@@ -39,7 +39,7 @@
 
 ```bash
 # 1. 进入项目目录
-cd "D:\claude code test\program"
+cd ".\program"
 
 # 2. 安装依赖
 pip install -r requirements.txt
