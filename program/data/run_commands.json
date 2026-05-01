@@ -1,0 +1,1354 @@
+[
+    {
+        "name": "regedit",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开 Windows 注册表编辑器，可查看和修改系统注册表项",
+        "syntax": "regedit",
+        "parameters": [],
+        "examples": [
+            {"description": "打开注册表编辑器", "command": "regedit"}
+        ],
+        "tags": ["注册表", "registry", "系统配置", "编辑器"]
+    },
+    {
+        "name": "msconfig",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开系统配置实用程序，管理启动项、服务和引导选项",
+        "syntax": "msconfig",
+        "parameters": [],
+        "examples": [
+            {"description": "打开系统配置", "command": "msconfig"}
+        ],
+        "tags": ["启动项", "boot", "系统配置", "startup", "服务"]
+    },
+    {
+        "name": "taskmgr",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开 Windows 任务管理器，查看运行中的进程、性能和启动项",
+        "syntax": "taskmgr",
+        "parameters": [],
+        "examples": [
+            {"description": "打开任务管理器", "command": "taskmgr"}
+        ],
+        "tags": ["任务管理器", "进程", "process", "性能", "performance"]
+    },
+    {
+        "name": "winver",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "显示当前 Windows 版本信息",
+        "syntax": "winver",
+        "parameters": [],
+        "examples": [
+            {"description": "查看 Windows 版本", "command": "winver"}
+        ],
+        "tags": ["版本", "version", "系统信息", "关于"]
+    },
+    {
+        "name": "dxdiag",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开 DirectX 诊断工具，查看显卡、声卡等硬件信息",
+        "syntax": "dxdiag",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 DirectX 诊断工具", "command": "dxdiag"}
+        ],
+        "tags": ["directx", "显卡", "声卡", "硬件", "诊断", "GPU"]
+    },
+    {
+        "name": "msinfo32",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开系统信息窗口，查看完整的硬件和软件环境详情",
+        "syntax": "msinfo32",
+        "parameters": [],
+        "examples": [
+            {"description": "查看系统信息", "command": "msinfo32"}
+        ],
+        "tags": ["系统信息", "hardware", "software", "环境"]
+    },
+    {
+        "name": "resmon",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开资源监视器，实时监控 CPU、内存、磁盘和网络使用情况",
+        "syntax": "resmon",
+        "parameters": [],
+        "examples": [
+            {"description": "打开资源监视器", "command": "resmon"}
+        ],
+        "tags": ["资源监视器", "resource", "监控", "CPU", "内存", "磁盘"]
+    },
+    {
+        "name": "perfmon",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开性能监视器，收集和分析系统性能数据",
+        "syntax": "perfmon",
+        "parameters": [],
+        "examples": [
+            {"description": "打开性能监视器", "command": "perfmon"}
+        ],
+        "tags": ["性能", "performance", "监视器", "计数器"]
+    },
+    {
+        "name": "verifier",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "驱动程序验证管理器，用于检测驱动程序问题",
+        "syntax": "verifier",
+        "parameters": [],
+        "examples": [
+            {"description": "打开驱动验证管理器", "command": "verifier"}
+        ],
+        "tags": ["驱动", "driver", "验证", "蓝屏"]
+    },
+    {
+        "name": "mrt",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "启动 Windows 恶意软件删除工具",
+        "syntax": "mrt",
+        "parameters": [],
+        "examples": [
+            {"description": "启动恶意软件删除工具", "command": "mrt"}
+        ],
+        "tags": ["恶意软件", "malware", "杀毒", "安全扫描"]
+    },
+    {
+        "name": "services.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开服务管理控制台，管理系统服务的启动、停止和属性",
+        "syntax": "services.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开服务管理", "command": "services.msc"}
+        ],
+        "tags": ["服务", "service", "管理", "启动", "停止"]
+    },
+    {
+        "name": "devmgmt.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开设备管理器，查看和管理计算机硬件设备",
+        "syntax": "devmgmt.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开设备管理器", "command": "devmgmt.msc"}
+        ],
+        "tags": ["设备管理器", "device", "硬件", "驱动", "driver"]
+    },
+    {
+        "name": "gpedit.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开本地组策略编辑器，配置系统和用户策略",
+        "syntax": "gpedit.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开组策略编辑器", "command": "gpedit.msc"}
+        ],
+        "tags": ["组策略", "group policy", "策略", "安全设置"]
+    },
+    {
+        "name": "compmgmt.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开计算机管理控制台，集成磁盘、服务、事件查看器等管理工具",
+        "syntax": "compmgmt.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开计算机管理", "command": "compmgmt.msc"}
+        ],
+        "tags": ["计算机管理", "computer management", "磁盘", "事件"]
+    },
+    {
+        "name": "diskmgmt.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开磁盘管理控制台，管理磁盘分区、格式化和卷操作",
+        "syntax": "diskmgmt.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开磁盘管理", "command": "diskmgmt.msc"}
+        ],
+        "tags": ["磁盘管理", "disk", "分区", "格式化", "卷"]
+    },
+    {
+        "name": "certmgr.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开证书管理器，管理数字证书",
+        "syntax": "certmgr.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开证书管理器", "command": "certmgr.msc"}
+        ],
+        "tags": ["证书", "certificate", "安全", "SSL"]
+    },
+    {
+        "name": "secpol.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开本地安全策略控制台，配置安全策略",
+        "syntax": "secpol.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开本地安全策略", "command": "secpol.msc"}
+        ],
+        "tags": ["安全策略", "security", "策略", "密码策略"]
+    },
+    {
+        "name": "lusrmgr.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开本地用户和组管理控制台",
+        "syntax": "lusrmgr.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开用户和组管理", "command": "lusrmgr.msc"}
+        ],
+        "tags": ["用户", "user", "组", "group", "账户"]
+    },
+    {
+        "name": "wmimgmt.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开 WMI 控制管理单元",
+        "syntax": "wmimgmt.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 WMI 管理", "command": "wmimgmt.msc"}
+        ],
+        "tags": ["WMI", "管理", "系统管理"]
+    },
+    {
+        "name": "printmanagement.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开打印管理控制台，管理打印机和打印队列",
+        "syntax": "printmanagement.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开打印管理", "command": "printmanagement.msc"}
+        ],
+        "tags": ["打印", "printer", "打印队列"]
+    },
+    {
+        "name": "fsmgmt.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开共享文件夹管理控制台",
+        "syntax": "fsmgmt.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开共享文件夹管理", "command": "fsmgmt.msc"}
+        ],
+        "tags": ["共享", "share", "文件夹", "网络共享"]
+    },
+    {
+        "name": "eventvwr.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开事件查看器，查看系统日志和应用程序日志",
+        "syntax": "eventvwr.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开事件查看器", "command": "eventvwr.msc"}
+        ],
+        "tags": ["事件", "event", "日志", "log", "错误"]
+    },
+    {
+        "name": "tpm.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开 TPM 管理控制台，管理受信任的平台模块",
+        "syntax": "tpm.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 TPM 管理", "command": "tpm.msc"}
+        ],
+        "tags": ["TPM", "安全芯片", "加密"]
+    },
+    {
+        "name": "control",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开 Windows 控制面板",
+        "syntax": "control",
+        "parameters": [],
+        "examples": [
+            {"description": "打开控制面板", "command": "control"},
+            {"description": "打开控制面板分类视图", "command": "control /name Microsoft.NetworkAndSharingCenter"}
+        ],
+        "tags": ["控制面板", "control panel", "设置", "settings"]
+    },
+    {
+        "name": "appwiz.cpl",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开程序和功能（卸载或更改程序）",
+        "syntax": "appwiz.cpl",
+        "parameters": [],
+        "examples": [
+            {"description": "打开卸载程序界面", "command": "appwiz.cpl"}
+        ],
+        "tags": ["卸载", "uninstall", "程序", "program", "软件"]
+    },
+    {
+        "name": "ncpa.cpl",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开网络连接窗口，管理网络适配器",
+        "syntax": "ncpa.cpl",
+        "parameters": [],
+        "examples": [
+            {"description": "打开网络连接", "command": "ncpa.cpl"}
+        ],
+        "tags": ["网络连接", "network", "适配器", "网卡"]
+    },
+    {
+        "name": "desk.cpl",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开显示设置（屏幕分辨率、多显示器等）",
+        "syntax": "desk.cpl",
+        "parameters": [],
+        "examples": [
+            {"description": "打开显示设置", "command": "desk.cpl"}
+        ],
+        "tags": ["显示", "display", "分辨率", "屏幕"]
+    },
+    {
+        "name": "firewall.cpl",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开 Windows Defender 防火墙设置",
+        "syntax": "firewall.cpl",
+        "parameters": [],
+        "examples": [
+            {"description": "打开防火墙设置", "command": "firewall.cpl"}
+        ],
+        "tags": ["防火墙", "firewall", "安全", "defender"]
+    },
+    {
+        "name": "inetcpl.cpl",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开 Internet 属性（Internet Explorer 设置）",
+        "syntax": "inetcpl.cpl",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 Internet 属性", "command": "inetcpl.cpl"}
+        ],
+        "tags": ["internet", "浏览器", "代理", "proxy"]
+    },
+    {
+        "name": "timedate.cpl",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开日期和时间设置",
+        "syntax": "timedate.cpl",
+        "parameters": [],
+        "examples": [
+            {"description": "打开日期时间设置", "command": "timedate.cpl"}
+        ],
+        "tags": ["日期", "时间", "date", "time", "时区"]
+    },
+    {
+        "name": "main.cpl",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开鼠标属性设置",
+        "syntax": "main.cpl",
+        "parameters": [],
+        "examples": [
+            {"description": "打开鼠标设置", "command": "main.cpl"}
+        ],
+        "tags": ["鼠标", "mouse", "指针", "点击"]
+    },
+    {
+        "name": "mmsys.cpl",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开声音（音频设备）设置",
+        "syntax": "mmsys.cpl",
+        "parameters": [],
+        "examples": [
+            {"description": "打开声音设置", "command": "mmsys.cpl"}
+        ],
+        "tags": ["声音", "sound", "音频", "audio", "麦克风"]
+    },
+    {
+        "name": "powercfg.cpl",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开电源选项设置",
+        "syntax": "powercfg.cpl",
+        "parameters": [],
+        "examples": [
+            {"description": "打开电源选项", "command": "powercfg.cpl"}
+        ],
+        "tags": ["电源", "power", "电池", "睡眠", "节能"]
+    },
+    {
+        "name": "sysdm.cpl",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开系统属性（计算机名、硬件、远程等设置）",
+        "syntax": "sysdm.cpl",
+        "parameters": [],
+        "examples": [
+            {"description": "打开系统属性", "command": "sysdm.cpl"}
+        ],
+        "tags": ["系统属性", "computer name", "远程", "硬件配置"]
+    },
+    {
+        "name": "intl.cpl",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开区域和语言设置",
+        "syntax": "intl.cpl",
+        "parameters": [],
+        "examples": [
+            {"description": "打开区域设置", "command": "intl.cpl"}
+        ],
+        "tags": ["区域", "语言", "region", "language", "格式"]
+    },
+    {
+        "name": "notepad",
+        "source": "run",
+        "category": "run-app",
+        "categoryLabel": "应用程序",
+        "description": "打开 Windows 记事本",
+        "syntax": "notepad",
+        "parameters": [],
+        "examples": [
+            {"description": "打开记事本", "command": "notepad"},
+            {"description": "用记事本打开指定文件", "command": "notepad C:\\file.txt"}
+        ],
+        "tags": ["记事本", "notepad", "文本编辑", "编辑器"]
+    },
+    {
+        "name": "calc",
+        "source": "run",
+        "category": "run-app",
+        "categoryLabel": "应用程序",
+        "description": "打开 Windows 计算器",
+        "syntax": "calc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开计算器", "command": "calc"}
+        ],
+        "tags": ["计算器", "calculator", "计算"]
+    },
+    {
+        "name": "mspaint",
+        "source": "run",
+        "category": "run-app",
+        "categoryLabel": "应用程序",
+        "description": "打开画图程序",
+        "syntax": "mspaint",
+        "parameters": [],
+        "examples": [
+            {"description": "打开画图", "command": "mspaint"}
+        ],
+        "tags": ["画图", "paint", "绘图", "图片编辑"]
+    },
+    {
+        "name": "write",
+        "source": "run",
+        "category": "run-app",
+        "categoryLabel": "应用程序",
+        "description": "打开写字板（WordPad）",
+        "syntax": "write",
+        "parameters": [],
+        "examples": [
+            {"description": "打开写字板", "command": "write"}
+        ],
+        "tags": ["写字板", "wordpad", "文字处理"]
+    },
+    {
+        "name": "magnify",
+        "source": "run",
+        "category": "run-app",
+        "categoryLabel": "应用程序",
+        "description": "打开放大镜工具",
+        "syntax": "magnify",
+        "parameters": [],
+        "examples": [
+            {"description": "打开放大镜", "command": "magnify"}
+        ],
+        "tags": ["放大镜", "magnifier", "辅助功能", "缩放"]
+    },
+    {
+        "name": "narrator",
+        "source": "run",
+        "category": "run-app",
+        "categoryLabel": "应用程序",
+        "description": "打开讲述人（屏幕朗读器）",
+        "syntax": "narrator",
+        "parameters": [],
+        "examples": [
+            {"description": "打开讲述人", "command": "narrator"}
+        ],
+        "tags": ["讲述人", "narrator", "朗读", "辅助功能"]
+    },
+    {
+        "name": "osk",
+        "source": "run",
+        "category": "run-app",
+        "categoryLabel": "应用程序",
+        "description": "打开屏幕键盘",
+        "syntax": "osk",
+        "parameters": [],
+        "examples": [
+            {"description": "打开屏幕键盘", "command": "osk"}
+        ],
+        "tags": ["屏幕键盘", "on-screen keyboard", "虚拟键盘"]
+    },
+    {
+        "name": "charmap",
+        "source": "run",
+        "category": "run-app",
+        "categoryLabel": "应用程序",
+        "description": "打开字符映射表，插入特殊字符",
+        "syntax": "charmap",
+        "parameters": [],
+        "examples": [
+            {"description": "打开字符映射表", "command": "charmap"}
+        ],
+        "tags": ["字符", "character", "特殊符号", "Unicode"]
+    },
+    {
+        "name": "psr",
+        "source": "run",
+        "category": "run-app",
+        "categoryLabel": "应用程序",
+        "description": "打开步骤记录器，录制操作步骤用于故障排除",
+        "syntax": "psr",
+        "parameters": [],
+        "examples": [
+            {"description": "打开步骤记录器", "command": "psr"}
+        ],
+        "tags": ["步骤记录器", "recorder", "截图", "故障排除"]
+    },
+    {
+        "name": "snippingtool",
+        "source": "run",
+        "category": "run-app",
+        "categoryLabel": "应用程序",
+        "description": "打开截图工具",
+        "syntax": "snippingtool",
+        "parameters": [],
+        "examples": [
+            {"description": "打开截图工具", "command": "snippingtool"}
+        ],
+        "tags": ["截图", "snipping", "截屏", "screenshot"]
+    },
+    {
+        "name": "stikynot",
+        "source": "run",
+        "category": "run-app",
+        "categoryLabel": "应用程序",
+        "description": "打开便笺（Sticky Notes）",
+        "syntax": "stikynot",
+        "parameters": [],
+        "examples": [
+            {"description": "打开便笺", "command": "stikynot"}
+        ],
+        "tags": ["便笺", "sticky notes", "备忘录", "记事"]
+    },
+    {
+        "name": "wmplayer",
+        "source": "run",
+        "category": "run-app",
+        "categoryLabel": "应用程序",
+        "description": "打开 Windows Media Player",
+        "syntax": "wmplayer",
+        "parameters": [],
+        "examples": [
+            {"description": "打开媒体播放器", "command": "wmplayer"}
+        ],
+        "tags": ["媒体播放器", "media player", "音乐", "视频"]
+    },
+    {
+        "name": "mstsc",
+        "source": "run",
+        "category": "run-network",
+        "categoryLabel": "网络工具",
+        "description": "打开远程桌面连接，连接到远程计算机",
+        "syntax": "mstsc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开远程桌面连接", "command": "mstsc"},
+            {"description": "连接到指定 IP", "command": "mstsc /v:192.168.1.100"}
+        ],
+        "tags": ["远程桌面", "remote desktop", "RDP", "远程连接"]
+    },
+    {
+        "name": "mstsc /v:",
+        "source": "run",
+        "category": "run-network",
+        "categoryLabel": "网络工具",
+        "description": "直接连接到指定远程计算机",
+        "syntax": "mstsc /v:计算机名或IP",
+        "parameters": [
+            {"name": "/v:计算机名或IP", "description": "指定要连接的远程计算机地址", "required": true}
+        ],
+        "examples": [
+            {"description": "连接到远程服务器", "command": "mstsc /v:192.168.1.100"},
+            {"description": "连接到指定端口", "command": "mstsc /v:192.168.1.100:3389"}
+        ],
+        "tags": ["远程桌面", "remote desktop", "连接", "服务器"]
+    },
+    {
+        "name": "explorer",
+        "source": "run",
+        "category": "run-file",
+        "categoryLabel": "文件管理",
+        "description": "打开 Windows 文件资源管理器",
+        "syntax": "explorer",
+        "parameters": [],
+        "examples": [
+            {"description": "打开文件资源管理器", "command": "explorer"},
+            {"description": "打开指定文件夹", "command": "explorer C:\\"},
+            {"description": "打开此电脑", "command": "explorer shell:MyComputerFolder"}
+        ],
+        "tags": ["资源管理器", "explorer", "文件管理", "文件夹"]
+    },
+    {
+        "name": "cmd",
+        "source": "run",
+        "category": "run-file",
+        "categoryLabel": "文件管理",
+        "description": "打开命令提示符窗口",
+        "syntax": "cmd",
+        "parameters": [],
+        "examples": [
+            {"description": "打开命令提示符", "command": "cmd"},
+            {"description": "以管理员身份打开", "command": "cmd (Ctrl+Shift+Enter)"}
+        ],
+        "tags": ["命令提示符", "command prompt", "CMD", "终端"]
+    },
+    {
+        "name": "powershell",
+        "source": "run",
+        "category": "run-file",
+        "categoryLabel": "文件管理",
+        "description": "打开 Windows PowerShell",
+        "syntax": "powershell",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 PowerShell", "command": "powershell"},
+            {"description": "以管理员身份打开", "command": "powershell (Ctrl+Shift+Enter)"}
+        ],
+        "tags": ["powershell", "终端", "脚本", "命令行"]
+    },
+    {
+        "name": "shell:startup",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开当前用户的启动文件夹（开机自启程序所在位置）",
+        "syntax": "shell:startup",
+        "parameters": [],
+        "examples": [
+            {"description": "打开启动文件夹", "command": "shell:startup"}
+        ],
+        "tags": ["启动", "startup", "自启", "开机启动"]
+    },
+    {
+        "name": "shell:sendto",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开「发送到」菜单对应的文件夹",
+        "syntax": "shell:sendto",
+        "parameters": [],
+        "examples": [
+            {"description": "打开发送到文件夹", "command": "shell:sendto"}
+        ],
+        "tags": ["发送到", "sendto", "右键菜单"]
+    },
+    {
+        "name": "shell:recent",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开最近使用的文件列表",
+        "syntax": "shell:recent",
+        "parameters": [],
+        "examples": [
+            {"description": "打开最近文件", "command": "shell:recent"}
+        ],
+        "tags": ["最近", "recent", "历史记录", "最近文件"]
+    },
+    {
+        "name": "shell:downloads",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开当前用户的下载文件夹",
+        "syntax": "shell:downloads",
+        "parameters": [],
+        "examples": [
+            {"description": "打开下载文件夹", "command": "shell:downloads"}
+        ],
+        "tags": ["下载", "downloads", "文件夹"]
+    },
+    {
+        "name": "shell:desktop",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开当前用户的桌面文件夹",
+        "syntax": "shell:desktop",
+        "parameters": [],
+        "examples": [
+            {"description": "打开桌面文件夹", "command": "shell:desktop"}
+        ],
+        "tags": ["桌面", "desktop", "文件夹"]
+    },
+    {
+        "name": "shell:personal",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开当前用户的文档文件夹",
+        "syntax": "shell:personal",
+        "parameters": [],
+        "examples": [
+            {"description": "打开文档文件夹", "command": "shell:personal"}
+        ],
+        "tags": ["文档", "documents", "文件夹"]
+    },
+    {
+        "name": "shell:appsfolder",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开应用程序文件夹（已安装的所有应用）",
+        "syntax": "shell:appsfolder",
+        "parameters": [],
+        "examples": [
+            {"description": "查看所有已安装应用", "command": "shell:appsfolder"}
+        ],
+        "tags": ["应用", "apps", "已安装", "程序"]
+    },
+    {
+        "name": "shell:ControlPanelFolder",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "通过 Shell 命令打开控制面板",
+        "syntax": "shell:ControlPanelFolder",
+        "parameters": [],
+        "examples": [
+            {"description": "打开控制面板", "command": "shell:ControlPanelFolder"}
+        ],
+        "tags": ["控制面板", "control panel", "shell"]
+    },
+    {
+        "name": "shell:NetworkConnectionsFolder",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开网络连接文件夹",
+        "syntax": "shell:NetworkConnectionsFolder",
+        "parameters": [],
+        "examples": [
+            {"description": "打开网络连接", "command": "shell:NetworkConnectionsFolder"}
+        ],
+        "tags": ["网络连接", "network", "连接"]
+    },
+    {
+        "name": "shell:RecycleBinFolder",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开回收站",
+        "syntax": "shell:RecycleBinFolder",
+        "parameters": [],
+        "examples": [
+            {"description": "打开回收站", "command": "shell:RecycleBinFolder"}
+        ],
+        "tags": ["回收站", "recycle bin", "删除"]
+    },
+    {
+        "name": "shell:FontsFolder",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开字体文件夹",
+        "syntax": "shell:FontsFolder",
+        "parameters": [],
+        "examples": [
+            {"description": "打开字体管理", "command": "shell:FontsFolder"}
+        ],
+        "tags": ["字体", "fonts", "字型"]
+    },
+    {
+        "name": "%temp%",
+        "source": "run",
+        "category": "run-path",
+        "categoryLabel": "系统路径",
+        "description": "打开当前用户的临时文件夹",
+        "syntax": "%temp%",
+        "parameters": [],
+        "examples": [
+            {"description": "打开临时文件夹", "command": "%temp%"}
+        ],
+        "tags": ["临时文件", "temp", "缓存", "清理"]
+    },
+    {
+        "name": "%appdata%",
+        "source": "run",
+        "category": "run-path",
+        "categoryLabel": "系统路径",
+        "description": "打开当前用户的 AppData\\Roaming 文件夹",
+        "syntax": "%appdata%",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 AppData Roaming", "command": "%appdata%"}
+        ],
+        "tags": ["appdata", "应用数据", "配置文件"]
+    },
+    {
+        "name": "%localappdata%",
+        "source": "run",
+        "category": "run-path",
+        "categoryLabel": "系统路径",
+        "description": "打开当前用户的 AppData\\Local 文件夹",
+        "syntax": "%localappdata%",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 Local AppData", "command": "%localappdata%"}
+        ],
+        "tags": ["localappdata", "本地数据", "缓存"]
+    },
+    {
+        "name": "%programfiles%",
+        "source": "run",
+        "category": "run-path",
+        "categoryLabel": "系统路径",
+        "description": "打开 Program Files 文件夹（64 位程序安装目录）",
+        "syntax": "%programfiles%",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 Program Files", "command": "%programfiles%"}
+        ],
+        "tags": ["program files", "安装目录", "程序文件"]
+    },
+    {
+        "name": "%systemroot%",
+        "source": "run",
+        "category": "run-path",
+        "categoryLabel": "系统路径",
+        "description": "打开 Windows 系统目录（通常为 C:\\Windows）",
+        "syntax": "%systemroot%",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 Windows 系统目录", "command": "%systemroot%"}
+        ],
+        "tags": ["系统目录", "systemroot", "windows", "系统文件"]
+    },
+    {
+        "name": "%userprofile%",
+        "source": "run",
+        "category": "run-path",
+        "categoryLabel": "系统路径",
+        "description": "打开当前用户的个人文件夹",
+        "syntax": "%userprofile%",
+        "parameters": [],
+        "examples": [
+            {"description": "打开用户文件夹", "command": "%userprofile%"}
+        ],
+        "tags": ["用户文件夹", "userprofile", "home"]
+    },
+    {
+        "name": "C:\\Windows",
+        "source": "run",
+        "category": "run-path",
+        "categoryLabel": "系统路径",
+        "description": "直接打开 Windows 系统安装目录",
+        "syntax": "C:\\Windows",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 Windows 目录", "command": "C:\\Windows"}
+        ],
+        "tags": ["windows目录", "系统目录", "安装目录"]
+    },
+    {
+        "name": "wf.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开 Windows 高级安全防火墙控制台，配置入站和出站规则",
+        "syntax": "wf.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开高级安全防火墙", "command": "wf.msc"}
+        ],
+        "tags": ["防火墙", "firewall", "高级安全", "入站规则", "出站规则"]
+    },
+    {
+        "name": "rsop.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开策略结果集控制台，查看当前生效的组策略设置",
+        "syntax": "rsop.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "查看策略结果集", "command": "rsop.msc"}
+        ],
+        "tags": ["策略结果集", "resultant set of policy", "组策略", "策略生效"]
+    },
+    {
+        "name": "azman.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开授权管理器，管理应用程序的角色和权限",
+        "syntax": "azman.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开授权管理器", "command": "azman.msc"}
+        ],
+        "tags": ["授权管理器", "authorization manager", "角色", "权限", "访问控制"]
+    },
+    {
+        "name": "certlm.msc",
+        "source": "run",
+        "category": "run-console",
+        "categoryLabel": "管理控制台",
+        "description": "打开本地计算机证书管理控制台，管理计算机级别的数字证书",
+        "syntax": "certlm.msc",
+        "parameters": [],
+        "examples": [
+            {"description": "打开本地计算机证书管理", "command": "certlm.msc"}
+        ],
+        "tags": ["证书", "certificate", "本地计算机", "计算机证书", "SSL"]
+    },
+    {
+        "name": "wscui.cpl",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开 Windows 安全中心面板，查看安全和维护状态",
+        "syntax": "wscui.cpl",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 Windows 安全中心", "command": "wscui.cpl"}
+        ],
+        "tags": ["安全中心", "security center", "安全和维护", "防护状态"]
+    },
+    {
+        "name": "hdwwiz.cpl",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开添加硬件向导，手动安装硬件设备驱动程序",
+        "syntax": "hdwwiz.cpl",
+        "parameters": [],
+        "examples": [
+            {"description": "打开添加硬件向导", "command": "hdwwiz.cpl"}
+        ],
+        "tags": ["添加硬件", "hardware wizard", "硬件安装", "驱动安装"]
+    },
+    {
+        "name": "tabletpc.cpl",
+        "source": "run",
+        "category": "run-panel",
+        "categoryLabel": "控制面板",
+        "description": "打开笔和触控设置面板，配置手写笔和触摸输入选项",
+        "syntax": "tabletpc.cpl",
+        "parameters": [],
+        "examples": [
+            {"description": "打开笔和触控设置", "command": "tabletpc.cpl"}
+        ],
+        "tags": ["笔", "触控", "tablet", "手写笔", "触摸屏", "pen"]
+    },
+    {
+        "name": "cleanmgr",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开磁盘清理工具，删除临时文件和不需要的系统文件以释放磁盘空间",
+        "syntax": "cleanmgr",
+        "parameters": [],
+        "examples": [
+            {"description": "打开磁盘清理", "command": "cleanmgr"},
+            {"description": "清理指定驱动器", "command": "cleanmgr /d C:"}
+        ],
+        "tags": ["磁盘清理", "disk cleanup", "清理空间", "临时文件", "垃圾清理"]
+    },
+    {
+        "name": "optionalfeatures",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开 Windows 功能开关对话框，启用或关闭可选的 Windows 组件",
+        "syntax": "optionalfeatures",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 Windows 功能", "command": "optionalfeatures"}
+        ],
+        "tags": ["Windows功能", "optional features", "组件", "功能开关", "启用功能"]
+    },
+    {
+        "name": "msra",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开 Windows 远程协助，邀请他人协助解决计算机问题或协助他人",
+        "syntax": "msra",
+        "parameters": [],
+        "examples": [
+            {"description": "打开远程协助", "command": "msra"}
+        ],
+        "tags": ["远程协助", "remote assistance", "远程帮助", "协助"]
+    },
+    {
+        "name": "iexpress",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开自解压包创建向导，将文件打包为自解压的安装程序",
+        "syntax": "iexpress",
+        "parameters": [],
+        "examples": [
+            {"description": "打开自解压包创建向导", "command": "iexpress"}
+        ],
+        "tags": ["自解压", "iexpress", "打包", "安装包", "压缩"]
+    },
+    {
+        "name": "eudcedit",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开专用字符编辑器（造字程序），创建和编辑自定义字符",
+        "syntax": "eudcedit",
+        "parameters": [],
+        "examples": [
+            {"description": "打开专用字符编辑器", "command": "eudcedit"}
+        ],
+        "tags": ["造字", "eudcedit", "专用字符", "自定义字符", "字体编辑"]
+    },
+    {
+        "name": "dccw",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开显示器颜色校准向导，校准显示器的伽马、亮度和颜色",
+        "syntax": "dccw",
+        "parameters": [],
+        "examples": [
+            {"description": "打开显示器颜色校准", "command": "dccw"}
+        ],
+        "tags": ["颜色校准", "display calibration", "显示器", "伽马", "色彩"]
+    },
+    {
+        "name": "isoburn",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开 Windows 光盘映像刻录工具，将 ISO 文件刻录到光盘",
+        "syntax": "isoburn",
+        "parameters": [],
+        "examples": [
+            {"description": "打开光盘映像刻录工具", "command": "isoburn"},
+            {"description": "刻录指定 ISO 文件", "command": "isoburn D:\\image.iso"}
+        ],
+        "tags": ["刻录", "burn", "ISO", "光盘映像", "CD", "DVD"]
+    },
+    {
+        "name": "shrpubw",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开共享文件夹创建向导，快速设置文件夹的网络共享",
+        "syntax": "shrpubw",
+        "parameters": [],
+        "examples": [
+            {"description": "打开共享文件夹创建向导", "command": "shrpubw"}
+        ],
+        "tags": ["共享文件夹", "share", "网络共享", "共享向导"]
+    },
+    {
+        "name": "sdclt",
+        "source": "run",
+        "category": "run-system",
+        "categoryLabel": "系统工具",
+        "description": "打开备份和还原工具，管理文件备份和系统还原点",
+        "syntax": "sdclt",
+        "parameters": [],
+        "examples": [
+            {"description": "打开备份和还原", "command": "sdclt"}
+        ],
+        "tags": ["备份", "backup", "还原", "restore", "系统备份"]
+    },
+    {
+        "name": "wfs",
+        "source": "run",
+        "category": "run-app",
+        "categoryLabel": "应用程序",
+        "description": "打开 Windows 传真和扫描程序，发送传真或扫描文档",
+        "syntax": "wfs",
+        "parameters": [],
+        "examples": [
+            {"description": "打开传真和扫描", "command": "wfs"}
+        ],
+        "tags": ["传真", "扫描", "fax", "scan", "传真和扫描"]
+    },
+    {
+        "name": "rasphone",
+        "source": "run",
+        "category": "run-network",
+        "categoryLabel": "网络工具",
+        "description": "打开拨号和 VPN 连接窗口，管理拨号和 VPN 网络连接",
+        "syntax": "rasphone",
+        "parameters": [],
+        "examples": [
+            {"description": "打开拨号和 VPN 连接", "command": "rasphone"}
+        ],
+        "tags": ["拨号", "VPN", "远程连接", "网络连接", "dial-up"]
+    },
+    {
+        "name": "nslookup",
+        "source": "run",
+        "category": "run-network",
+        "categoryLabel": "网络工具",
+        "description": "打开 DNS 查询工具（命令行），查询域名对应的 IP 地址和 DNS 记录",
+        "syntax": "nslookup",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 nslookup 工具", "command": "nslookup"},
+            {"description": "查询域名 DNS 记录", "command": "nslookup example.com"}
+        ],
+        "tags": ["DNS", "nslookup", "域名解析", "IP查询", "网络诊断"]
+    },
+    {
+        "name": "shell:cache",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开临时 Internet 文件（IE 缓存）文件夹",
+        "syntax": "shell:cache",
+        "parameters": [],
+        "examples": [
+            {"description": "打开临时 Internet 文件夹", "command": "shell:cache"}
+        ],
+        "tags": ["缓存", "cache", "临时文件", "Internet临时文件", "IE缓存"]
+    },
+    {
+        "name": "shell:cookies",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开 Cookie 文件夹，查看浏览器存储的 Cookie 文件",
+        "syntax": "shell:cookies",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 Cookie 文件夹", "command": "shell:cookies"}
+        ],
+        "tags": ["Cookie", "cookies", "浏览器数据", "网站数据"]
+    },
+    {
+        "name": "shell:history",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开浏览历史文件夹，查看 Internet Explorer 浏览记录",
+        "syntax": "shell:history",
+        "parameters": [],
+        "examples": [
+            {"description": "打开浏览历史", "command": "shell:history"}
+        ],
+        "tags": ["浏览历史", "history", "访问记录", "浏览器历史"]
+    },
+    {
+        "name": "shell:profile",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开当前用户的配置文件夹（与 %userprofile% 等效）",
+        "syntax": "shell:profile",
+        "parameters": [],
+        "examples": [
+            {"description": "打开用户配置文件夹", "command": "shell:profile"}
+        ],
+        "tags": ["用户配置", "profile", "用户目录", "home目录"]
+    },
+    {
+        "name": "shell:UsersFilesFolder",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开用户文件夹（包含文档、下载、图片等子文件夹）",
+        "syntax": "shell:UsersFilesFolder",
+        "parameters": [],
+        "examples": [
+            {"description": "打开用户文件夹", "command": "shell:UsersFilesFolder"}
+        ],
+        "tags": ["用户文件夹", "users files", "个人文件", "用户目录"]
+    },
+    {
+        "name": "shell:Public",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开公共文件夹，所有用户共享的文件目录",
+        "syntax": "shell:Public",
+        "parameters": [],
+        "examples": [
+            {"description": "打开公共文件夹", "command": "shell:Public"}
+        ],
+        "tags": ["公共文件夹", "public", "共享文件", "所有用户"]
+    },
+    {
+        "name": "shell:SearchHomeFolder",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开搜索主页文件夹，Windows 搜索的起始位置",
+        "syntax": "shell:SearchHomeFolder",
+        "parameters": [],
+        "examples": [
+            {"description": "打开搜索主页", "command": "shell:SearchHomeFolder"}
+        ],
+        "tags": ["搜索", "search", "搜索主页", "查找"]
+    },
+    {
+        "name": "shell:ProgramFiles",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开 Program Files 文件夹（与 %programfiles% 等效）",
+        "syntax": "shell:ProgramFiles",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 Program Files", "command": "shell:ProgramFiles"}
+        ],
+        "tags": ["Program Files", "程序文件", "安装目录", "应用程序"]
+    },
+    {
+        "name": "shell:Common Administrative Tools",
+        "source": "run",
+        "category": "run-shell",
+        "categoryLabel": "Shell 命令",
+        "description": "打开管理工具文件夹，包含所有用户的管理工具快捷方式",
+        "syntax": "shell:Common Administrative Tools",
+        "parameters": [],
+        "examples": [
+            {"description": "打开管理工具文件夹", "command": "shell:Common Administrative Tools"}
+        ],
+        "tags": ["管理工具", "administrative tools", "系统管理", "管理文件夹"]
+    },
+    {
+        "name": "%programdata%",
+        "source": "run",
+        "category": "run-path",
+        "categoryLabel": "系统路径",
+        "description": "打开 ProgramData 文件夹，存放应用程序的共享数据",
+        "syntax": "%programdata%",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 ProgramData 文件夹", "command": "%programdata%"}
+        ],
+        "tags": ["programdata", "程序数据", "共享数据", "应用数据"]
+    },
+    {
+        "name": "%homedrive%",
+        "source": "run",
+        "category": "run-path",
+        "categoryLabel": "系统路径",
+        "description": "打开系统驱动器根目录（通常为 C:\\）",
+        "syntax": "%homedrive%",
+        "parameters": [],
+        "examples": [
+            {"description": "打开系统驱动器根目录", "command": "%homedrive%"}
+        ],
+        "tags": ["系统驱动器", "homedrive", "C盘", "根目录", "驱动器根"]
+    },
+    {
+        "name": "%homepath%",
+        "source": "run",
+        "category": "run-path",
+        "categoryLabel": "系统路径",
+        "description": "打开用户主目录路径（等效于 %userprofile%）",
+        "syntax": "%homepath%",
+        "parameters": [],
+        "examples": [
+            {"description": "打开用户主目录", "command": "%homepath%"}
+        ],
+        "tags": ["用户主目录", "homepath", "home目录", "用户路径"]
+    },
+    {
+        "name": "%commonprogramfiles%",
+        "source": "run",
+        "category": "run-path",
+        "categoryLabel": "系统路径",
+        "description": "打开 Common Program Files 文件夹，存放程序共享的组件和库",
+        "syntax": "%commonprogramfiles%",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 Common Program Files", "command": "%commonprogramfiles%"}
+        ],
+        "tags": ["common program files", "共享组件", "公共程序文件", "共享库"]
+    },
+    {
+        "name": "%programfiles(x86)%",
+        "source": "run",
+        "category": "run-path",
+        "categoryLabel": "系统路径",
+        "description": "打开 Program Files (x86) 文件夹（32 位程序安装目录）",
+        "syntax": "%programfiles(x86)%",
+        "parameters": [],
+        "examples": [
+            {"description": "打开 32 位程序文件夹", "command": "%programfiles(x86)%"}
+        ],
+        "tags": ["program files x86", "32位程序", "Program Files", "x86", "程序文件"]
+    }
+]

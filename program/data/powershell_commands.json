@@ -1,0 +1,2632 @@
+[
+  {
+    "name": "Get-ChildItem",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "获取一个或多个指定位置中的项和子项。相当于 CMD 中的 dir 和 Linux 中的 ls",
+    "syntax": "Get-ChildItem [[-Path] <string[]>] [[-Filter] <string>] [-Include <string[]>] [-Exclude <string[]>] [-Recurse] [-Depth <uint32>] [-Force] [-Name] [-Directory] [-File] [-Hidden] [-ReadOnly] [-System] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "指定一个或多个位置的路径，支持通配符", "required": false},
+      {"name": "-Recurse", "description": "获取指定位置及其所有子位置中的项", "required": false},
+      {"name": "-Filter", "description": "使用提供程序特定的语言筛选结果", "required": false},
+      {"name": "-Force", "description": "允许获取无法访问的隐藏项或系统项", "required": false},
+      {"name": "-Directory", "description": "仅获取目录", "required": false},
+      {"name": "-File", "description": "仅获取文件", "required": false},
+      {"name": "-Depth", "description": "指定递归的深度级别（与 -Recurse 一起使用）", "required": false},
+      {"name": "-Hidden", "description": "仅获取隐藏项", "required": false}
+    ],
+    "examples": [
+      {"description": "列出当前目录内容", "command": "Get-ChildItem"},
+      {"description": "递归列出所有文件", "command": "Get-ChildItem -Recurse"},
+      {"description": "仅列出 .txt 文件", "command": "Get-ChildItem -Filter *.txt"},
+      {"description": "列出指定路径下的目录", "command": "Get-ChildItem C:\\Users -Directory"},
+      {"description": "使用别名", "command": "ls -Recurse"}
+    ],
+    "tags": ["文件", "目录", "file", "directory", "ls", "dir", "列出", "list", "遍历", "recurse", "gci"]
+  },
+  {
+    "name": "Set-Location",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "将当前工作位置设置为指定位置（更改目录）",
+    "syntax": "Set-Location [[-Path] <string>] [-PassThru] [-UseTransaction] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "要切换到的工作位置路径", "required": false},
+      {"name": "-PassThru", "description": "返回新位置的对象", "required": false}
+    ],
+    "examples": [
+      {"description": "切换到指定目录", "command": "Set-Location C:\\Windows"},
+      {"description": "返回上级目录", "command": "Set-Location .."},
+      {"description": "使用别名", "command": "cd C:\\Projects"}
+    ],
+    "tags": ["目录", "切换", "cd", "chdir", "sl", "导航", "路径", "Set-Location"]
+  },
+  {
+    "name": "New-Item",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "创建新项，如文件、目录、注册表项等",
+    "syntax": "New-Item [-Path] <string[]> [-ItemType <string>] [-Value <Object>] [-Force] [-Credential <PSCredential>] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "指定新项的位置和名称", "required": true},
+      {"name": "-ItemType", "description": "指定项类型 (File/Directory/SymbolicLink/Junction)", "required": false},
+      {"name": "-Value", "description": "指定新项的内容", "required": false},
+      {"name": "-Force", "description": "强制创建（覆盖只读属性等）", "required": false}
+    ],
+    "examples": [
+      {"description": "创建目录", "command": "New-Item -Path C:\\Temp\\NewFolder -ItemType Directory"},
+      {"description": "创建文件", "command": "New-Item -Path test.txt -ItemType File"},
+      {"description": "使用别名创建目录", "command": "mkdir MyProject"}
+    ],
+    "tags": ["文件", "创建", "新建", "mkdir", "ni", "new", "文件", "目录", "create"]
+  },
+  {
+    "name": "Remove-Item",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "删除指定的项（文件、目录等）",
+    "syntax": "Remove-Item [-Path] <string[]> [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Recurse] [-Force] [-Credential <PSCredential>] [-WhatIf] [-Confirm] [-Stream <string[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "要删除的项路径", "required": true},
+      {"name": "-Recurse", "description": "递归删除目录及其内容", "required": false},
+      {"name": "-Force", "description": "强制删除（隐藏/只读项）", "required": false},
+      {"name": "-WhatIf", "description": "预览将删除的项而不实际删除", "required": false}
+    ],
+    "examples": [
+      {"description": "删除文件", "command": "Remove-Item oldfile.txt"},
+      {"description": "递归删除目录", "command": "Remove-Item -Path C:\\Temp -Recurse"},
+      {"description": "强制删除", "command": "Remove-Item -Force locked.txt"},
+      {"description": "预览删除", "command": "Remove-Item *.bak -WhatIf"}
+    ],
+    "tags": ["文件", "删除", "rm", "del", "ri", "remove", "delete", "清理"]
+  },
+  {
+    "name": "Copy-Item",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "将项（文件、目录）从一个位置复制到另一个位置",
+    "syntax": "Copy-Item [-Path] <string[]> [[-Destination] <string>] [-Container] [-Force] [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Recurse] [-Credential <PSCredential>] [-WhatIf] [-Confirm] [-FromSession <PSSession>] [-ToSession <PSSession>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "要复制的项路径", "required": true},
+      {"name": "-Destination", "description": "目标路径", "required": false},
+      {"name": "-Recurse", "description": "递归复制目录内容", "required": false},
+      {"name": "-Force", "description": "覆盖只读文件或目标", "required": false}
+    ],
+    "examples": [
+      {"description": "复制文件", "command": "Copy-Item source.txt dest.txt"},
+      {"description": "复制目录树", "command": "Copy-Item C:\\Source C:\\Backup -Recurse"},
+      {"description": "使用别名", "command": "cp *.ps1 D:\\Scripts\\"}
+    ],
+    "tags": ["文件", "复制", "cp", "copy", "ci", "备份", "拷贝"]
+  },
+  {
+    "name": "Move-Item",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "将项从一个位置移动到另一个位置（也可用于重命名）",
+    "syntax": "Move-Item [-Path] <string[]> [[-Destination] <string>] [-Force] [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <PSCredential>] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "要移动的项路径", "required": true},
+      {"name": "-Destination", "description": "目标路径（目录或新文件名）", "required": false},
+      {"name": "-Force", "description": "强制执行（覆盖等）", "required": false}
+    ],
+    "examples": [
+      {"description": "移动文件", "command": "Move-Item data.csv C:\\Archive\\"},
+      {"description": "重命名文件", "command": "Move-Item oldname.txt newname.txt"},
+      {"description": "使用别名", "command": "mv *.log .\\Logs\\"}
+    ],
+    "tags": ["文件", "移动", "mv", "move", "mi", "重命名", "转移"]
+  },
+  {
+    "name": "Rename-Item",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "重命名 PowerShell 提供程序命名空间中的项",
+    "syntax": "Rename-Item [-Path] <string> [-NewName] <string> [-Force] [-Credential <PSCredential>] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "要重命名的项路径", "required": true},
+      {"name": "-NewName", "description": "新名称", "required": true},
+      {"name": "-Force", "description": "强制重命名", "required": false}
+    ],
+    "examples": [
+      {"description": "重命名文件", "command": "Rename-Item report.txt -NewName report_2024.txt"},
+      {"description": "使用别名", "command": "ren config.ini config.bak"}
+    ],
+    "tags": ["文件", "重命名", "ren", "rni", "改名", "rename"]
+  },
+  {
+    "name": "Get-Content",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "获取项（如文件）的内容",
+    "syntax": "Get-Content [-Path] <string[]> [-ReadCount <Int64>] [-TotalCount <Int64>] [-Tail <Int32>] [-Delimiter <string>] [-Wait] [-Raw] [-Encoding <Encoding>] [-AsByteStream] [-Stream <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "文件路径", "required": true},
+      {"name": "-TotalCount", "description": "仅读取前 N 行", "required": false},
+      {"name": "-Tail", "description": "读取最后 N 行", "required": false},
+      {"name": "-Raw", "description": "将整个文件作为单个字符串返回", "required": false},
+      {"name": "-Encoding", "description": "指定编码 (UTF8/ASCII/Unicode等)", "required": false},
+      {"name": "-Wait", "description": "保持文件打开，等待追加内容（类似 tail -f）", "required": false}
+    ],
+    "examples": [
+      {"description": "读取文件内容", "command": "Get-Content log.txt"},
+      {"description": "读取前10行", "command": "Get-Content file.txt -TotalCount 10"},
+      {"description": "实时监控日志", "command": "Get-Content app.log -Wait -Tail 20"},
+      {"description": "以原始文本读取", "command": "Get-Content data.json -Raw"}
+    ],
+    "tags": ["文件", "读取", "cat", "gc", "type", "查看", "内容", "tail", "日志"]
+  },
+  {
+    "name": "Set-Content",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "向文件写入新内容或替换现有内容",
+    "syntax": "Set-Content [-Path] <string[]> [-Value] <Object[]> [-Encoding <Encoding>] [-Force] [-NoNewline] [-Stream <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "文件路径", "required": true},
+      {"name": "-Value", "description": "要写入的内容", "required": true},
+      {"name": "-Encoding", "description": "指定编码 (UTF8/ASCII等)", "required": false},
+      {"name": "-Force", "description": "覆盖只读文件", "required": false},
+      {"name": "-NoNewline", "description": "不在末尾添加换行符", "required": false}
+    ],
+    "examples": [
+      {"description": "写入文件", "command": "Set-Content config.ini \"key=value\""},
+      {"description": "覆盖只读文件", "command": "Set-Content file.txt \"new content\" -Force"}
+    ],
+    "tags": ["文件", "写入", "sc", "set", "内容", "保存", "输出"]
+  },
+  {
+    "name": "Add-Content",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "将内容追加到指定文件中",
+    "syntax": "Add-Content [-Path] <string[]> [-Value] <Object[]> [-Encoding <Encoding>] [-NoNewline] [-Stream <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "文件路径", "required": true},
+      {"name": "-Value", "description": "要追加的内容", "required": true},
+      {"name": "-Encoding", "description": "指定编码", "required": false}
+    ],
+    "examples": [
+      {"description": "追加文本到文件", "command": "Add-Content log.txt \"New log entry\""},
+      {"description": "追加多行", "command": "Add-Content notes.txt \"Line1\", \"Line2\""}
+    ],
+    "tags": ["文件", "追加", "ac", "add", "写入", "日志", "append"]
+  },
+  {
+    "name": "Out-File",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "将输出发送到文件",
+    "syntax": "Out-File [-FilePath] <string> [[-Encoding] <Encoding>] [-Append] [-Force] [-NoClobber] [-Width <int>] [-NoNewline] [-InputObject <PSObject>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-FilePath", "description": "输出文件路径", "required": true},
+      {"name": "-Append", "description": "追加到文件末尾", "required": false},
+      {"name": "-Force", "description": "覆盖只读文件", "required": false},
+      {"name": "-NoClobber", "description": "不覆盖已有文件", "required": false},
+      {"name": "-Width", "description": "每行字符宽度", "required": false}
+    ],
+    "examples": [
+      {"description": "输出到文件", "command": "Get-Process | Out-File processes.txt"},
+      {"description": "追加到文件", "command": "Get-Date | Out-File log.txt -Append"},
+      {"description": "不覆盖已有文件", "command": "Get-ChildItem | Out-File listing.txt -NoClobber"}
+    ],
+    "tags": ["文件", "输出", "out-file", "写入", "重定向", "保存"]
+  },
+  {
+    "name": "Get-Item",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "获取指定位置的项（不获取子项）",
+    "syntax": "Get-Item [-Path] <string[]> [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Force] [-Credential <PSCredential>] [-Stream <string[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "项路径（支持通配符）", "required": true},
+      {"name": "-Force", "description": "获取隐藏和系统项", "required": false}
+    ],
+    "examples": [
+      {"description": "获取文件信息", "command": "Get-Item config.json"},
+      {"description": "使用别名", "command": "gi C:\\Windows\\System32\\*.*"}
+    ],
+    "tags": ["文件", "信息", "gi", "get", "属性", "item"]
+  },
+  {
+    "name": "Invoke-Item",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "对指定项执行默认操作（如用默认程序打开文件）",
+    "syntax": "Invoke-Item [-Path] <string[]> [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <PSCredential>] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "项路径", "required": true}
+    ],
+    "examples": [
+      {"description": "打开文件", "command": "Invoke-Item report.pdf"},
+      {"description": "打开资源管理器", "command": "ii ."}
+    ],
+    "tags": ["文件", "打开", "ii", "invoke", "启动", "运行", "open"]
+  },
+  {
+    "name": "Get-ItemProperty",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "获取指定项的属性（如文件属性、注册表值等）",
+    "syntax": "Get-ItemProperty [-Path] <string[]> [[-Name] <string[]>] [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-Credential <PSCredential>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "项路径", "required": true},
+      {"name": "-Name", "description": "要获取的属性名称", "required": false}
+    ],
+    "examples": [
+      {"description": "获取文件属性", "command": "Get-ItemProperty myfile.txt"},
+      {"description": "获取注册表项", "command": "Get-ItemProperty \"HKLM:\\Software\\Microsoft\""},
+      {"description": "使用别名", "command": "gp myfile.txt"}
+    ],
+    "tags": ["文件", "属性", "gp", "property", "信息", "注册表"]
+  },
+  {
+    "name": "Get-Process",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取本地或远程计算机上运行的进程",
+    "syntax": "Get-Process [[-Name] <string[]>] [-ComputerName <string[]>] [-Module] [-FileVersionInfo] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "按名称筛选进程（支持通配符）", "required": false},
+      {"name": "-Id", "description": "按 PID 筛选进程", "required": false},
+      {"name": "-ComputerName", "description": "获取远程计算机上的进程", "required": false},
+      {"name": "-Module", "description": "显示进程加载的模块", "required": false},
+      {"name": "-FileVersionInfo", "description": "显示进程的文件版本信息", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有进程", "command": "Get-Process"},
+      {"description": "按名称筛选", "command": "Get-Process -Name chrome"},
+      {"description": "按PID获取", "command": "Get-Process -Id 1234"},
+      {"description": "使用别名", "command": "ps | Sort-Object CPU -Descending"}
+    ],
+    "tags": ["进程", "process", "ps", "gps", "tasklist", "运行", "PID", "CPU", "内存"]
+  },
+  {
+    "name": "Stop-Process",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "停止一个或多个正在运行的进程",
+    "syntax": "Stop-Process [-Id] <int[]> [-PassThru] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>] 或 Stop-Process -Name <string[]> [options]",
+    "parameters": [
+      {"name": "-Id", "description": "按 PID 停止进程", "required": false},
+      {"name": "-Name", "description": "按名称停止进程", "required": false},
+      {"name": "-Force", "description": "强制停止进程", "required": false}
+    ],
+    "examples": [
+      {"description": "按名称停止", "command": "Stop-Process -Name notepad"},
+      {"description": "按PID停止", "command": "Stop-Process -Id 5678 -Force"},
+      {"description": "使用别名", "command": "kill -Name chrome"}
+    ],
+    "tags": ["进程", "stop", "kill", "spps", "taskkill", "终止", "结束"]
+  },
+  {
+    "name": "Start-Process",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "启动本地计算机上的一个或多个进程",
+    "syntax": "Start-Process [-FilePath] <string> [[-ArgumentList] <string[]>] [-Credential <PSCredential>] [-WorkingDirectory <string>] [-LoadUserProfile] [-NoNewWindow] [-PassThru] [-RedirectStandardError <string>] [-RedirectStandardInput <string>] [-RedirectStandardOutput <string>] [-WindowStyle <ProcessWindowStyle>] [-Wait] [-UseNewEnvironment] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-FilePath", "description": "要运行的可执行文件路径", "required": true},
+      {"name": "-ArgumentList", "description": "传递给程序的参数", "required": false},
+      {"name": "-Wait", "description": "等待程序完成后再继续", "required": false},
+      {"name": "-NoNewWindow", "description": "在当前窗口启动进程", "required": false},
+      {"name": "-RedirectStandardOutput", "description": "将标准输出重定向到文件", "required": false},
+      {"name": "-WindowStyle", "description": "窗口样式 (Normal/Hidden/Minimized/Maximized)", "required": false}
+    ],
+    "examples": [
+      {"description": "启动程序", "command": "Start-Process notepad.exe"},
+      {"description": "带参数启动", "command": "Start-Process python -ArgumentList \"script.py --verbose\""},
+      {"description": "等待完成", "command": "Start-Process setup.exe -Wait"},
+      {"description": "使用别名", "command": "start calc.exe"}
+    ],
+    "tags": ["进程", "start", "saps", "启动", "运行", "程序", "exec"]
+  },
+  {
+    "name": "Get-Service",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取计算机上的服务（运行中和已停止的）",
+    "syntax": "Get-Service [[-Name] <string[]>] [-ComputerName <string[]>] [-DependentServices] [-RequiredServices] [-Include <string[]>] [-Exclude <string[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "指定服务名称（支持通配符）", "required": false},
+      {"name": "-ComputerName", "description": "指定远程计算机", "required": false},
+      {"name": "-DependentServices", "description": "显示依赖于此服务的服务", "required": false},
+      {"name": "-RequiredServices", "description": "显示此服务依赖的服务", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有服务", "command": "Get-Service"},
+      {"description": "按名称筛选", "command": "Get-Service -Name *sql*"},
+      {"description": "查看依赖关系", "command": "Get-Service WinRM -DependentServices"}
+    ],
+    "tags": ["服务", "service", "gsv", "Windows服务", "管理", "后台"]
+  },
+  {
+    "name": "Start-Service",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "启动一个或多个已停止的服务",
+    "syntax": "Start-Service [-Name] <string[]> [-Exclude <string[]>] [-Include <string[]>] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "要启动的服务名称", "required": true}
+    ],
+    "examples": [
+      {"description": "启动服务", "command": "Start-Service -Name spooler"},
+      {"description": "使用别名", "command": "sasv wuauserv"}
+    ],
+    "tags": ["服务", "start", "sasv", "启动", "service"]
+  },
+  {
+    "name": "Stop-Service",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "停止一个或多个正在运行的服务",
+    "syntax": "Stop-Service [-Name] <string[]> [-Force] [-NoWait] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "要停止的服务名称", "required": true},
+      {"name": "-Force", "description": "强制停止服务", "required": false}
+    ],
+    "examples": [
+      {"description": "停止服务", "command": "Stop-Service -Name wuauserv"},
+      {"description": "强制停止", "command": "Stop-Service -Name spooler -Force"}
+    ],
+    "tags": ["服务", "stop", "spsv", "停止", "service"]
+  },
+  {
+    "name": "Restart-Service",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "停止然后启动一个或多个服务",
+    "syntax": "Restart-Service [-Name] <string[]> [-Force] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "要重启的服务名称", "required": true},
+      {"name": "-Force", "description": "强制重启", "required": false}
+    ],
+    "examples": [
+      {"description": "重启服务", "command": "Restart-Service -Name spooler"},
+      {"description": "强制重启", "command": "Restart-Service -Name WinRM -Force"}
+    ],
+    "tags": ["服务", "restart", "重启", "service"]
+  },
+  {
+    "name": "Get-ComputerInfo",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取有关计算机系统的综合信息（Windows版本、硬件、BIOS等）",
+    "syntax": "Get-ComputerInfo [[-Property] <string[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Property", "description": "指定要获取的属性（默认全部）", "required": false}
+    ],
+    "examples": [
+      {"description": "获取所有系统信息", "command": "Get-ComputerInfo"},
+      {"description": "仅获取OS信息", "command": "Get-ComputerInfo -Property *os*"},
+      {"description": "获取内存信息", "command": "Get-ComputerInfo -Property *memory*"}
+    ],
+    "tags": ["系统", "computer", "info", "硬件", "OS", "版本", "specs"]
+  },
+  {
+    "name": "Get-Date",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取当前日期和时间",
+    "syntax": "Get-Date [[-Date] <DateTime>] [-Year <int>] [-Month <int>] [-Day <int>] [-Hour <int>] [-Minute <int>] [-Second <int>] [-Format <string>] [-UFormat <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Format", "description": "使用 .NET 格式字符串显示日期", "required": false},
+      {"name": "-UFormat", "description": "使用 UNIX 格式字符串显示日期", "required": false}
+    ],
+    "examples": [
+      {"description": "获取当前日期时间", "command": "Get-Date"},
+      {"description": "自定义格式", "command": "Get-Date -Format \"yyyy-MM-dd HH:mm:ss\""},
+      {"description": "获取昨天日期", "command": "(Get-Date).AddDays(-1)"}
+    ],
+    "tags": ["系统", "日期", "时间", "date", "time", "datetime"]
+  },
+  {
+    "name": "Get-Host",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取表示当前主机的对象（PowerShell 版本、区域性等）",
+    "syntax": "Get-Host [<CommonParameters>]",
+    "parameters": [],
+    "examples": [
+      {"description": "获取主机信息", "command": "Get-Host"},
+      {"description": "获取PowerShell版本", "command": "(Get-Host).Version"}
+    ],
+    "tags": ["系统", "host", "PowerShell", "版本", "控制台"]
+  },
+  {
+    "name": "Get-Random",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取一个随机数，或从一个集合中随机选择元素",
+    "syntax": "Get-Random [[-Maximum] <Object>] [-SetSeed <int>] [-Minimum <Object>] [-Count <int>] [-InputObject] <Object[]> [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Maximum", "description": "随机数的上限（不包含）", "required": false},
+      {"name": "-Minimum", "description": "随机数的下限（包含）", "required": false},
+      {"name": "-InputObject", "description": "从中随机选择的集合", "required": false},
+      {"name": "-Count", "description": "随机选择的元素数量", "required": false}
+    ],
+    "examples": [
+      {"description": "生成随机数", "command": "Get-Random -Minimum 1 -Maximum 100"},
+      {"description": "随机选择", "command": "Get-Random -InputObject @(\"A\",\"B\",\"C\")"},
+      {"description": "随机选择3个", "command": "Get-Random -InputObject (1..10) -Count 3"}
+    ],
+    "tags": ["系统", "random", "随机", "rand", "数"]
+  },
+  {
+    "name": "Get-WmiObject",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取 Windows Management Instrumentation (WMI) 类的实例和信息（PowerShell 5.1+ 建议使用 Get-CimInstance）",
+    "syntax": "Get-WmiObject [-Class] <string> [[-Property] <string[]>] [-Filter <string>] [-ComputerName <string[]>] [-Namespace <string>] [-Credential <PSCredential>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Class", "description": "WMI 类名", "required": true},
+      {"name": "-ComputerName", "description": "远程计算机名", "required": false},
+      {"name": "-Filter", "description": "WHERE 子句筛选", "required": false}
+    ],
+    "examples": [
+      {"description": "获取BIOS信息", "command": "Get-WmiObject Win32_BIOS"},
+      {"description": "获取磁盘信息", "command": "Get-WmiObject Win32_LogicalDisk"},
+      {"description": "远程计算机信息", "command": "Get-WmiObject Win32_Service -ComputerName Server01"}
+    ],
+    "tags": ["系统", "WMI", "gwmi", "管理", "查询", "硬件", "信息"]
+  },
+  {
+    "name": "Get-CimInstance",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取 CIM（通用信息模型）实例（WMI 的现代替代品）",
+    "syntax": "Get-CimInstance [-ClassName] <string> [-ComputerName <string[]>] [-Namespace <string>] [-Filter <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-ClassName", "description": "CIM 类名", "required": true},
+      {"name": "-ComputerName", "description": "远程计算机", "required": false},
+      {"name": "-Filter", "description": "WQL WHERE 子句", "required": false}
+    ],
+    "examples": [
+      {"description": "获取磁盘分区信息", "command": "Get-CimInstance Win32_DiskPartition"},
+      {"description": "获取网络适配器", "command": "Get-CimInstance Win32_NetworkAdapter"}
+    ],
+    "tags": ["系统", "CIM", "gcim", "WMI", "管理", "硬件"]
+  },
+  {
+    "name": "Restart-Computer",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "重新启动本地或远程计算机的操作系统",
+    "syntax": "Restart-Computer [[-ComputerName] <string[]>] [[-Credential] <PSCredential>] [-Force] [-Wait] [-Timeout <int>] [-For <WaitForServiceTypes>] [-Delay <int>] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-ComputerName", "description": "指定要重启的计算机（默认本地）", "required": false},
+      {"name": "-Force", "description": "强制重启", "required": false},
+      {"name": "-Wait", "description": "等待重启完成后继续", "required": false}
+    ],
+    "examples": [
+      {"description": "重启本地计算机", "command": "Restart-Computer"},
+      {"description": "强制重启", "command": "Restart-Computer -Force"},
+      {"description": "重启远程计算机", "command": "Restart-Computer -ComputerName Server01 -Force"}
+    ],
+    "tags": ["系统", "重启", "restart", "关机", "reboot"]
+  },
+  {
+    "name": "Stop-Computer",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "关闭（关机）本地计算机",
+    "syntax": "Stop-Computer [[-ComputerName] <string[]>] [[-Credential] <PSCredential>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-ComputerName", "description": "远程计算机关机", "required": false},
+      {"name": "-Force", "description": "强制关机", "required": false}
+    ],
+    "examples": [
+      {"description": "关闭本地计算机", "command": "Stop-Computer"},
+      {"description": "强制关机", "command": "Stop-Computer -Force"}
+    ],
+    "tags": ["系统", "关机", "stop", "shutdown", "关闭"]
+  },
+  {
+    "name": "Test-Connection",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "向一台或多台远程计算机发送 ICMP 回显请求数据包（ping）以测试连接",
+    "syntax": "Test-Connection [-TargetName] <string[]> [-Count <int>] [-Delay <int>] [-BufferSize <int>] [-TimeoutSeconds <int>] [-Quiet] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-TargetName", "description": "目标计算机名或IP", "required": true},
+      {"name": "-Count", "description": "发送的回显请求数（默认4）", "required": false},
+      {"name": "-Quiet", "description": "仅返回 True/False（连通/不连通）", "required": false},
+      {"name": "-TimeoutSeconds", "description": "超时秒数", "required": false}
+    ],
+    "examples": [
+      {"description": "测试连接", "command": "Test-Connection google.com"},
+      {"description": "安静模式", "command": "Test-Connection 8.8.8.8 -Quiet"},
+      {"description": "发送2个请求", "command": "Test-Connection example.com -Count 2"}
+    ],
+    "tags": ["网络", "ping", "test", "连接", "ICMP", "连通性", "延迟"]
+  },
+  {
+    "name": "Test-NetConnection",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "显示诊断信息以进行网络连接测试（支持 ping 和端口测试）",
+    "syntax": "Test-NetConnection [[-ComputerName] <string>] [-Port <int>] [-InformationLevel <string>] [-TraceRoute] [-Hops <int>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-ComputerName", "description": "目标 DNS 名称或 IP 地址", "required": false},
+      {"name": "-Port", "description": "指定要测试的 TCP 端口", "required": false},
+      {"name": "-TraceRoute", "description": "执行路由追踪", "required": false}
+    ],
+    "examples": [
+      {"description": "测试基本网络连接", "command": "Test-NetConnection"},
+      {"description": "测试端口连通性", "command": "Test-NetConnection example.com -Port 443"},
+      {"description": "测试并追踪路由", "command": "Test-NetConnection google.com -TraceRoute"}
+    ],
+    "tags": ["网络", "test", "net", "端口", "port", "连接", "诊断", "TNC"]
+  },
+  {
+    "name": "Resolve-DnsName",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "执行 DNS 名称查询解析",
+    "syntax": "Resolve-DnsName [-Name] <string> [[-Type] <RecordType>] [-Server <string[]>] [-DnsOnly] [-NoHostsFile] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "要解析的 DNS 名称", "required": true},
+      {"name": "-Type", "description": "DNS 记录类型 (A/AAAA/MX/NS/CNAME/TXT等)", "required": false},
+      {"name": "-Server", "description": "指定 DNS 服务器", "required": false}
+    ],
+    "examples": [
+      {"description": "解析域名", "command": "Resolve-DnsName google.com"},
+      {"description": "查询MX记录", "command": "Resolve-DnsName gmail.com -Type MX"},
+      {"description": "使用指定DNS", "command": "Resolve-DnsName example.com -Server 8.8.8.8"}
+    ],
+    "tags": ["网络", "DNS", "resolve", "nslookup", "域名", "解析", "IP"]
+  },
+  {
+    "name": "Get-NetIPAddress",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "获取 IP 地址配置信息",
+    "syntax": "Get-NetIPAddress [[-IPAddress] <string[]>] [-InterfaceIndex <uint32[]>] [-InterfaceAlias <string[]>] [-AddressFamily <AddressFamily[]>] [-Type <Type[]>] [-PrefixLength <byte[]>] [-CimSession <CimSession[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-InterfaceAlias", "description": "按接口别名筛选", "required": false},
+      {"name": "-AddressFamily", "description": "地址族 (IPv4/IPv6)", "required": false},
+      {"name": "-IPAddress", "description": "筛选特定IP地址", "required": false}
+    ],
+    "examples": [
+      {"description": "查看所有IP配置", "command": "Get-NetIPAddress"},
+      {"description": "仅查看IPv4", "command": "Get-NetIPAddress -AddressFamily IPv4"},
+      {"description": "查看特定接口", "command": "Get-NetIPAddress -InterfaceAlias \"以太网\""}
+    ],
+    "tags": ["网络", "IP", "地址", "net", "配置", "接口", "ipconfig"]
+  },
+  {
+    "name": "Get-NetAdapter",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "获取网络适配器的基本信息",
+    "syntax": "Get-NetAdapter [[-Name] <string[]>] [-InterfaceIndex <uint32[]>] [-Physical] [-IncludeHidden] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "按适配器名称筛选", "required": false},
+      {"name": "-Physical", "description": "仅显示物理适配器", "required": false}
+    ],
+    "examples": [
+      {"description": "查看所有适配器", "command": "Get-NetAdapter"},
+      {"description": "仅物理适配器", "command": "Get-NetAdapter -Physical"}
+    ],
+    "tags": ["网络", "adapter", "适配器", "网卡", "接口", "NIC"]
+  },
+  {
+    "name": "Get-NetRoute",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "获取 IP 路由表中的路由信息",
+    "syntax": "Get-NetRoute [[-DestinationPrefix] <string[]>] [-InterfaceIndex <uint32[]>] [-NextHop <string[]>] [-Protocol <Protocol[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-DestinationPrefix", "description": "目标网络前缀", "required": false},
+      {"name": "-NextHop", "description": "按下一跳筛选", "required": false}
+    ],
+    "examples": [
+      {"description": "查看路由表", "command": "Get-NetRoute"},
+      {"description": "查看默认路由", "command": "Get-NetRoute -DestinationPrefix 0.0.0.0/0"}
+    ],
+    "tags": ["网络", "路由", "route", "routing", "网关", "gateway"]
+  },
+  {
+    "name": "Invoke-WebRequest",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "从 Internet 上的网页获取内容（类似 curl）",
+    "syntax": "Invoke-WebRequest [-Uri] <Uri> [-UseBasicParsing] [-Method <WebRequestMethod>] [-Headers <IDictionary>] [-Body <Object>] [-ContentType <string>] [-TimeoutSec <int>] [-OutFile <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Uri", "description": "网页或API的URL", "required": true},
+      {"name": "-Method", "description": "HTTP方法 (GET/POST/PUT/DELETE等)", "required": false},
+      {"name": "-Headers", "description": "自定义请求头", "required": false},
+      {"name": "-Body", "description": "请求体", "required": false},
+      {"name": "-OutFile", "description": "将响应保存到文件", "required": false}
+    ],
+    "examples": [
+      {"description": "GET请求", "command": "Invoke-WebRequest https://api.github.com"},
+      {"description": "POST请求", "command": "Invoke-WebRequest -Uri https://api.example.com -Method POST -Body @{key='value'}"},
+      {"description": "下载文件", "command": "Invoke-WebRequest -Uri https://example.com/file.zip -OutFile file.zip"},
+      {"description": "使用别名", "command": "iwr https://google.com"}
+    ],
+    "tags": ["网络", "HTTP", "curl", "iwr", "web", "API", "下载", "请求"]
+  },
+  {
+    "name": "Invoke-RestMethod",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "向 REST API 发送 HTTP/HTTPS 请求并自动将 JSON/XML 响应解析为 PowerShell 对象",
+    "syntax": "Invoke-RestMethod [-Uri] <Uri> [-Method <WebRequestMethod>] [-Headers <IDictionary>] [-Body <Object>] [-ContentType <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Uri", "description": "REST API URL", "required": true},
+      {"name": "-Method", "description": "HTTP方法", "required": false},
+      {"name": "-Headers", "description": "请求头", "required": false},
+      {"name": "-Body", "description": "请求体（自动序列化为JSON）", "required": false}
+    ],
+    "examples": [
+      {"description": "调用REST API", "command": "Invoke-RestMethod https://api.github.com/users/microsoft"},
+      {"description": "POST JSON数据", "command": "Invoke-RestMethod -Uri https://api.example.com -Method POST -Body @{name='test'} -ContentType 'application/json'"},
+      {"description": "使用别名", "command": "irm https://api.github.com"}
+    ],
+    "tags": ["网络", "REST", "API", "JSON", "irm", "HTTP", "web"]
+  },
+  {
+    "name": "Get-NetTCPConnection",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "获取当前的 TCP 连接（类似 netstat）",
+    "syntax": "Get-NetTCPConnection [[-LocalAddress] <string[]>] [-LocalPort <uint16[]>] [-RemoteAddress <string[]>] [-RemotePort <uint16[]>] [-State <State[]>] [-AppliedSetting <AppliedSetting[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-State", "description": "按连接状态筛选 (Listen/Established/TimeWait等)", "required": false},
+      {"name": "-LocalPort", "description": "按本地端口筛选", "required": false},
+      {"name": "-RemoteAddress", "description": "按远程地址筛选", "required": false}
+    ],
+    "examples": [
+      {"description": "查看所有TCP连接", "command": "Get-NetTCPConnection"},
+      {"description": "查看监听端口", "command": "Get-NetTCPConnection -State Listen"},
+      {"description": "查看特定端口", "command": "Get-NetTCPConnection -LocalPort 443"}
+    ],
+    "tags": ["网络", "TCP", "netstat", "连接", "端口", "port", "监听"]
+  },
+  {
+    "name": "Get-NetFirewallRule",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "获取 Windows 防火墙规则",
+    "syntax": "Get-NetFirewallRule [[-Name] <string[]>] [-Enabled <Enabled[]>] [-Direction <Direction[]>] [-Action <Action[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Enabled", "description": "按启用状态筛选 (True/False)", "required": false},
+      {"name": "-Direction", "description": "按方向筛选 (Inbound/Outbound)", "required": false},
+      {"name": "-Action", "description": "按操作筛选 (Allow/Block)", "required": false}
+    ],
+    "examples": [
+      {"description": "查看所有防火墙规则", "command": "Get-NetFirewallRule"},
+      {"description": "查看启用的入站规则", "command": "Get-NetFirewallRule -Enabled True -Direction Inbound"},
+      {"description": "查看阻止规则", "command": "Get-NetFirewallRule -Action Block"}
+    ],
+    "tags": ["网络", "防火墙", "firewall", "规则", "安全", "filter"]
+  },
+  {
+    "name": "Select-Object",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "选择对象或对象属性的指定属性",
+    "syntax": "Select-Object [[-Property] <Object[]>] [-InputObject <PSObject>] [-ExcludeProperty <string[]>] [-ExpandProperty <string>] [-Unique] [-Last <int>] [-First <int>] [-Skip <int>] [-Wait] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Property", "description": "要选择的属性（支持通配符和计算属性）", "required": false},
+      {"name": "-First", "description": "选择前 N 个对象", "required": false},
+      {"name": "-Last", "description": "选择最后 N 个对象", "required": false},
+      {"name": "-Unique", "description": "仅选择唯一对象", "required": false},
+      {"name": "-ExpandProperty", "description": "展开属性以获取其值", "required": false}
+    ],
+    "examples": [
+      {"description": "选择特定属性", "command": "Get-Process | Select-Object Name, Id, CPU"},
+      {"description": "选择前10个", "command": "Get-ChildItem | Select-Object -First 10"},
+      {"description": "使用别名", "command": "ps | select Name, CPU -First 5"}
+    ],
+    "tags": ["对象", "select", "select-object", "属性", "管道", "筛选", "选择"]
+  },
+  {
+    "name": "Where-Object",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "根据属性值从集合中筛选对象",
+    "syntax": "Where-Object [-InputObject <PSObject>] [-Property] <string> [[-Value] <Object>] [-FilterScript] <ScriptBlock> [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Property", "description": "属性名", "required": false},
+      {"name": "-FilterScript", "description": "筛选脚本块 { $_ ... }", "required": false}
+    ],
+    "examples": [
+      {"description": "按属性筛选", "command": "Get-Process | Where-Object {$_.CPU -gt 100}"},
+      {"description": "按名称筛选", "command": "Get-Service | Where-Object {$_.Status -eq 'Running'}"},
+      {"description": "使用别名", "command": "ls | ? {$_.Length -gt 1MB}"}
+    ],
+    "tags": ["对象", "where", "filter", "筛选", "条件", "管道", "过滤"]
+  },
+  {
+    "name": "ForEach-Object",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "对集合中的每个对象执行操作",
+    "syntax": "ForEach-Object [-InputObject <PSObject>] [-Begin <ScriptBlock>] [-Process] <ScriptBlock[]> [-End <ScriptBlock>] [-RemainingScripts <ScriptBlock[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Process", "description": "对每个输入对象执行的脚本块", "required": true},
+      {"name": "-Begin", "description": "在处理任何输入前执行的脚本块", "required": false},
+      {"name": "-End", "description": "在处理所有输入后执行的脚本块", "required": false}
+    ],
+    "examples": [
+      {"description": "对每个文件操作", "command": "Get-ChildItem | ForEach-Object { $_.Name }"},
+      {"description": "对每个进程操作", "command": "Get-Process | ForEach-Object { $_.ProcessName.ToUpper() }"},
+      {"description": "使用别名", "command": "1..10 | % { $_ * 2 }"}
+    ],
+    "tags": ["对象", "foreach", "循环", "遍历", "迭代", "管道", "每个"]
+  },
+  {
+    "name": "Sort-Object",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "按属性值对对象进行排序",
+    "syntax": "Sort-Object [[-Property] <Object[]>] [-InputObject <PSObject>] [-Descending] [-Unique] [-CaseSensitive] [-Top <int>] [-Bottom <int>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Property", "description": "排序依据的属性", "required": false},
+      {"name": "-Descending", "description": "按降序排序", "required": false},
+      {"name": "-Unique", "description": "消除重复并返回唯一值", "required": false},
+      {"name": "-Top", "description": "仅返回前 N 个", "required": false}
+    ],
+    "examples": [
+      {"description": "按名称排序", "command": "Get-ChildItem | Sort-Object Name"},
+      {"description": "按大小降序", "command": "Get-ChildItem | Sort-Object Length -Descending"},
+      {"description": "取前5个", "command": "Get-Process | Sort-Object CPU -Descending -Top 5"},
+      {"description": "使用别名", "command": "ls | sort Name -Descending"}
+    ],
+    "tags": ["对象", "sort", "排序", "顺序", "降序", "排列"]
+  },
+  {
+    "name": "Group-Object",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "按属性值对对象进行分组",
+    "syntax": "Group-Object [[-Property] <Object[]>] [-InputObject <PSObject>] [-NoElement] [-AsHashTable] [-AsString] [-CaseSensitive] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Property", "description": "分组依据的属性", "required": false},
+      {"name": "-NoElement", "description": "不包含组中元素", "required": false},
+      {"name": "-AsHashTable", "description": "以哈希表形式返回", "required": false}
+    ],
+    "examples": [
+      {"description": "按扩展名分组", "command": "Get-ChildItem | Group-Object Extension"},
+      {"description": "按状态分组服务", "command": "Get-Service | Group-Object Status"},
+      {"description": "使用别名", "command": "ls | group Extension"}
+    ],
+    "tags": ["对象", "group", "分组", "归类", "聚合", "统计"]
+  },
+  {
+    "name": "Measure-Object",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "计算对象的数值属性，如计数、总和、平均值、最小值和最大值",
+    "syntax": "Measure-Object [[-Property] <string[]>] [-InputObject <PSObject>] [-Sum] [-Average] [-Maximum] [-Minimum] [-StandardDeviation] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Property", "description": "要测量的属性", "required": false},
+      {"name": "-Sum", "description": "计算总和", "required": false},
+      {"name": "-Average", "description": "计算平均值", "required": false},
+      {"name": "-Maximum", "description": "获取最大值", "required": false},
+      {"name": "-Minimum", "description": "获取最小值", "required": false}
+    ],
+    "examples": [
+      {"description": "统计文件数", "command": "Get-ChildItem | Measure-Object"},
+      {"description": "计算总大小", "command": "Get-ChildItem | Measure-Object Length -Sum"},
+      {"description": "使用别名", "command": "ls | measure Length -Sum -Average"}
+    ],
+    "tags": ["对象", "measure", "统计", "计算", "总和", "平均", "最大", "最小"]
+  },
+  {
+    "name": "Compare-Object",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "比较两组对象，找出差异",
+    "syntax": "Compare-Object [-ReferenceObject] <PSObject[]> [-DifferenceObject] <PSObject[]> [-Property <Object[]>] [-IncludeEqual] [-CaseSensitive] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-ReferenceObject", "description": "参考对象集合", "required": true},
+      {"name": "-DifferenceObject", "description": "差异对象集合", "required": true},
+      {"name": "-Property", "description": "比较的属性", "required": false},
+      {"name": "-IncludeEqual", "description": "同时在输出中包含相等的对象", "required": false}
+    ],
+    "examples": [
+      {"description": "比较两组数据", "command": "Compare-Object (Get-Content file1.txt) (Get-Content file2.txt)"},
+      {"description": "使用别名", "command": "diff $list1 $list2"}
+    ],
+    "tags": ["对象", "compare", "diff", "比较", "差异", "对比"]
+  },
+  {
+    "name": "Tee-Object",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "将命令输出保存到文件或变量，同时将其沿管道传递下去",
+    "syntax": "Tee-Object [-FilePath] <string> [-InputObject <PSObject>] [-Append] [<CommonParameters>] 或 Tee-Object -Variable <string> [options]",
+    "parameters": [
+      {"name": "-FilePath", "description": "输出文件路径", "required": false},
+      {"name": "-Variable", "description": "保存到变量", "required": false},
+      {"name": "-Append", "description": "追加到文件", "required": false}
+    ],
+    "examples": [
+      {"description": "管道中保存到文件", "command": "Get-Process | Tee-Object -FilePath proc.txt | Sort-Object CPU"},
+      {"description": "保存到变量", "command": "Get-Service | Tee-Object -Variable svc | Where-Object Status -eq Running"},
+      {"description": "使用别名", "command": "ls | tee listing.txt"}
+    ],
+    "tags": ["对象", "tee", "管道", "保存", "文件", "变量", "分流"]
+  },
+  {
+    "name": "New-Object",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "创建 Microsoft .NET Framework 或 COM 对象的实例",
+    "syntax": "New-Object [-TypeName] <string> [[-ArgumentList] <Object[]>] [-Property <IDictionary>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-TypeName", "description": ".NET 类全名", "required": true},
+      {"name": "-ArgumentList", "description": "构造函数参数", "required": false},
+      {"name": "-Property", "description": "设置对象属性", "required": false}
+    ],
+    "examples": [
+      {"description": "创建 .NET 对象", "command": "New-Object System.Diagnostics.ProcessStartInfo"},
+      {"description": "创建哈希表", "command": "New-Object Hashtable"},
+      {"description": "创建 PSCredential", "command": "New-Object System.Management.Automation.PSCredential(\"user\", (Read-Host -AsSecureString))"}
+    ],
+    "tags": ["对象", "new", "创建", ".NET", "COM", "实例", "instance"]
+  },
+  {
+    "name": "Format-Table",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "将输出格式化为表格",
+    "syntax": "Format-Table [[-Property] <Object[]>] [-InputObject <PSObject>] [-AutoSize] [-Wrap] [-GroupBy <Object>] [-HideTableHeaders] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Property", "description": "要显示的属性", "required": false},
+      {"name": "-AutoSize", "description": "自动调整列宽", "required": false},
+      {"name": "-Wrap", "description": "超宽文本自动换行", "required": false},
+      {"name": "-GroupBy", "description": "按属性分组显示", "required": false}
+    ],
+    "examples": [
+      {"description": "表格显示", "command": "Get-Process | Format-Table Name, Id, CPU -AutoSize"},
+      {"description": "使用别名", "command": "ls | ft Name, Length, LastWriteTime -AutoSize"}
+    ],
+    "tags": ["格式", "format", "table", "ft", "表格", "显示", "输出"]
+  },
+  {
+    "name": "Format-List",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "将输出格式化为每个属性的值各占一行的属性列表",
+    "syntax": "Format-List [[-Property] <Object[]>] [-InputObject <PSObject>] [-GroupBy <Object>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Property", "description": "要显示的属性（默认使用通配符 *）", "required": false}
+    ],
+    "examples": [
+      {"description": "列表格式显示", "command": "Get-Service | Format-List"},
+      {"description": "显示所有属性", "command": "Get-Process -Id $pid | Format-List *"},
+      {"description": "使用别名", "command": "ps | fl Name, Path"}
+    ],
+    "tags": ["格式", "format", "list", "fl", "列表", "显示", "详细"]
+  },
+  {
+    "name": "Format-Wide",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "将对象格式化为仅显示每个对象的一个属性的宽表",
+    "syntax": "Format-Wide [[-Property] <Object>] [-InputObject <PSObject>] [-Column <int>] [-AutoSize] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Property", "description": "要显示的属性", "required": false},
+      {"name": "-Column", "description": "列数", "required": false},
+      {"name": "-AutoSize", "description": "根据屏幕宽度自动调整", "required": false}
+    ],
+    "examples": [
+      {"description": "宽格式显示文件名", "command": "Get-ChildItem | Format-Wide Name"},
+      {"description": "使用别名", "command": "ls | fw Name -Column 4"}
+    ],
+    "tags": ["格式", "format", "wide", "fw", "宽表", "显示"]
+  },
+  {
+    "name": "Export-Csv",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "将对象转换为一系列 CSV 字符串并保存到文件",
+    "syntax": "Export-Csv [[-Path] <string>] [[-Delimiter] <char>] [-InputObject <PSObject>] [-Encoding <Encoding>] [-NoTypeInformation] [-Append] [-Force] [-NoClobber] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "CSV 文件路径", "required": true},
+      {"name": "-NoTypeInformation", "description": "不包含类型信息头", "required": false},
+      {"name": "-Delimiter", "description": "分隔符（默认逗号）", "required": false},
+      {"name": "-Encoding", "description": "编码 (UTF8/ASCII等)", "required": false},
+      {"name": "-Append", "description": "追加到已有文件", "required": false}
+    ],
+    "examples": [
+      {"description": "导出到CSV", "command": "Get-Process | Export-Csv processes.csv -NoTypeInformation"},
+      {"description": "使用别名", "command": "ls | epcsv files.csv"}
+    ],
+    "tags": ["对象", "csv", "export", "导出", "文件", "数据", "表格"]
+  },
+  {
+    "name": "Import-Csv",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "从 CSV 文件创建类似表格的自定义对象",
+    "syntax": "Import-Csv [[-Path] <string[]>] [[-Delimiter] <char>] [-Header <string[]>] [-Encoding <Encoding>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "CSV 文件路径", "required": true},
+      {"name": "-Delimiter", "description": "分隔符", "required": false},
+      {"name": "-Header", "description": "自定义列标题", "required": false},
+      {"name": "-Encoding", "description": "编码", "required": false}
+    ],
+    "examples": [
+      {"description": "导入CSV", "command": "Import-Csv data.csv"},
+      {"description": "导入并处理", "command": "Import-Csv users.csv | ForEach-Object { $_.Name }"},
+      {"description": "使用别名", "command": "ipcsv data.csv"}
+    ],
+    "tags": ["对象", "csv", "import", "导入", "文件", "数据", "解析"]
+  },
+  {
+    "name": "ConvertTo-Json",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "将对象转换为 JSON 格式的字符串",
+    "syntax": "ConvertTo-Json [-InputObject] <Object> [-Depth <int>] [-Compress] [-AsArray] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Depth", "description": "JSON 嵌套深度（默认2）", "required": false},
+      {"name": "-Compress", "description": "压缩输出（去除空格和换行）", "required": false}
+    ],
+    "examples": [
+      {"description": "转换为JSON", "command": "Get-Process | Select-Object Name,Id | ConvertTo-Json"},
+      {"description": "深层转换", "command": "Get-ChildItem | ConvertTo-Json -Depth 3"},
+      {"description": "压缩JSON", "command": "@{key='value'} | ConvertTo-Json -Compress"}
+    ],
+    "tags": ["对象", "JSON", "convert", "序列化", "格式", "转换"]
+  },
+  {
+    "name": "ConvertFrom-Json",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "将 JSON 格式的字符串转换为自定义对象",
+    "syntax": "ConvertFrom-Json [-InputObject] <string> [-AsHashtable] [-NoEnumerate] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-InputObject", "description": "JSON 字符串", "required": true},
+      {"name": "-AsHashtable", "description": "转换为哈希表而不是 PSCustomObject", "required": false}
+    ],
+    "examples": [
+      {"description": "解析JSON", "command": "'{\"name\":\"test\"}' | ConvertFrom-Json"},
+      {"description": "从文件解析", "command": "Get-Content config.json | ConvertFrom-Json"},
+      {"description": "API响应解析", "command": "Invoke-RestMethod https://api.example.com | ConvertTo-Json"}
+    ],
+    "tags": ["对象", "JSON", "convert", "解析", "反序列化", "格式"]
+  },
+  {
+    "name": "Enter-PSSession",
+    "source": "powershell",
+    "category": "remote",
+    "categoryLabel": "远程管理",
+    "description": "与远程计算机建立交互式 PowerShell 会话",
+    "syntax": "Enter-PSSession [-ComputerName] <string> [-Credential <PSCredential>] [-Port <int>] [-UseSSL] [-SessionOption <PSSessionOption>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-ComputerName", "description": "远程计算机名或IP", "required": true},
+      {"name": "-Credential", "description": "用于连接的用户凭据", "required": false},
+      {"name": "-Port", "description": "远程端口（默认5985 SSL时5986）", "required": false},
+      {"name": "-UseSSL", "description": "使用SSL加密连接", "required": false}
+    ],
+    "examples": [
+      {"description": "进入远程会话", "command": "Enter-PSSession -ComputerName Server01"},
+      {"description": "使用凭据连接", "command": "Enter-PSSession Server02 -Credential DOMAIN\\Admin"},
+      {"description": "使用别名", "command": "etsn Server01"}
+    ],
+    "tags": ["远程", "PSSession", "enter", "etsn", "远程桌面", "shell", "SSH"]
+  },
+  {
+    "name": "Exit-PSSession",
+    "source": "powershell",
+    "category": "remote",
+    "categoryLabel": "远程管理",
+    "description": "退出交互式远程 PowerShell 会话，返回本地会话",
+    "syntax": "Exit-PSSession [<CommonParameters>]",
+    "parameters": [],
+    "examples": [
+      {"description": "退出远程会话", "command": "Exit-PSSession"},
+      {"description": "使用别名", "command": "exsn"}
+    ],
+    "tags": ["远程", "exit", "exsn", "退出", "session"]
+  },
+  {
+    "name": "New-PSSession",
+    "source": "powershell",
+    "category": "remote",
+    "categoryLabel": "远程管理",
+    "description": "创建到本地或远程计算机的持久 PowerShell 会话",
+    "syntax": "New-PSSession [[-ComputerName] <string[]>] [-Credential <PSCredential>] [-Name <string[]>] [-Port <int>] [-UseSSL] [-SessionOption <PSSessionOption>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-ComputerName", "description": "远程计算机名", "required": false},
+      {"name": "-Name", "description": "会话名称", "required": false},
+      {"name": "-Credential", "description": "凭据", "required": false}
+    ],
+    "examples": [
+      {"description": "创建远程会话", "command": "New-PSSession -ComputerName Server01"},
+      {"description": "创建命名会话", "command": "New-PSSession -ComputerName Server01 -Name MySession"},
+      {"description": "使用别名", "command": "nsn Server01,Server02"}
+    ],
+    "tags": ["远程", "session", "nsn", "创建", "PSSession", "持久"]
+  },
+  {
+    "name": "Get-PSSession",
+    "source": "powershell",
+    "category": "remote",
+    "categoryLabel": "远程管理",
+    "description": "获取当前会话中已建立的 PowerShell 会话",
+    "syntax": "Get-PSSession [[-ComputerName] <string[]>] [-Name <string[]>] [-InstanceId <Guid[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-ComputerName", "description": "按计算机名筛选", "required": false},
+      {"name": "-Name", "description": "按会话名筛选", "required": false}
+    ],
+    "examples": [
+      {"description": "列出现有会话", "command": "Get-PSSession"},
+      {"description": "使用别名", "command": "gsn"}
+    ],
+    "tags": ["远程", "session", "gsn", "列出", "PSSession"]
+  },
+  {
+    "name": "Invoke-Command",
+    "source": "powershell",
+    "category": "remote",
+    "categoryLabel": "远程管理",
+    "description": "在本地或远程计算机上运行命令（远程执行）",
+    "syntax": "Invoke-Command [-ScriptBlock] <ScriptBlock> [-ComputerName <string[]>] [-Credential <PSCredential>] [-Session <PSSession[]>] [-AsJob] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-ScriptBlock", "description": "要执行的命令脚本块", "required": true},
+      {"name": "-ComputerName", "description": "目标计算机", "required": false},
+      {"name": "-Session", "description": "使用已建立的 PSSession", "required": false},
+      {"name": "-AsJob", "description": "作为后台作业运行", "required": false}
+    ],
+    "examples": [
+      {"description": "远程执行命令", "command": "Invoke-Command -ComputerName Server01 -ScriptBlock { Get-Process }"},
+      {"description": "多台计算机执行", "command": "Invoke-Command Server01,Server02 { Get-Date }"},
+      {"description": "使用别名", "command": "icm Server01 { hostname }"}
+    ],
+    "tags": ["远程", "invoke", "icm", "执行", "远程执行", "命令"]
+  },
+  {
+    "name": "Get-Module",
+    "source": "powershell",
+    "category": "modules",
+    "categoryLabel": "模块与帮助",
+    "description": "获取已导入或可用的 PowerShell 模块列表",
+    "syntax": "Get-Module [[-Name] <string[]>] [-ListAvailable] [-FullyQualifiedName <ModuleSpecification[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "模块名（支持通配符）", "required": false},
+      {"name": "-ListAvailable", "description": "列出所有可用的模块", "required": false}
+    ],
+    "examples": [
+      {"description": "查看已导入模块", "command": "Get-Module"},
+      {"description": "查看所有可用模块", "command": "Get-Module -ListAvailable"},
+      {"description": "使用别名", "command": "gmo -ListAvailable"}
+    ],
+    "tags": ["模块", "module", "gmo", "导入", "可用", "列表"]
+  },
+  {
+    "name": "Import-Module",
+    "source": "powershell",
+    "category": "modules",
+    "categoryLabel": "模块与帮助",
+    "description": "将模块导入当前 PowerShell 会话中",
+    "syntax": "Import-Module [-Name] <string[]> [-Force] [-Scope <string>] [-Prefix <string>] [-NoClobber] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "要导入的模块名", "required": true},
+      {"name": "-Force", "description": "强制重新导入模块", "required": false},
+      {"name": "-Prefix", "description": "为导入的cmdlet添加前缀", "required": false}
+    ],
+    "examples": [
+      {"description": "导入模块", "command": "Import-Module ActiveDirectory"},
+      {"description": "强制重新导入", "command": "Import-Module MyModule -Force"},
+      {"description": "使用别名", "command": "ipmo ServerManager"}
+    ],
+    "tags": ["模块", "import", "ipmo", "导入", "module", "加载"]
+  },
+  {
+    "name": "Install-Module",
+    "source": "powershell",
+    "category": "modules",
+    "categoryLabel": "模块与帮助",
+    "description": "从 PowerShell Gallery 下载并安装模块",
+    "syntax": "Install-Module [-Name] <string[]> [-RequiredVersion <string>] [-Scope <string>] [-Force] [-AllowClobber] [-SkipPublisherCheck] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "模块名称", "required": true},
+      {"name": "-Scope", "description": "安装范围 (CurrentUser/AllUsers)", "required": false},
+      {"name": "-Force", "description": "强制安装不提示", "required": false}
+    ],
+    "examples": [
+      {"description": "安装模块", "command": "Install-Module -Name Az"},
+      {"description": "当前用户安装", "command": "Install-Module PSReadLine -Scope CurrentUser"}
+    ],
+    "tags": ["模块", "install", "安装", "Gallery", "PSGallery", "下载"]
+  },
+  {
+    "name": "Find-Module",
+    "source": "powershell",
+    "category": "modules",
+    "categoryLabel": "模块与帮助",
+    "description": "在 PowerShell Gallery 中搜索模块",
+    "syntax": "Find-Module [[-Name] <string[]>] [-MinimumVersion <string>] [-MaximumVersion <string>] [-RequiredVersion <string>] [-AllVersions] [-Tag <string[]>] [-Filter <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "模块名（支持通配符）", "required": false},
+      {"name": "-Tag", "description": "按标签搜索", "required": false}
+    ],
+    "examples": [
+      {"description": "搜索模块", "command": "Find-Module -Name *sql*"},
+      {"description": "按标签搜索", "command": "Find-Module -Tag Security"}
+    ],
+    "tags": ["模块", "find", "搜索", "Gallery", "查找", "安装"]
+  },
+  {
+    "name": "Get-Command",
+    "source": "powershell",
+    "category": "modules",
+    "categoryLabel": "模块与帮助",
+    "description": "获取所有可用的命令（cmdlet、函数、别名、脚本等）",
+    "syntax": "Get-Command [[-Name] <string[]>] [[-Module] <string[]>] [-CommandType <CommandTypes>] [-Syntax] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "命令名（支持通配符）", "required": false},
+      {"name": "-Module", "description": "按模块筛选", "required": false},
+      {"name": "-CommandType", "description": "命令类型 (Cmdlet/Function/Alias等)", "required": false},
+      {"name": "-Syntax", "description": "仅显示命令语法", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有命令", "command": "Get-Command"},
+      {"description": "搜索命令", "command": "Get-Command -Name *item*"},
+      {"description": "查看模块中的命令", "command": "Get-Command -Module NetTCPIP"},
+      {"description": "使用别名", "command": "gcm *process*"}
+    ],
+    "tags": ["帮助", "command", "gcm", "命令", "搜索", "查找", "列出"]
+  },
+  {
+    "name": "Get-Help",
+    "source": "powershell",
+    "category": "modules",
+    "categoryLabel": "模块与帮助",
+    "description": "显示有关 PowerShell 命令和概念的帮助信息",
+    "syntax": "Get-Help [[-Name] <string>] [-Full] [-Detailed] [-Examples] [-Online] [-Parameter <string>] [-ShowWindow] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "要获取帮助的命令名称", "required": false},
+      {"name": "-Examples", "description": "仅显示示例", "required": false},
+      {"name": "-Full", "description": "显示完整帮助", "required": false},
+      {"name": "-Online", "description": "在浏览器中打开在线帮助", "required": false},
+      {"name": "-Parameter", "description": "仅显示指定参数的帮助", "required": false}
+    ],
+    "examples": [
+      {"description": "获取命令帮助", "command": "Get-Help Get-Process"},
+      {"description": "查看示例", "command": "Get-Help Get-ChildItem -Examples"},
+      {"description": "查看完整帮助", "command": "Get-Help Get-Service -Full"},
+      {"description": "在线帮助", "command": "Get-Help about_If -Online"}
+    ],
+    "tags": ["帮助", "help", "文档", "man", "examples", "用法"]
+  },
+  {
+    "name": "Get-Alias",
+    "source": "powershell",
+    "category": "modules",
+    "categoryLabel": "模块与帮助",
+    "description": "获取当前会话中的命令别名",
+    "syntax": "Get-Alias [[-Name] <string[]>] [-Exclude <string[]>] [-Scope <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "别名名称（支持通配符）", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有别名", "command": "Get-Alias"},
+      {"description": "查找特定别名", "command": "Get-Alias -Name ls"},
+      {"description": "使用别名", "command": "gal"}
+    ],
+    "tags": ["帮助", "alias", "gal", "别名", "命令"]
+  },
+  {
+    "name": "Set-Alias",
+    "source": "powershell",
+    "category": "modules",
+    "categoryLabel": "模块与帮助",
+    "description": "为 cmdlet 或其他命令创建或更改别名",
+    "syntax": "Set-Alias [-Name] <string> [-Value] <string> [-Description <string>] [-Option <ScopedItemOptions>] [-PassThru] [-Scope <string>] [-Force] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "别名名称", "required": true},
+      {"name": "-Value", "description": "别名所代表的命令", "required": true},
+      {"name": "-Description", "description": "别名描述", "required": false}
+    ],
+    "examples": [
+      {"description": "创建别名", "command": "Set-Alias -Name gps -Value Get-Process"},
+      {"description": "覆盖已有别名", "command": "Set-Alias -Name ls -Value Get-ChildItem"}
+    ],
+    "tags": ["帮助", "alias", "set", "sal", "别名", "创建"]
+  },
+  {
+    "name": "Get-ExecutionPolicy",
+    "source": "powershell",
+    "category": "security",
+    "categoryLabel": "安全",
+    "description": "获取当前会话的执行策略",
+    "syntax": "Get-ExecutionPolicy [[-Scope] <ExecutionPolicyScope>] [-List] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Scope", "description": "获取指定范围的策略", "required": false},
+      {"name": "-List", "description": "列出所有范围的策略", "required": false}
+    ],
+    "examples": [
+      {"description": "查看当前执行策略", "command": "Get-ExecutionPolicy"},
+      {"description": "查看所有范围策略", "command": "Get-ExecutionPolicy -List"}
+    ],
+    "tags": ["安全", "execution", "policy", "执行策略", "权限", "Restricted"]
+  },
+  {
+    "name": "Set-ExecutionPolicy",
+    "source": "powershell",
+    "category": "security",
+    "categoryLabel": "安全",
+    "description": "更改 PowerShell 执行策略（需要管理员权限）",
+    "syntax": "Set-ExecutionPolicy [-ExecutionPolicy] <ExecutionPolicy> [[-Scope] <ExecutionPolicyScope>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-ExecutionPolicy", "description": "策略值 (Restricted/RemoteSigned/AllSigned/Unrestricted/Bypass)", "required": true},
+      {"name": "-Scope", "description": "作用范围 (Process/CurrentUser/LocalMachine)", "required": false},
+      {"name": "-Force", "description": "强制更改不提示", "required": false}
+    ],
+    "examples": [
+      {"description": "设置执行策略", "command": "Set-ExecutionPolicy RemoteSigned"},
+      {"description": "当前用户范围设置", "command": "Set-ExecutionPolicy RemoteSigned -Scope CurrentUser"}
+    ],
+    "tags": ["安全", "execution", "policy", "执行策略", "设置", "RemoteSigned"]
+  },
+  {
+    "name": "Get-Acl",
+    "source": "powershell",
+    "category": "security",
+    "categoryLabel": "安全",
+    "description": "获取指定资源的安全描述符（访问控制列表）",
+    "syntax": "Get-Acl [[-Path] <string[]>] [-Audit] [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "要获取 ACL 的资源路径", "required": true},
+      {"name": "-Audit", "description": "获取审核信息", "required": false}
+    ],
+    "examples": [
+      {"description": "查看文件权限", "command": "Get-Acl C:\\Windows\\System32"},
+      {"description": "查看注册表权限", "command": "Get-Acl HKLM:\\Software"}
+    ],
+    "tags": ["安全", "ACL", "权限", "访问控制", "安全描述符"]
+  },
+  {
+    "name": "Set-Acl",
+    "source": "powershell",
+    "category": "security",
+    "categoryLabel": "安全",
+    "description": "更改指定资源的安全描述符（ACL）",
+    "syntax": "Set-Acl [-Path] <string[]> [-AclObject] <Object> [-Filter <string>] [-Include <string[]>] [-Exclude <string[]>] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "资源路径", "required": true},
+      {"name": "-AclObject", "description": "要应用的 ACL 对象", "required": true}
+    ],
+    "examples": [
+      {"description": "设置文件权限", "command": "$acl = Get-Acl file.txt; $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(\"user\",\"FullControl\",\"Allow\"); $acl.SetAccessRule($rule); Set-Acl file.txt $acl"}
+    ],
+    "tags": ["安全", "ACL", "权限", "设置", "访问控制"]
+  },
+  {
+    "name": "Get-Variable",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "获取当前 PowerShell 会话中的变量",
+    "syntax": "Get-Variable [[-Name] <string[]>] [-ValueOnly] [-Include <string[]>] [-Exclude <string[]>] [-Scope <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "变量名（支持通配符）", "required": false},
+      {"name": "-ValueOnly", "description": "仅显示值不显示变量对象", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有变量", "command": "Get-Variable"},
+      {"description": "查看特定变量", "command": "Get-Variable HOME"},
+      {"description": "使用别名", "command": "gv"}
+    ],
+    "tags": ["变量", "variable", "gv", "会话", "环境", "scope"]
+  },
+  {
+    "name": "Set-Variable",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "设置变量的值",
+    "syntax": "Set-Variable [-Name] <string[]> [[-Value] <Object>] [-Include <string[]>] [-Exclude <string[]>] [-Description <string>] [-Option <ScopedItemOptions>] [-Force] [-Visibility <SessionStateEntryVisibility>] [-Scope <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "变量名", "required": true},
+      {"name": "-Value", "description": "变量值", "required": false},
+      {"name": "-Option", "description": "选项 (ReadOnly/Constant/None)", "required": false},
+      {"name": "-Description", "description": "变量描述", "required": false}
+    ],
+    "examples": [
+      {"description": "设置变量", "command": "Set-Variable -Name MaxCount -Value 100"},
+      {"description": "创建只读变量", "command": "Set-Variable -Name Config -Value $configObj -Option ReadOnly"},
+      {"description": "使用别名", "command": "sv PathConfig \"C:\\Config\""}
+    ],
+    "tags": ["变量", "set", "sv", "赋值", "创建", "session"]
+  },
+  {
+    "name": "New-Variable",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "创建新变量",
+    "syntax": "New-Variable [-Name] <string> [[-Value] <Object>] [-Description <string>] [-Option <ScopedItemOptions>] [-Visibility <SessionStateEntryVisibility>] [-Force] [-Scope <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "新变量名", "required": true},
+      {"name": "-Value", "description": "变量初始值", "required": false}
+    ],
+    "examples": [
+      {"description": "创建变量", "command": "New-Variable -Name Counter -Value 0"},
+      {"description": "使用别名", "command": "nv PathList @()"}
+    ],
+    "tags": ["变量", "new", "nv", "创建", "声明"]
+  },
+  {
+    "name": "Clear-Variable",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "删除变量的值",
+    "syntax": "Clear-Variable [-Name] <string[]> [-Include <string[]>] [-Exclude <string[]>] [-Force] [-Scope <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "要清除的变量名", "required": true}
+    ],
+    "examples": [
+      {"description": "清除变量", "command": "Clear-Variable -Name Counter"}
+    ],
+    "tags": ["变量", "clear", "清除", "重置", "null"]
+  },
+  {
+    "name": "Remove-Variable",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "删除变量及其值",
+    "syntax": "Remove-Variable [-Name] <string[]> [-Include <string[]>] [-Exclude <string[]>] [-Force] [-Scope <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "要删除的变量名", "required": true},
+      {"name": "-Force", "description": "强制删除（包括只读变量）", "required": false}
+    ],
+    "examples": [
+      {"description": "删除变量", "command": "Remove-Variable -Name tempData"},
+      {"description": "使用别名", "command": "rv unusedVar"}
+    ],
+    "tags": ["变量", "remove", "rv", "删除", "销毁"]
+  },
+  {
+    "name": "Get-PSDrive",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "获取当前 PowerShell 会话中的驱动器（包括文件系统、注册表等）",
+    "syntax": "Get-PSDrive [[-Name] <string[]>] [-PSProvider <string[]>] [-Scope <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "驱动器名", "required": false},
+      {"name": "-PSProvider", "description": "按提供程序筛选 (FileSystem/Registry等)", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有驱动器", "command": "Get-PSDrive"},
+      {"description": "仅列出文件系统驱动器", "command": "Get-PSDrive -PSProvider FileSystem"},
+      {"description": "使用别名", "command": "gdr"}
+    ],
+    "tags": ["变量", "drive", "gdr", "驱动器", "文件系统", "注册表"]
+  },
+  {
+    "name": "Write-Host",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "将自定义输出写入控制台（不进入管道）",
+    "syntax": "Write-Host [[-Object] <Object>] [-NoNewline] [-Separator <Object>] [-ForegroundColor <ConsoleColor>] [-BackgroundColor <ConsoleColor>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Object", "description": "要显示的对象", "required": false},
+      {"name": "-ForegroundColor", "description": "前景色", "required": false},
+      {"name": "-BackgroundColor", "description": "背景色", "required": false},
+      {"name": "-NoNewline", "description": "不追加换行", "required": false}
+    ],
+    "examples": [
+      {"description": "输出文本", "command": "Write-Host \"Hello World\""},
+      {"description": "彩色输出", "command": "Write-Host \"Error!\" -ForegroundColor Red"},
+      {"description": "绿字输出成功", "command": "Write-Host \"Success!\" -ForegroundColor Green"}
+    ],
+    "tags": ["输出", "write", "echo", "打印", "显示", "控制台"]
+  },
+  {
+    "name": "Write-Output",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "将指定对象发送到管道中的下一个命令（如果它是最后一个命令，则将对象显示在控制台中）",
+    "syntax": "Write-Output [-InputObject] <PSObject[]> [-NoEnumerate] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-InputObject", "description": "要沿管道传递的对象", "required": true},
+      {"name": "-NoEnumerate", "description": "不枚举集合（将集合作为单个对象传递）", "required": false}
+    ],
+    "examples": [
+      {"description": "输出到管道", "command": "Write-Output \"Hello World\""},
+      {"description": "管道传递", "command": "Write-Output (1..5) | ForEach-Object { $_ * 2 }"}
+    ],
+    "tags": ["输出", "write", "echo", "管道", "output"]
+  },
+  {
+    "name": "Read-Host",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "从控制台读取一行输入",
+    "syntax": "Read-Host [[-Prompt] <Object>] [-AsSecureString] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Prompt", "description": "提示文本", "required": false},
+      {"name": "-AsSecureString", "description": "以安全字符串形式输入（用于密码）", "required": false}
+    ],
+    "examples": [
+      {"description": "读取用户输入", "command": "$name = Read-Host \"Enter your name\""},
+      {"description": "读取密码", "command": "$pass = Read-Host -AsSecureString \"Enter password\""}
+    ],
+    "tags": ["输入", "read", "交互", "提示", "用户输入"]
+  },
+  {
+    "name": "Out-GridView",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "将输出发送到图形交互式表格窗口中显示",
+    "syntax": "Out-GridView [-InputObject <PSObject>] [-Title <string>] [-PassThru] [-OutputMode <OutputModeOption>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Title", "description": "窗口标题", "required": false},
+      {"name": "-PassThru", "description": "允许在表格中选择项并传递到管道", "required": false},
+      {"name": "-OutputMode", "description": "选择模式 (Single/Multiple)", "required": false}
+    ],
+    "examples": [
+      {"description": "图形化查看进程", "command": "Get-Process | Out-GridView"},
+      {"description": "交互式选择", "command": "Get-Service | Out-GridView -PassThru | Restart-Service"},
+      {"description": "使用别名", "command": "ls | ogv"}
+    ],
+    "tags": ["GUI", "grid", "ogv", "图形", "表格", "交互"]
+  },
+  {
+    "name": "Get-History",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "获取当前会话中输入的命令历史记录",
+    "syntax": "Get-History [[-Id] <Int64[]>] [[-Count] <int>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Count", "description": "获取最近 N 条记录", "required": false},
+      {"name": "-Id", "description": "按历史ID筛选", "required": false}
+    ],
+    "examples": [
+      {"description": "查看命令历史", "command": "Get-History"},
+      {"description": "最近10条", "command": "Get-History -Count 10"},
+      {"description": "使用别名", "command": "h"}
+    ],
+    "tags": ["历史", "history", "h", "ghy", "命令记录", "会话"]
+  },
+  {
+    "name": "Invoke-History",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "重新运行命令历史中的命令",
+    "syntax": "Invoke-History [[-Id] <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Id", "description": "要重新运行的命令历史ID", "required": false}
+    ],
+    "examples": [
+      {"description": "重新运行上一条命令", "command": "Invoke-History"},
+      {"description": "运行指定ID命令", "command": "Invoke-History -Id 5"},
+      {"description": "使用别名", "command": "r"}
+    ],
+    "tags": ["历史", "invoke", "r", "ihy", "重新运行", "重做"]
+  },
+  {
+    "name": "Get-EventLog",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取本地或远程计算机上事件日志中的事件（传统事件日志；PowerShell 5.1+ 建议使用 Get-WinEvent）",
+    "syntax": "Get-EventLog [-LogName] <string> [[-InstanceId] <Int64[]>] [-ComputerName <string[]>] [-Newest <int>] [-After <DateTime>] [-Before <DateTime>] [-UserName <string[]>] [-EntryType <string[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-LogName", "description": "日志名称 (Application/Security/System等)", "required": true},
+      {"name": "-Newest", "description": "最近 N 条记录", "required": false},
+      {"name": "-EntryType", "description": "条目类型 (Error/Warning/Information等)", "required": false}
+    ],
+    "examples": [
+      {"description": "查看系统日志", "command": "Get-EventLog -LogName System -Newest 20"},
+      {"description": "查看错误日志", "command": "Get-EventLog -LogName Application -EntryType Error"},
+      {"description": "查看安全日志", "command": "Get-EventLog -LogName Security -Newest 50"}
+    ],
+    "tags": ["系统", "eventlog", "日志", "事件", "错误", "审计", "安全"]
+  },
+  {
+    "name": "Get-WinEvent",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "从事件日志和事件追踪日志文件中获取事件（推荐替代 Get-EventLog）",
+    "syntax": "Get-WinEvent [[-LogName] <string[]>] [-MaxEvents <int64>] [-FilterXPath <string>] [-FilterXml <XmlDocument>] [-Oldest] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-LogName", "description": "日志名称", "required": false},
+      {"name": "-MaxEvents", "description": "最大事件数", "required": false},
+      {"name": "-FilterXPath", "description": "XPath 筛选器", "required": false}
+    ],
+    "examples": [
+      {"description": "查看最近系统事件", "command": "Get-WinEvent -LogName System -MaxEvents 20"},
+      {"description": "筛选特定事件ID", "command": "Get-WinEvent -FilterHashtable @{LogName='System'; ID=41}"}
+    ],
+    "tags": ["系统", "event", "日志", "winEvent", "事件", "诊断"]
+  },
+  {
+    "name": "Clear-RecycleBin",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "清空回收站",
+    "syntax": "Clear-RecycleBin [[-DriveLetter] <string[]>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-DriveLetter", "description": "指定驱动器（默认所有驱动器）", "required": false},
+      {"name": "-Force", "description": "不提示确认", "required": false}
+    ],
+    "examples": [
+      {"description": "清空回收站", "command": "Clear-RecycleBin -Force"},
+      {"description": "清空C盘回收站", "command": "Clear-RecycleBin -DriveLetter C"}
+    ],
+    "tags": ["系统", "回收站", "clear", "清理", "删除"]
+  },
+  {
+    "name": "Compress-Archive",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "将指定文件或目录压缩到 ZIP 存档中",
+    "syntax": "Compress-Archive [-Path] <string[]> [-DestinationPath] <string> [-CompressionLevel <string>] [-Update] [-Force] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "要压缩的文件或目录路径", "required": true},
+      {"name": "-DestinationPath", "description": "ZIP 文件输出路径", "required": true},
+      {"name": "-CompressionLevel", "description": "压缩级别 (Optimal/Fastest/NoCompression)", "required": false},
+      {"name": "-Update", "description": "更新已有存档中的文件", "required": false}
+    ],
+    "examples": [
+      {"description": "创建ZIP文件", "command": "Compress-Archive -Path C:\\Data -DestinationPath C:\\Backup.zip"},
+      {"description": "压缩多个文件", "command": "Compress-Archive -Path *.txt,*.csv -DestinationPath archive.zip"},
+      {"description": "快速压缩", "command": "Compress-Archive -Path .\\Project -DestinationPath project.zip -CompressionLevel Fastest"}
+    ],
+    "tags": ["文件", "zip", "压缩", "archive", "打包", "compress"]
+  },
+  {
+    "name": "Expand-Archive",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "从指定的 ZIP 存档中提取文件",
+    "syntax": "Expand-Archive [-Path] <string> [[-DestinationPath] <string>] [-Force] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "ZIP 文件路径", "required": true},
+      {"name": "-DestinationPath", "description": "解压目标目录（默认当前目录）", "required": false},
+      {"name": "-Force", "description": "覆盖已有文件", "required": false}
+    ],
+    "examples": [
+      {"description": "解压到当前目录", "command": "Expand-Archive backup.zip"},
+      {"description": "解压到指定目录", "command": "Expand-Archive -Path archive.zip -DestinationPath C:\\Extracted"},
+      {"description": "强制覆盖", "command": "Expand-Archive data.zip -Force"}
+    ],
+    "tags": ["文件", "zip", "解压", "extract", "unzip", "展开"]
+  },
+  {
+    "name": "Test-Path",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "测试指定路径是否存在，并可检查路径类型（文件、目录、容器等）",
+    "syntax": "Test-Path [-Path] <string[]> [-PathType <TestPathType>] [-IsValid] [-Include <string[]>] [-Exclude <string[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "要测试的路径", "required": true},
+      {"name": "-PathType", "description": "检查路径类型 (Any/Container/Leaf)", "required": false},
+      {"name": "-IsValid", "description": "仅检查路径语法是否有效（不要求实际存在）", "required": false},
+      {"name": "-Include", "description": "包含指定项", "required": false}
+    ],
+    "examples": [
+      {"description": "检查文件是否存在", "command": "Test-Path C:\\Windows\\System32\\notepad.exe"},
+      {"description": "检查目录是否存在", "command": "Test-Path C:\\Temp -PathType Container"},
+      {"description": "条件判断", "command": "if (Test-Path data.json) { Get-Content data.json }"}
+    ],
+    "tags": ["文件", "目录", "test", "路径", "存在", "判断", "exists"]
+  },
+  {
+    "name": "Split-Path",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "返回路径的指定部分，如父目录、文件名、扩展名等",
+    "syntax": "Split-Path [-Path] <string[]> [-Parent] [-Leaf] [-LeafBase] [-Extension] [-Qualifier] [-NoQualifier] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "要拆分的路径", "required": true},
+      {"name": "-Parent", "description": "返回父目录路径", "required": false},
+      {"name": "-Leaf", "description": "返回文件名（含扩展名）", "required": false},
+      {"name": "-LeafBase", "description": "返回文件名（不含扩展名）", "required": false},
+      {"name": "-Extension", "description": "返回扩展名", "required": false}
+    ],
+    "examples": [
+      {"description": "获取父目录", "command": "Split-Path C:\\Users\\Admin\\file.txt -Parent"},
+      {"description": "获取文件名", "command": "Split-Path C:\\Users\\Admin\\file.txt -Leaf"},
+      {"description": "获取扩展名", "command": "Split-Path C:\\Users\\Admin\\file.txt -Extension"}
+    ],
+    "tags": ["路径", "拆分", "文件名", "目录", "extension", "parent", "leaf"]
+  },
+  {
+    "name": "Join-Path",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "将路径和子路径合并为单个路径，自动处理分隔符",
+    "syntax": "Join-Path [-Path] <string[]> [-ChildPath] <string> [-Resolve] [-Credential <PSCredential>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "主路径", "required": true},
+      {"name": "-ChildPath", "description": "要追加的子路径", "required": true},
+      {"name": "-Resolve", "description": "解析为绝对路径", "required": false}
+    ],
+    "examples": [
+      {"description": "合并路径", "command": "Join-Path C:\\Users \"Documents\\file.txt\""},
+      {"description": "多路径合并", "command": "Join-Path C:\\Users, C:\\Windows -ChildPath \"file.txt\""},
+      {"description": "管道合并", "command": "'C:\\Users' | Join-Path -ChildPath 'Desktop'"}
+    ],
+    "tags": ["路径", "合并", "join", "拼接", "combine", "path"]
+  },
+  {
+    "name": "Resolve-Path",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "将相对路径解析为绝对路径，支持通配符",
+    "syntax": "Resolve-Path [-Path] <string[]> [-Relative] [-Credential <PSCredential>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "要解析的路径（支持通配符）", "required": true},
+      {"name": "-Relative", "description": "返回相对于当前位置的相对路径", "required": false}
+    ],
+    "examples": [
+      {"description": "解析为绝对路径", "command": "Resolve-Path ."},
+      {"description": "解析通配符", "command": "Resolve-Path C:\\Windows\\*.exe"},
+      {"description": "获取相对路径", "command": "Resolve-Path C:\\Windows\\System32 -Relative"}
+    ],
+    "tags": ["路径", "解析", "绝对路径", "relative", "resolve"]
+  },
+  {
+    "name": "Push-Location",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "将当前位置压入位置堆栈，并切换到新位置（便于快速返回）",
+    "syntax": "Push-Location [[-Path] <string>] [-PassThru] [-StackName <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "要切换到的路径", "required": false},
+      {"name": "-StackName", "description": "指定位置堆栈名称", "required": false},
+      {"name": "-PassThru", "description": "返回位置对象", "required": false}
+    ],
+    "examples": [
+      {"description": "压栈并切换", "command": "Push-Location C:\\Windows"},
+      {"description": "使用别名", "command": "pushd D:\\Projects"},
+      {"description": "压栈不切换", "command": "Push-Location -StackName MyStack"}
+    ],
+    "tags": ["路径", "堆栈", "push", "切换", "pushd", "目录"]
+  },
+  {
+    "name": "Pop-Location",
+    "source": "powershell",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "从位置堆栈中弹出最近保存的位置并切换回去",
+    "syntax": "Pop-Location [-PassThru] [-StackName <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-StackName", "description": "指定位置堆栈名称", "required": false},
+      {"name": "-PassThru", "description": "返回位置对象", "required": false}
+    ],
+    "examples": [
+      {"description": "返回上一个位置", "command": "Pop-Location"},
+      {"description": "使用别名", "command": "popd"},
+      {"description": "指定堆栈弹出", "command": "Pop-Location -StackName MyStack"}
+    ],
+    "tags": ["路径", "堆栈", "pop", "返回", "popd", "目录"]
+  },
+  {
+    "name": "Start-Job",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "在后台启动 PowerShell 作业（不阻塞当前会话）",
+    "syntax": "Start-Job [-ScriptBlock] <ScriptBlock> [-Name <string>] [-Credential <PSCredential>] [-InitializationScript <ScriptBlock>] [-ArgumentList <Object[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-ScriptBlock", "description": "要在后台执行的脚本块", "required": true},
+      {"name": "-Name", "description": "作业名称", "required": false},
+      {"name": "-Credential", "description": "用于运行作业的凭据", "required": false},
+      {"name": "-ArgumentList", "description": "传递给脚本块的参数", "required": false}
+    ],
+    "examples": [
+      {"description": "后台运行命令", "command": "Start-Job -ScriptBlock { Get-Process } -Name MyJob"},
+      {"description": "后台执行脚本", "command": "Start-Job -FilePath C:\\Scripts\\backup.ps1"},
+      {"description": "带参数启动", "command": "Start-Job -ScriptBlock { param($p) Get-ChildItem $p } -ArgumentList C:\\Data"}
+    ],
+    "tags": ["后台", "job", "作业", "异步", "并行", "后台任务"]
+  },
+  {
+    "name": "Get-Job",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取当前会话中的后台作业列表",
+    "syntax": "Get-Job [[-Id] <int[]>] [-Name <string[]>] [-State <JobState>] [-HasMoreData <bool>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Id", "description": "按作业 ID 筛选", "required": false},
+      {"name": "-Name", "description": "按作业名称筛选", "required": false},
+      {"name": "-State", "description": "按状态筛选 (Running/Completed/Failed/Blocked)", "required": false},
+      {"name": "-HasMoreData", "description": "筛选有未接收数据的作业", "required": false}
+    ],
+    "examples": [
+      {"description": "查看所有作业", "command": "Get-Job"},
+      {"description": "查看运行中作业", "command": "Get-Job -State Running"},
+      {"description": "查看指定名称", "command": "Get-Job -Name MyJob"}
+    ],
+    "tags": ["后台", "job", "作业", "列表", "状态", "查看"]
+  },
+  {
+    "name": "Receive-Job",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取后台作业的输出结果（接收后默认会清空作业数据）",
+    "syntax": "Receive-Job [-Job] <Job[]> [-Keep] [-Wait] [-AutoRemoveJob] [-WriteEvents] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Job", "description": "要接收的作业对象", "required": true},
+      {"name": "-Keep", "description": "接收后保留作业数据（可再次接收）", "required": false},
+      {"name": "-Wait", "description": "等待作业完成后再接收", "required": false},
+      {"name": "-AutoRemoveJob", "description": "接收后自动删除作业", "required": false}
+    ],
+    "examples": [
+      {"description": "接收作业结果", "command": "Get-Job | Receive-Job"},
+      {"description": "保留数据", "command": "Receive-Job -Id 1 -Keep"},
+      {"description": "等待完成", "command": "Receive-Job -Name MyJob -Wait"}
+    ],
+    "tags": ["后台", "job", "输出", "结果", "接收", "receive"]
+  },
+  {
+    "name": "Start-Transcript",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "开始记录当前 PowerShell 会话中所有输入和输出的文本日志",
+    "syntax": "Start-Transcript [[-Path] <string>] [-OutputDirectory <string>] [-IncludeInvocationHeader] [-Force] [-Append] [-NoClobber] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "日志文件路径", "required": false},
+      {"name": "-OutputDirectory", "description": "日志输出目录", "required": false},
+      {"name": "-Append", "description": "追加到已有文件", "required": false},
+      {"name": "-NoClobber", "description": "不覆盖已有文件", "required": false}
+    ],
+    "examples": [
+      {"description": "开始记录", "command": "Start-Transcript"},
+      {"description": "指定文件", "command": "Start-Transcript C:\\Logs\\session.txt"},
+      {"description": "追加记录", "command": "Start-Transcript -Append -Path C:\\Logs\\session.txt"}
+    ],
+    "tags": ["日志", "记录", "transcript", "会话", "审计", "日志"]
+  },
+  {
+    "name": "Stop-Transcript",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "停止当前会话的文本记录",
+    "syntax": "Stop-Transcript [<CommonParameters>]",
+    "parameters": [],
+    "examples": [
+      {"description": "停止记录", "command": "Stop-Transcript"}
+    ],
+    "tags": ["日志", "记录", "transcript", "停止", "结束"]
+  },
+  {
+    "name": "Get-Credential",
+    "source": "powershell",
+    "category": "security",
+    "categoryLabel": "安全",
+    "description": "显示安全对话框以输入用户名和密码，返回 PSCredential 对象",
+    "syntax": "Get-Credential [-Message <string>] [-UserName <string>] [-Title <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Message", "description": "对话框中显示的提示消息", "required": false},
+      {"name": "-UserName", "description": "预设的用户名", "required": false},
+      {"name": "-Title", "description": "对话框标题（仅限 Windows）", "required": false}
+    ],
+    "examples": [
+      {"description": "弹出凭据对话框", "command": "$cred = Get-Credential"},
+      {"description": "带提示消息", "command": "Get-Credential -Message '请输入管理员凭据' -UserName 'admin'"},
+      {"description": "非交互式（需已有凭据）", "command": "Get-Credential -UserName 'DOMAIN\\user'"}
+    ],
+    "tags": ["安全", "凭据", "credential", "密码", "认证", "login", "密码输入"]
+  },
+  {
+    "name": "ConvertTo-SecureString",
+    "source": "powershell",
+    "category": "security",
+    "categoryLabel": "安全",
+    "description": "将纯文本字符串转换为加密的安全字符串",
+    "syntax": "ConvertTo-SecureString [-String] <string> [-AsPlainText] [-Force] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-String", "description": "要加密的纯文本", "required": true},
+      {"name": "-AsPlainText", "description": "指定输入是明文（必须与 -Force 一起使用）", "required": false},
+      {"name": "-Force", "description": "确认使用明文方式", "required": false}
+    ],
+    "examples": [
+      {"description": "转换密码", "command": "ConvertTo-SecureString 'MyPassword' -AsPlainText -Force"},
+      {"description": "管道输入", "command": "'MyPassword' | ConvertTo-SecureString -AsPlainText -Force"}
+    ],
+    "tags": ["安全", "加密", "securestring", "密码", "凭据", "转换"]
+  },
+  {
+    "name": "ConvertFrom-SecureString",
+    "source": "powershell",
+    "category": "security",
+    "categoryLabel": "安全",
+    "description": "将加密的安全字符串转换回纯文本或导出为可导出的加密字符串",
+    "syntax": "ConvertFrom-SecureString [-SecureString] <SecureString> [<CommonParameters>]",
+    "parameters": [
+      {"name": "-SecureString", "description": "要转换的安全字符串", "required": true}
+    ],
+    "examples": [
+      {"description": "导出为加密文本", "command": "$ss = Read-Host -AsSecureString; ConvertFrom-SecureString $ss"},
+      {"description": "保存加密密码到文件", "command": "Read-Host -AsSecureString | ConvertFrom-SecureString | Out-File C:\\pass.txt"}
+    ],
+    "tags": ["安全", "解密", "securestring", "密码", "导出", "转换"]
+  },
+  {
+    "name": "Write-Error",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "将错误对象写入错误流，可指定错误类别、ID 和目标对象",
+    "syntax": "Write-Error [-Message] <string> [-Category <ErrorCategory>] [-ErrorId <string>] [-TargetObject <Object>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Message", "description": "错误消息", "required": true},
+      {"name": "-Category", "description": "错误类别 (NotSpecified/OperationStopped/ObjectNotFound等)", "required": false},
+      {"name": "-ErrorId", "description": "错误标识符", "required": false},
+      {"name": "-TargetObject", "description": "与错误关联的对象", "required": false}
+    ],
+    "examples": [
+      {"description": "写入错误", "command": "Write-Error '文件未找到'"},
+      {"description": "指定错误类别", "command": "Write-Error '无法连接' -Category ConnectionError"}
+    ],
+    "tags": ["输出", "错误", "error", "异常", "日志", "写入", "错误流"]
+  },
+  {
+    "name": "Write-Warning",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "将警告消息写入警告流（默认以黄色高亮显示）",
+    "syntax": "Write-Warning [-Message] <string> [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Message", "description": "警告消息", "required": true}
+    ],
+    "examples": [
+      {"description": "输出警告", "command": "Write-Warning '磁盘空间不足'"},
+      {"description": "条件警告", "command": "if ($free -lt 1GB) { Write-Warning '空间不足' }"}
+    ],
+    "tags": ["输出", "警告", "warning", "日志", "写入", "warning流"]
+  },
+  {
+    "name": "Set-Clipboard",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "将内容复制到 Windows 剪贴板（PowerShell 5.1+ / PowerShell 7）",
+    "syntax": "Set-Clipboard [-Value] <string[]> [-Append] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Value", "description": "要复制的内容", "required": true},
+      {"name": "-Append", "description": "追加到剪贴板现有内容", "required": false}
+    ],
+    "examples": [
+      {"description": "复制文本", "command": "Set-Clipboard 'Hello World'"},
+      {"description": "管道复制", "command": "Get-Content file.txt | Set-Clipboard"},
+      {"description": "追加复制", "command": "Set-Clipboard '追加内容' -Append"}
+    ],
+    "tags": ["剪贴板", "clipboard", "复制", "粘贴", "复制内容"]
+  },
+  {
+    "name": "Get-Clipboard",
+    "source": "powershell",
+    "category": "variables",
+    "categoryLabel": "变量与会话",
+    "description": "获取 Windows 剪贴板的内容（PowerShell 5.1+ / PowerShell 7）",
+    "syntax": "Get-Clipboard [-Format <TextDataFormat>] [-Raw] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Format", "description": "格式 (Text/Html/Rtf/FileDrop)", "required": false},
+      {"name": "-Raw", "description": "返回原始字符串（不分割为行数组）", "required": false}
+    ],
+    "examples": [
+      {"description": "获取剪贴板内容", "command": "Get-Clipboard"},
+      {"description": "管道使用", "command": "Get-Clipboard | Out-File paste.txt"},
+      {"description": "原始模式", "command": "Get-Clipboard -Raw"}
+    ],
+    "tags": ["剪贴板", "clipboard", "粘贴", "获取", "读取"]
+  },
+  {
+    "name": "Join-String",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "将管道中的字符串或对象属性合并为单个字符串",
+    "syntax": "Join-String [[-Property] <Object>] [-Separator <string>] [-OutputPrefix <string>] [-OutputSuffix <string>] [-UseCulture] [-InputObject <PSObject>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Property", "description": "要合并的对象属性", "required": false},
+      {"name": "-Separator", "description": "分隔符（默认空格）", "required": false},
+      {"name": "-OutputPrefix", "description": "输出前缀", "required": false},
+      {"name": "-OutputSuffix", "description": "输出后缀", "required": false}
+    ],
+    "examples": [
+      {"description": "用逗号连接字符串", "command": "'a','b','c' | Join-String -Separator ','"},
+      {"description": "连接文件名列", "command": "Get-ChildItem | Join-String -Property Name -Separator \", \""},
+      {"description": "带前缀后缀", "command": "1..5 | Join-String -Separator ',' -OutputPrefix '[' -OutputSuffix ']'"}
+    ],
+    "tags": ["字符串", "连接", "join", "合并", "拼接", "string"]
+  },
+  {
+    "name": "Out-String",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "将对象转换为字符串表示，保留 PowerShell 的格式化输出",
+    "syntax": "Out-String [-InputObject <PSObject>] [-Stream] [-Width <int>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-InputObject", "description": "要转换的对象", "required": false},
+      {"name": "-Stream", "description": "每行作为一个独立字符串输出", "required": false},
+      {"name": "-Width", "description": "每行字符宽度", "required": false}
+    ],
+    "examples": [
+      {"description": "转为字符串", "command": "Get-Process | Out-String"},
+      {"description": "流式输出", "command": "Get-Process | Out-String -Stream"},
+      {"description": "指定宽度", "command": "Get-Command | Out-String -Width 120"}
+    ],
+    "tags": ["字符串", "输出", "转换", "format", "text", "string"]
+  },
+  {
+    "name": "Update-Help",
+    "source": "powershell",
+    "category": "modules",
+    "categoryLabel": "模块与帮助",
+    "description": "下载并安装 PowerShell 帮助文件的最新版本（需要管理员权限或 -Scope）",
+    "syntax": "Update-Help [[-Module] <string[]>] [-SourcePath <string>] [-UICulture <CultureInfo>] [-Credential <PSCredential>] [-Force] [-ErrorAction <ActionPreference>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Module", "description": "要更新的模块（默认全部）", "required": false},
+      {"name": "-SourcePath", "description": "本地帮助文件路径", "required": false},
+      {"name": "-UICulture", "description": "UI 文化（如 zh-CN、en-US）", "required": false},
+      {"name": "-Force", "description": "强制更新不提示", "required": false}
+    ],
+    "examples": [
+      {"description": "更新所有帮助", "command": "Update-Help"},
+      {"description": "更新指定模块", "command": "Update-Help -Module NetTCPIP"},
+      {"description": "强制更新", "command": "Update-Help -Force"}
+    ],
+    "tags": ["帮助", "文档", "更新", "help", "download", "文档更新"]
+  },
+  {
+    "name": "Save-Help",
+    "source": "powershell",
+    "category": "modules",
+    "categoryLabel": "模块与帮助",
+    "description": "下载帮助文件到指定目录（可用于离线计算机安装）",
+    "syntax": "Save-Help [[-Module] <string[]>] [-DestinationPath] <string> [-UICulture <CultureInfo>] [-Credential <PSCredential>] [-Force] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Module", "description": "要下载帮助的模块", "required": false},
+      {"name": "-DestinationPath", "description": "保存目录", "required": true},
+      {"name": "-UICulture", "description": "UI 文化", "required": false}
+    ],
+    "examples": [
+      {"description": "下载所有帮助", "command": "Save-Help -DestinationPath C:\\HelpFiles"},
+      {"description": "下载指定模块", "command": "Save-Help -Module NetTCPIP -DestinationPath C:\\Help"}
+    ],
+    "tags": ["帮助", "文档", "下载", "离线", "save", "help", "离线文档"]
+  },
+  {
+    "name": "Send-MailMessage",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "通过 SMTP 服务器发送电子邮件（PowerShell 5.1+，已标记为弃用但常用）",
+    "syntax": "Send-MailMessage [-To] <string[]> [-Subject] <string> [-From] <string> [[-Body] <string>] [-SmtpServer <string>] [-Port <int>] [-UseSsl] [-Credential <PSCredential>] [-Attachments <string[]>] [-BodyAsHtml] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-To", "description": "收件人地址", "required": true},
+      {"name": "-From", "description": "发件人地址", "required": true},
+      {"name": "-Subject", "description": "邮件主题", "required": true},
+      {"name": "-Body", "description": "邮件正文", "required": false},
+      {"name": "-SmtpServer", "description": "SMTP 服务器地址", "required": false},
+      {"name": "-Port", "description": "SMTP 端口（默认25）", "required": false},
+      {"name": "-UseSsl", "description": "使用 SSL 加密连接", "required": false},
+      {"name": "-Attachments", "description": "附件路径", "required": false},
+      {"name": "-BodyAsHtml", "description": "正文以 HTML 格式发送", "required": false}
+    ],
+    "examples": [
+      {"description": "发送简单邮件", "command": "Send-MailMessage -To 'user@example.com' -From 'sender@example.com' -Subject '通知' -Body '邮件内容' -SmtpServer smtp.example.com"},
+      {"description": "带附件", "command": "Send-MailMessage -To 'user@example.com' -From 'sender@example.com' -Subject '报告' -Attachments 'C:\\report.pdf' -SmtpServer smtp.example.com"},
+      {"description": "HTML 邮件", "command": "Send-MailMessage -To 'user@example.com' -From 'sender@example.com' -Subject 'HTML测试' -Body '<h1>标题</h1>' -BodyAsHtml -SmtpServer smtp.example.com"}
+    ],
+    "tags": ["邮件", "email", "SMTP", "发送", "Send-MailMessage", "通知"]
+  },
+  {
+    "name": "Get-NetFirewallPortFilter",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "获取 Windows 防火墙规则中与端口相关的过滤条件",
+    "syntax": "Get-NetFirewallPortFilter [-PolicyStore <string>] [-GPOSession <string>] [-CimSession <CimSession[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-PolicyStore", "description": "策略存储位置 (ActiveStore/PersistentStore)", "required": false}
+    ],
+    "examples": [
+      {"description": "查看端口过滤规则", "command": "Get-NetFirewallPortFilter"},
+      {"description": "结合防火墙规则查看", "command": "Get-NetFirewallRule | Where-Object {$_.Enabled -eq 'True'} | Get-NetFirewallPortFilter"}
+    ],
+    "tags": ["网络", "防火墙", "端口", "过滤", "firewall", "port", "规则"]
+  },
+  {
+    "name": "Set-ItemProperty",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "设置注册表项或文件的属性值",
+    "syntax": "Set-ItemProperty [-Path] <string[]> [-Name] <string> [-Value] <Object> [-PassThru] [-Force] [-Credential <PSCredential>] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "注册表项或文件路径", "required": true},
+      {"name": "-Name", "description": "属性名称", "required": true},
+      {"name": "-Value", "description": "要设置的值", "required": true},
+      {"name": "-Force", "description": "强制覆盖只读属性", "required": false}
+    ],
+    "examples": [
+      {"description": "设置注册表值", "command": "Set-ItemProperty -Path 'HKLM:\\Software\\MyApp' -Name 'Version' -Value '2.0'"},
+      {"description": "修改文件属性", "command": "Set-ItemProperty -Path file.txt -Name IsReadOnly -Value $true"}
+    ],
+    "tags": ["注册表", "属性", "设置", "registry", "property", "set", "修改"]
+  },
+  {
+    "name": "New-ItemProperty",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "在注册表项或文件中创建新的属性",
+    "syntax": "New-ItemProperty [-Path] <string[]> [-Name] <string> [-Value] <Object> [-PropertyType <string>] [-Force] [-Credential <PSCredential>] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "注册表项路径", "required": true},
+      {"name": "-Name", "description": "新属性名称", "required": true},
+      {"name": "-Value", "description": "属性值", "required": false},
+      {"name": "-PropertyType", "description": "注册表数据类型 (String/DWord/QWord/ExpandString等)", "required": false},
+      {"name": "-Force", "description": "强制覆盖已有属性", "required": false}
+    ],
+    "examples": [
+      {"description": "创建新的注册表值", "command": "New-ItemProperty -Path 'HKLM:\\Software\\MyApp' -Name 'InstallPath' -Value 'C:\\MyApp' -PropertyType String"},
+      {"description": "创建DWORD值", "command": "New-ItemProperty -Path 'HKCU:\\Software\\MyApp' -Name 'Enabled' -Value 1 -PropertyType DWord"}
+    ],
+    "tags": ["注册表", "属性", "新建", "registry", "new", "property", "创建"]
+  },
+  {
+    "name": "Remove-ItemProperty",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "删除注册表项中的属性",
+    "syntax": "Remove-ItemProperty [-Path] <string[]> [-Name] <string[]> [-Force] [-Credential <PSCredential>] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "注册表项路径", "required": true},
+      {"name": "-Name", "description": "要删除的属性名", "required": true},
+      {"name": "-Force", "description": "强制删除", "required": false}
+    ],
+    "examples": [
+      {"description": "删除注册表值", "command": "Remove-ItemProperty -Path 'HKLM:\\Software\\MyApp' -Name 'OldSetting'"},
+      {"description": "预览删除", "command": "Remove-ItemProperty -Path 'HKCU:\\Software\\MyApp' -Name 'TempKey' -WhatIf"}
+    ],
+    "tags": ["注册表", "属性", "删除", "registry", "remove", "property", "清理"]
+  },
+  {
+    "name": "Get-ScheduledTask",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取 Windows 计划任务信息",
+    "syntax": "Get-ScheduledTask [[-TaskName] <string[]>] [[-TaskPath] <string[]>] [-CimSession <CimSession[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-TaskName", "description": "计划任务名称（支持通配符）", "required": false},
+      {"name": "-TaskPath", "description": "计划任务文件夹路径", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有计划任务", "command": "Get-ScheduledTask"},
+      {"description": "查找特定任务", "command": "Get-ScheduledTask -TaskName '*Backup*'"},
+      {"description": "查看指定路径任务", "command": "Get-ScheduledTask -TaskPath '\\Microsoft\\Windows\\Defrag\\'"}
+    ],
+    "tags": ["计划任务", "定时", "任务", "task", "scheduled", "自动化", "计划"]
+  },
+  {
+    "name": "Register-ScheduledTask",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "注册新的 Windows 计划任务",
+    "syntax": "Register-ScheduledTask [-TaskName] <string> [[-TaskPath] <string>] [-Action] <CimInstance[]> [[-Trigger] <CimInstance[]>] [-Settings <CimInstance>] [-User <string>] [-Password <string>] [-RunLevel <RunLevelEnum>] [-Force] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-TaskName", "description": "计划任务名称", "required": true},
+      {"name": "-Action", "description": "任务要执行的操作（使用 New-ScheduledTaskAction 创建）", "required": true},
+      {"name": "-Trigger", "description": "触发条件（使用 New-ScheduledTaskTrigger 创建）", "required": false},
+      {"name": "-Settings", "description": "任务设置（使用 New-ScheduledTaskSettingsSet 创建）", "required": false},
+      {"name": "-User", "description": "运行任务的用户账户", "required": false}
+    ],
+    "examples": [
+      {"description": "创建每天定时任务", "command": "$action = New-ScheduledTaskAction -Execute 'PowerShell.exe' -Argument 'C:\\Scripts\\backup.ps1'\n$trigger = New-ScheduledTaskTrigger -Daily -At 3am\nRegister-ScheduledTask -TaskName 'DailyBackup' -Action $action -Trigger $trigger"},
+      {"description": "创建开机启动任务", "command": "$action = New-ScheduledTaskAction -Execute 'notepad.exe'\n$trigger = New-ScheduledTaskTrigger -AtLogon\nRegister-ScheduledTask -TaskName 'StartNotepad' -Action $action -Trigger $trigger"}
+    ],
+    "tags": ["计划任务", "注册", "定时", "task", "register", "scheduled", "自动化", "创建任务"]
+  },
+  {
+    "name": "Unregister-ScheduledTask",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "删除已注册的 Windows 计划任务",
+    "syntax": "Unregister-ScheduledTask [-TaskName] <string[]> [[-TaskPath] <string[]>] [-CimSession <CimSession[]>] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-TaskName", "description": "要删除的计划任务名称", "required": true},
+      {"name": "-TaskPath", "description": "计划任务文件夹路径", "required": false},
+      {"name": "-Confirm", "description": "确认删除", "required": false}
+    ],
+    "examples": [
+      {"description": "删除计划任务", "command": "Unregister-ScheduledTask -TaskName 'DailyBackup' -Confirm:$false"},
+      {"description": "预览删除", "command": "Unregister-ScheduledTask -TaskName 'OldTask' -WhatIf"}
+    ],
+    "tags": ["计划任务", "删除", "注销", "task", "unregister", "scheduled", "移除"]
+  },
+  {
+    "name": "Start-ScheduledTask",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "立即启动指定的 Windows 计划任务",
+    "syntax": "Start-ScheduledTask [-TaskName] <string> [[-TaskPath] <string>] [-CimSession <CimSession[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-TaskName", "description": "要启动的计划任务名称", "required": true},
+      {"name": "-TaskPath", "description": "计划任务文件夹路径", "required": false}
+    ],
+    "examples": [
+      {"description": "立即运行计划任务", "command": "Start-ScheduledTask -TaskName 'DailyBackup'"},
+      {"description": "运行系统任务", "command": "Start-ScheduledTask -TaskName 'ConsolidateLogs' -TaskPath '\\Microsoft\\Windows\\'"}
+    ],
+    "tags": ["计划任务", "启动", "运行", "task", "start", "scheduled", "立即执行"]
+  },
+  {
+    "name": "Get-WindowsOptionalFeature",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取 Windows 可选功能及其状态",
+    "syntax": "Get-WindowsOptionalFeature [[-FeatureName] <string>] [-Online] [-PackageName <string>] [-ScratchDirectory <string>] [-LogPath <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-FeatureName", "description": "可选功能名称", "required": false},
+      {"name": "-Online", "description": "针对当前运行的操作系统（而非离线映像）", "required": false},
+      {"name": "-PackageName", "description": "按程序包名称筛选", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有可选功能", "command": "Get-WindowsOptionalFeature -Online"},
+      {"description": "查看特定功能", "command": "Get-WindowsOptionalFeature -FeatureName 'TelnetClient' -Online"},
+      {"description": "筛选已启用功能", "command": "Get-WindowsOptionalFeature -Online | Where-Object State -eq 'Enabled'"}
+    ],
+    "tags": ["Windows", "功能", "可选", "feature", "optional", "系统组件", "组件"]
+  },
+  {
+    "name": "Enable-WindowsOptionalFeature",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "启用 Windows 可选功能",
+    "syntax": "Enable-WindowsOptionalFeature [-FeatureName] <string[]> [-Online] [-All] [-NoRestart] [-PackageName <string>] [-ScratchDirectory <string>] [-LogPath <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-FeatureName", "description": "要启用的功能名称", "required": true},
+      {"name": "-Online", "description": "针对当前运行的操作系统", "required": false},
+      {"name": "-All", "description": "同时启用父功能依赖项", "required": false},
+      {"name": "-NoRestart", "description": "不自动重启（如需要）", "required": false}
+    ],
+    "examples": [
+      {"description": "启用 Telnet 客户端", "command": "Enable-WindowsOptionalFeature -FeatureName 'TelnetClient' -Online"},
+      {"description": "启用并含依赖项", "command": "Enable-WindowsOptionalFeature -FeatureName 'NetFx3' -Online -All -NoRestart"}
+    ],
+    "tags": ["Windows", "功能", "启用", "feature", "enable", "optional", "安装组件"]
+  },
+  {
+    "name": "Get-WindowsCapability",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取 Windows 功能包（按需功能，如语言包、OpenSSH 等）",
+    "syntax": "Get-WindowsCapability [[-Name] <string>] [-Online] [-LimitAccess] [-ScratchDirectory <string>] [-LogPath <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "功能包名称（支持通配符）", "required": false},
+      {"name": "-Online", "description": "针对当前运行的操作系统", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有可用功能包", "command": "Get-WindowsCapability -Online"},
+      {"description": "查看 OpenSSH 客户端", "command": "Get-WindowsCapability -Name 'OpenSSH.Client~~~~0.0.1.0' -Online"},
+      {"description": "筛选未安装功能", "command": "Get-WindowsCapability -Online | Where-Object State -eq 'NotPresent'"}
+    ],
+    "tags": ["Windows", "功能", "按需", "capability", "可选", "组件", "语言包"]
+  },
+  {
+    "name": "Add-WindowsCapability",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "安装 Windows 按需功能（如 OpenSSH 客户端等）",
+    "syntax": "Add-WindowsCapability [-Name] <string> [-Online] [-LimitAccess] [-Source <string[]>] [-ScratchDirectory <string>] [-LogPath <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "要安装的功能包名称", "required": true},
+      {"name": "-Online", "description": "针对当前运行的操作系统", "required": false},
+      {"name": "-Source", "description": "指定功能包源路径", "required": false}
+    ],
+    "examples": [
+      {"description": "安装 OpenSSH 客户端", "command": "Add-WindowsCapability -Name 'OpenSSH.Client~~~~0.0.1.0' -Online"},
+      {"description": "安装 OpenSSH 服务端", "command": "Add-WindowsCapability -Name 'OpenSSH.Server~~~~0.0.1.0' -Online"}
+    ],
+    "tags": ["Windows", "功能", "安装", "capability", "add", "OpenSSH", "按需"]
+  },
+  {
+    "name": "Get-BitLockerVolume",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "获取 BitLocker 加密卷的状态信息",
+    "syntax": "Get-BitLockerVolume [[-MountPoint] <string[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-MountPoint", "description": "驱动器盘符或挂载点（如 C:）", "required": false}
+    ],
+    "examples": [
+      {"description": "查看所有卷的加密状态", "command": "Get-BitLockerVolume"},
+      {"description": "查看 C 盘加密状态", "command": "Get-BitLockerVolume -MountPoint C:"}
+    ],
+    "tags": ["BitLocker", "加密", "安全", "磁盘", "volume", "加密状态", "磁盘加密"]
+  },
+  {
+    "name": "Enable-BitLocker",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "对指定卷启用 BitLocker 加密",
+    "syntax": "Enable-BitLocker [-MountPoint] <string> [-EncryptionMethod <BitLockerEncryptionMethod>] [-RecoveryPasswordProtector] [-RecoveryKeyProtector] [-TpmProtector] [-PasswordProtector] [-UsedSpaceOnly] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-MountPoint", "description": "要加密的驱动器盘符", "required": true},
+      {"name": "-EncryptionMethod", "description": "加密方法 (Aes128/Aes256/XtsAes128/XtsAes256)", "required": false},
+      {"name": "-RecoveryPasswordProtector", "description": "创建数字密码恢复密钥", "required": false},
+      {"name": "-TpmProtector", "description": "使用 TPM 芯片保护", "required": false},
+      {"name": "-UsedSpaceOnly", "description": "仅加密已用空间（更快）", "required": false}
+    ],
+    "examples": [
+      {"description": "启用 BitLocker 并使用恢复密码", "command": "Enable-BitLocker -MountPoint 'C:' -RecoveryPasswordProtector -UsedSpaceOnly"},
+      {"description": "使用 TPM 加密", "command": "Enable-BitLocker -MountPoint 'D:' -EncryptionMethod XtsAes256 -TpmProtector"}
+    ],
+    "tags": ["BitLocker", "加密", "启用", "安全", "enable", "磁盘加密", "数据保护"]
+  },
+  {
+    "name": "Measure-Command",
+    "source": "powershell",
+    "category": "system-mgmt",
+    "categoryLabel": "系统管理",
+    "description": "测量运行脚本块或命令所花费的时间（用于性能分析）",
+    "syntax": "Measure-Command [-Expression] <ScriptBlock> [-InputObject <PSObject>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Expression", "description": "要计时的脚本块", "required": true}
+    ],
+    "examples": [
+      {"description": "测量命令执行时间", "command": "Measure-Command { Get-ChildItem -Recurse C:\\Windows }"},
+      {"description": "比较两种方式的性能", "command": "$t1 = Measure-Command { Get-ChildItem C:\\Windows -Recurse }\n$t2 = Measure-Command { [System.IO.Directory]::EnumerateFiles('C:\\Windows','*','AllDirectories') }\n\"PowerShell: $($t1.TotalSeconds)s  .NET: $($t2.TotalSeconds)s\""}
+    ],
+    "tags": ["性能", "计时", "测量", "measure", "command", "benchmark", "性能分析"]
+  },
+  {
+    "name": "Select-String",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "在文本字符串或文件中搜索匹配正则表达式或文本模式（类似 Linux 的 grep）",
+    "syntax": "Select-String [-Pattern] <string[]> [-Path] <string[]> [-SimpleMatch] [-CaseSensitive] [-Quiet] [-List] [-Context <int[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Pattern", "description": "要匹配的正则表达式或文本模式", "required": true},
+      {"name": "-Path", "description": "要搜索的文件路径", "required": false},
+      {"name": "-SimpleMatch", "description": "使用简单字符串匹配（非正则）", "required": false},
+      {"name": "-CaseSensitive", "description": "区分大小写", "required": false},
+      {"name": "-Quiet", "description": "仅返回布尔值（是否匹配）", "required": false},
+      {"name": "-List", "description": "每个文件仅返回第一个匹配", "required": false}
+    ],
+    "examples": [
+      {"description": "在文件中搜索文本", "command": "Select-String -Path log.txt -Pattern 'Error'"},
+      {"description": "递归搜索目录", "command": "Get-ChildItem -Recurse -Filter *.log | Select-String 'Exception'"},
+      {"description": "使用正则表达式", "command": "Select-String -Path config.xml -Pattern '\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}'"},
+      {"description": "管道搜索（类似 grep）", "command": "Get-Service | Out-String | Select-String 'Running'"}
+    ],
+    "tags": ["搜索", "grep", "文本", "正则", "string", "匹配", "查找", "pattern"]
+  },
+  {
+    "name": "ConvertTo-Html",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "将 .NET 对象转换为可在浏览器中查看的 HTML 表格",
+    "syntax": "ConvertTo-Html [[-Property] <Object[]>] [[-Body] <string[]>] [[-Head] <string[]>] [[-Title] <string>] [-As <string>] [-CssUri <Uri>] [-Fragment] [-InputObject <PSObject>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Property", "description": "要包含在 HTML 中的属性", "required": false},
+      {"name": "-Body", "description": "在 <body> 标签前插入的 HTML 内容", "required": false},
+      {"name": "-Head", "description": "在 <head> 标签中插入的内容（如 CSS 样式）", "required": false},
+      {"name": "-Title", "description": "HTML 页面标题", "required": false},
+      {"name": "-Fragment", "description": "仅输出 HTML 表格片段（不含完整页面结构）", "required": false}
+    ],
+    "examples": [
+      {"description": "生成 HTML 报告", "command": "Get-Process | Select-Object Name, Id, CPU | ConvertTo-Html -Title '进程报告' | Out-File report.html"},
+      {"description": "生成表格片段", "command": "Get-Service | ConvertTo-Html -Fragment"},
+      {"description": "带样式的报告", "command": "$head = '<style>body{font-family:Arial} table{border-collapse:collapse} td,th{border:1px solid #ccc;padding:5px}</style>'\nGet-ChildItem | ConvertTo-Html -Head $head -Title '文件列表' | Out-File files.html"}
+    ],
+    "tags": ["HTML", "报告", "导出", "convert", "html", "网页", "报表"]
+  },
+  {
+    "name": "Export-Clixml",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "将对象序列化并导出为 CLIXML 格式文件（可保留对象类型信息，用于跨会话传递对象）",
+    "syntax": "Export-Clixml [-Path] <string> [-InputObject] <PSObject> [-Depth <int>] [-Encoding <Encoding>] [-Force] [-NoClobber] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "输出文件路径", "required": true},
+      {"name": "-InputObject", "description": "要导出的对象", "required": true},
+      {"name": "-Depth", "description": "序列化对象的最大深度（默认2）", "required": false},
+      {"name": "-Encoding", "description": "文件编码", "required": false}
+    ],
+    "examples": [
+      {"description": "导出进程信息到 XML", "command": "Get-Process | Export-Clixml -Path processes.xml"},
+      {"description": "导出带深度的对象", "command": "$data = Get-Service | Group-Object Status\nExport-Clixml -Path grouped.xml -InputObject $data -Depth 3"}
+    ],
+    "tags": ["导出", "CLIXML", "序列化", "XML", "export", "clixml", "持久化"]
+  },
+  {
+    "name": "Import-Clixml",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "从 CLIXML 格式文件中导入并反序列化对象",
+    "syntax": "Import-Clixml [-Path] <string[]> [-Encoding <Encoding>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Path", "description": "CLIXML 文件路径", "required": true},
+      {"name": "-Encoding", "description": "文件编码", "required": false}
+    ],
+    "examples": [
+      {"description": "导入之前导出的对象", "command": "$processes = Import-Clixml -Path processes.xml"},
+      {"description": "导入并显示", "command": "Import-Clixml -Path grouped.xml | Format-Table"}
+    ],
+    "tags": ["导入", "CLIXML", "反序列化", "XML", "import", "clixml", "还原"]
+  },
+  {
+    "name": "New-PSDrive",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "创建新的 PowerShell 驱动器映射（如将远程共享映射为盘符、创建注册表驱动器等）",
+    "syntax": "New-PSDrive [-Name] <string> [-PSProvider] <string> [-Root] <string> [-Description <string>] [-Scope <string>] [-Persist] [-Credential <PSCredential>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "驱动器名称（如盘符 X）", "required": true},
+      {"name": "-PSProvider", "description": "提供程序 (FileSystem/Registry/Environment等)", "required": true},
+      {"name": "-Root", "description": "驱动器根路径", "required": true},
+      {"name": "-Persist", "description": "持久化映射（重启后仍有效，仅 FileSystem）", "required": false},
+      {"name": "-Description", "description": "驱动器描述", "required": false}
+    ],
+    "examples": [
+      {"description": "映射网络驱动器", "command": "New-PSDrive -Name 'X' -PSProvider FileSystem -Root '\\Server\\Share' -Persist"},
+      {"description": "创建注册表驱动器", "command": "New-PSDrive -Name 'MyReg' -PSProvider Registry -Root 'HKLM:\\Software\\MyApp'"},
+      {"description": "带凭据映射", "command": "New-PSDrive -Name 'Z' -PSProvider FileSystem -Root '\\NAS\\Backup' -Credential (Get-Credential) -Persist"}
+    ],
+    "tags": ["驱动器", "映射", "PSDrive", "网络", "new", "挂载", "盘符"]
+  },
+  {
+    "name": "Get-PSProvider",
+    "source": "powershell",
+    "category": "object-ops",
+    "categoryLabel": "对象操作",
+    "description": "获取已注册的 PowerShell 提供程序信息（如 FileSystem、Registry、Environment 等）",
+    "syntax": "Get-PSProvider [[-PSProvider] <string[]>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-PSProvider", "description": "提供程序名称", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有提供程序", "command": "Get-PSProvider"},
+      {"description": "查看文件系统提供程序", "command": "Get-PSProvider FileSystem"},
+      {"description": "查看提供程序支持的驱动器", "command": "Get-PSProvider | Format-Table Name, Drives -AutoSize"}
+    ],
+    "tags": ["提供程序", "PSProvider", "注册表", "文件系统", "环境变量", "驱动器"]
+  },
+  {
+    "name": "New-NetFirewallRule",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "创建新的 Windows 防火墙入站或出站规则",
+    "syntax": "New-NetFirewallRule [-DisplayName] <string> [-Direction <Direction>] [-Action <Action>] [-Protocol <string>] [-LocalPort <string>] [-RemotePort <string>] [-LocalAddress <string>] [-RemoteAddress <string>] [-Profile <string>] [-Enabled <bool>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-DisplayName", "description": "规则显示名称", "required": true},
+      {"name": "-Direction", "description": "方向 (Inbound/Outbound)", "required": false},
+      {"name": "-Action", "description": "操作 (Allow/Block)", "required": false},
+      {"name": "-Protocol", "description": "协议 (TCP/UDP/ICMP等)", "required": false},
+      {"name": "-LocalPort", "description": "本地端口", "required": false},
+      {"name": "-Profile", "description": "配置文件 (Domain/Private/Public/Any)", "required": false}
+    ],
+    "examples": [
+      {"description": "允许入站 TCP 8080 端口", "command": "New-NetFirewallRule -DisplayName 'Allow HTTP 8080' -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow"},
+      {"description": "阻止出站到特定 IP", "command": "New-NetFirewallRule -DisplayName 'Block Exfil' -Direction Outbound -RemoteAddress 10.0.0.50 -Action Block"},
+      {"description": "允许应用程序", "command": "New-NetFirewallRule -DisplayName 'MyApp' -Direction Inbound -Program 'C:\\MyApp\\server.exe' -Action Allow"}
+    ],
+    "tags": ["防火墙", "规则", "网络", "firewall", "rule", "new", "安全", "端口"]
+  },
+  {
+    "name": "Disable-NetAdapter",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "禁用网络适配器（断开网络连接）",
+    "syntax": "Disable-NetAdapter [-Name] <string[]> [-IncludeHidden] [-Confirm] [-WhatIf] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "网络适配器名称", "required": true},
+      {"name": "-IncludeHidden", "description": "包含隐藏适配器", "required": false},
+      {"name": "-Confirm", "description": "确认操作", "required": false}
+    ],
+    "examples": [
+      {"description": "禁用以太网适配器", "command": "Disable-NetAdapter -Name 'Ethernet' -Confirm:$false"},
+      {"description": "预览禁用操作", "command": "Disable-NetAdapter -Name 'Wi-Fi' -WhatIf"}
+    ],
+    "tags": ["网络", "禁用", "适配器", "网卡", "disable", "adapter", "断网"]
+  },
+  {
+    "name": "Enable-NetAdapter",
+    "source": "powershell",
+    "category": "network",
+    "categoryLabel": "网络",
+    "description": "启用已禁用的网络适配器",
+    "syntax": "Enable-NetAdapter [-Name] <string[]> [-IncludeHidden] [-Confirm] [-WhatIf] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Name", "description": "网络适配器名称", "required": true},
+      {"name": "-IncludeHidden", "description": "包含隐藏适配器", "required": false}
+    ],
+    "examples": [
+      {"description": "启用以太网适配器", "command": "Enable-NetAdapter -Name 'Ethernet'"},
+      {"description": "启用 Wi-Fi", "command": "Enable-NetAdapter -Name 'Wi-Fi'"}
+    ],
+    "tags": ["网络", "启用", "适配器", "网卡", "enable", "adapter", "联网"]
+  },
+  {
+    "name": "Get-AuthenticodeSignature",
+    "source": "powershell",
+    "category": "security",
+    "categoryLabel": "安全",
+    "description": "获取文件的 Authenticode 数字签名信息（验证文件来源和完整性）",
+    "syntax": "Get-AuthenticodeSignature [-FilePath] <string[]> [<CommonParameters>]",
+    "parameters": [
+      {"name": "-FilePath", "description": "要检查签名的文件路径", "required": true}
+    ],
+    "examples": [
+      {"description": "检查文件签名", "command": "Get-AuthenticodeSignature -FilePath C:\\Windows\\System32\\notepad.exe"},
+      {"description": "批量检查签名", "command": "Get-ChildItem C:\\Scripts\\*.ps1 | Get-AuthenticodeSignature"},
+      {"description": "筛选未签名文件", "command": "Get-ChildItem *.exe | Get-AuthenticodeSignature | Where-Object Status -ne 'Valid'"}
+    ],
+    "tags": ["签名", "安全", "验证", "authenticode", "数字签名", "证书", "文件完整性"]
+  },
+  {
+    "name": "Set-AuthenticodeSignature",
+    "source": "powershell",
+    "category": "security",
+    "categoryLabel": "安全",
+    "description": "使用代码签名证书对文件进行数字签名",
+    "syntax": "Set-AuthenticodeSignature [-FilePath] <string[]> [-Certificate] <X509Certificate2> [-IncludeChain <string>] [-TimestampServer <string>] [-HashAlgorithm <string>] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-FilePath", "description": "要签名的文件路径", "required": true},
+      {"name": "-Certificate", "description": "X509 代码签名证书", "required": true},
+      {"name": "-TimestampServer", "description": "时间戳服务器 URL（签名长期有效）", "required": false},
+      {"name": "-HashAlgorithm", "description": "哈希算法 (SHA1/SHA256/SHA384/SHA512)", "required": false}
+    ],
+    "examples": [
+      {"description": "对脚本签名", "command": "$cert = Get-ChildItem -Path Cert:\\CurrentUser\\My -CodeSigning\nSet-AuthenticodeSignature -FilePath script.ps1 -Certificate $cert"},
+      {"description": "带时间戳签名", "command": "Set-AuthenticodeSignature -FilePath deploy.ps1 -Certificate $cert -TimestampServer 'http://timestamp.digicert.com' -HashAlgorithm SHA256"}
+    ],
+    "tags": ["签名", "安全", "代码签名", "authenticode", "证书", "set", "数字签名"]
+  },
+  {
+    "name": "Get-Tpm",
+    "source": "powershell",
+    "category": "security",
+    "categoryLabel": "安全",
+    "description": "获取本地计算机上可信平台模块（TPM）芯片的信息",
+    "syntax": "Get-Tpm [<CommonParameters>]",
+    "parameters": [],
+    "examples": [
+      {"description": "查看 TPM 状态", "command": "Get-Tpm"},
+      {"description": "检查 TPM 是否已就绪", "command": "(Get-Tpm).TpmReady"}
+    ],
+    "tags": ["TPM", "安全", "芯片", "可信平台模块", "硬件安全", "BitLocker"]
+  },
+  {
+    "name": "Enable-PSRemoting",
+    "source": "powershell",
+    "category": "remote",
+    "categoryLabel": "远程管理",
+    "description": "在计算机上启用 PowerShell 远程管理（配置 WinRM 服务和防火墙规则）",
+    "syntax": "Enable-PSRemoting [-Force] [-SkipNetworkProfileCheck] [-WhatIf] [-Confirm] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-Force", "description": "不提示确认即执行", "required": false},
+      {"name": "-SkipNetworkProfileCheck", "description": "跳过网络配置文件检查（适用于公共网络）", "required": false}
+    ],
+    "examples": [
+      {"description": "启用远程管理", "command": "Enable-PSRemoting -Force"},
+      {"description": "在公共网络上启用", "command": "Enable-PSRemoting -Force -SkipNetworkProfileCheck"}
+    ],
+    "tags": ["远程", "PSRemoting", "WinRM", "启用", "enable", "远程管理", "远程桌面"]
+  },
+  {
+    "name": "Test-WSMan",
+    "source": "powershell",
+    "category": "remote",
+    "categoryLabel": "远程管理",
+    "description": "测试本地或远程计算机上的 WS-Management（WinRM）服务是否正在运行且可访问",
+    "syntax": "Test-WSMan [[-ComputerName] <string>] [-Authentication <AuthenticationMethod>] [-Credential <PSCredential>] [-Port <int>] [-UseSsl] [<CommonParameters>]",
+    "parameters": [
+      {"name": "-ComputerName", "description": "远程计算机名称或 IP", "required": false},
+      {"name": "-Authentication", "description": "认证方式 (Default/Basic/Kerberos/Negotiate等)", "required": false},
+      {"name": "-Credential", "description": "远程凭据", "required": false},
+      {"name": "-Port", "description": "WinRM 端口（默认5985/5986）", "required": false}
+    ],
+    "examples": [
+      {"description": "测试本地 WinRM", "command": "Test-WSMan"},
+      {"description": "测试远程计算机", "command": "Test-WSMan -ComputerName Server01"},
+      {"description": "使用 SSL 测试", "command": "Test-WSMan -ComputerName Server01 -UseSsl -Port 5986"}
+    ],
+    "tags": ["远程", "WSMan", "WinRM", "测试", "test", "连接", "远程管理"]
+  }
+]

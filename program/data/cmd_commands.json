@@ -1,0 +1,1969 @@
+[
+  {
+    "name": "dir",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "显示当前目录中的文件和子目录列表",
+    "syntax": "dir [drive:][path] [filename] [/A[[:]attributes]] [/B] [/C] [/D] [/L] [/N] [/O[[:]sortorder]] [/P] [/Q] [/R] [/S] [/T[[:]timefield]] [/W] [/X] [/4]",
+    "parameters": [
+      {"name": "/A", "description": "显示具有指定属性的文件 (D目录 R只读 H隐藏 A存档 S系统)", "required": false},
+      {"name": "/B", "description": "使用空格式（仅文件名，无标题和摘要）", "required": false},
+      {"name": "/O", "description": "排序方式 (N名称 S大小 E扩展名 D日期 G分组)", "required": false},
+      {"name": "/P", "description": "分页显示，每屏暂停", "required": false},
+      {"name": "/S", "description": "递归显示所有子目录中的文件", "required": false},
+      {"name": "/W", "description": "宽列表格式，横向排列", "required": false}
+    ],
+    "examples": [
+      {"description": "列出当前目录内容", "command": "dir"},
+      {"description": "分页列出文件", "command": "dir /p"},
+      {"description": "递归搜索所有 txt 文件", "command": "dir *.txt /s"},
+      {"description": "仅显示隐藏文件", "command": "dir /a:h"}
+    ],
+    "tags": ["文件", "目录", "列表", "dir", "directory", "list", "ls", "显示", "查看", "浏览"]
+  },
+  {
+    "name": "cd / chdir",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "更改当前工作目录或显示当前目录路径",
+    "syntax": "cd [/D] [drive:][path] 或 chdir [/D] [drive:][path]",
+    "parameters": [
+      {"name": "/D", "description": "同时更改驱动器和目录", "required": false},
+      {"name": "..", "description": "返回上一级目录", "required": false}
+    ],
+    "examples": [
+      {"description": "显示当前目录", "command": "cd"},
+      {"description": "切换到指定目录", "command": "cd C:\\Windows\\System32"},
+      {"description": "返回上一级", "command": "cd .."},
+      {"description": "切换到其他驱动器", "command": "cd /d D:\\Projects"},
+      {"description": "返回根目录", "command": "cd \\"}
+    ],
+    "tags": ["目录", "切换", "cd", "chdir", "导航", "路径", "文件夹", "change directory", "跳转"]
+  },
+  {
+    "name": "mkdir / md",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "创建新目录或子目录",
+    "syntax": "mkdir [drive:]path 或 md [drive:]path",
+    "parameters": [],
+    "examples": [
+      {"description": "创建单个目录", "command": "mkdir MyFolder"},
+      {"description": "创建多层目录", "command": "mkdir parent\\child\\grandchild"},
+      {"description": "在指定路径创建目录", "command": "mkdir D:\\Backup\\Data"}
+    ],
+    "tags": ["目录", "创建", "mkdir", "md", "新建", "文件夹", "make directory", "create"]
+  },
+  {
+    "name": "rmdir / rd",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "删除空目录（rmdir）或删除目录及其所有内容（rd /s）",
+    "syntax": "rmdir [/S] [/Q] [drive:]path 或 rd [/S] [/Q] [drive:]path",
+    "parameters": [
+      {"name": "/S", "description": "删除目录树（包含所有子目录和文件）", "required": false},
+      {"name": "/Q", "description": "安静模式，不提示确认", "required": false}
+    ],
+    "examples": [
+      {"description": "删除空目录", "command": "rmdir EmptyFolder"},
+      {"description": "删除目录及其所有内容", "command": "rmdir /s OldProject"},
+      {"description": "强制删除不提示", "command": "rmdir /s /q TempData"}
+    ],
+    "tags": ["目录", "删除", "rmdir", "rd", "移除", "文件夹", "remove directory", "delete"]
+  },
+  {
+    "name": "copy",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "将一个或多个文件复制到指定位置",
+    "syntax": "copy [/A | /B] source [/A | /B] [+ source [/A | /B] ...] [destination [/A | /B]] [/V] [/Y | /-Y] [/Z] [/L]",
+    "parameters": [
+      {"name": "/A", "description": "以 ASCII 文本模式复制", "required": false},
+      {"name": "/B", "description": "以二进制模式复制", "required": false},
+      {"name": "/V", "description": "验证复制后的文件正确性", "required": false},
+      {"name": "/Y", "description": "覆盖现有文件时不提示确认", "required": false},
+      {"name": "/-Y", "description": "覆盖现有文件时提示确认", "required": false},
+      {"name": "/Z", "description": "以可断点续传模式复制网络文件", "required": false}
+    ],
+    "examples": [
+      {"description": "复制文件到另一个目录", "command": "copy file.txt D:\\Backup\\"},
+      {"description": "合并多个文件", "command": "copy file1.txt + file2.txt merged.txt"},
+      {"description": "覆盖不提示", "command": "copy /y source.txt dest.txt"},
+      {"description": "验证复制", "command": "copy /v important.docx E:\\Safe\\"}
+    ],
+    "tags": ["文件", "复制", "copy", "拷贝", "备份", "cp", "duplicate", "transfer"]
+  },
+  {
+    "name": "xcopy",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "复制文件和目录树，比 copy 更强大",
+    "syntax": "xcopy source [destination] [/A | /M] [/D[:date]] [/P] [/S [/E]] [/V] [/W] [/C] [/I] [/Q] [/F] [/L] [/G] [/H] [/R] [/T] [/U] [/K] [/N] [/O] [/X] [/Y] [/-Y] [/Z] [/B] [/J] [/EXCLUDE:file1[+file2]...] [/COMPRESS]",
+    "parameters": [
+      {"name": "/S", "description": "复制目录和子目录（非空）", "required": false},
+      {"name": "/E", "description": "复制目录和子目录（包括空的）", "required": false},
+      {"name": "/D", "description": "仅复制指定日期后修改的文件", "required": false},
+      {"name": "/Y", "description": "覆盖不提示", "required": false},
+      {"name": "/H", "description": "复制隐藏和系统文件", "required": false},
+      {"name": "/EXCLUDE", "description": "排除指定文件", "required": false}
+    ],
+    "examples": [
+      {"description": "复制整个目录树", "command": "xcopy C:\\Source D:\\Dest /e /h /y"},
+      {"description": "仅复制更新的文件", "command": "xcopy src\\* dest\\ /d /s"},
+      {"description": "预览将要复制的文件", "command": "xcopy src\\* dest\\ /l"}
+    ],
+    "tags": ["文件", "目录", "复制", "xcopy", "批量", "备份", "同步", "文件夹复制"]
+  },
+  {
+    "name": "robocopy",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "高级文件复制工具（Robust File Copy），支持多线程和断点续传",
+    "syntax": "robocopy source destination [file [file]...] [options]",
+    "parameters": [
+      {"name": "/S", "description": "复制子目录（非空）", "required": false},
+      {"name": "/E", "description": "复制子目录（包括空的）", "required": false},
+      {"name": "/MT[:n]", "description": "多线程复制（默认8线程）", "required": false},
+      {"name": "/MIR", "description": "镜像目录树（等同于 /E /PURGE）", "required": false},
+      {"name": "/Z", "description": "可断点续传模式", "required": false},
+      {"name": "/R:n", "description": "失败重试次数（默认1百万次）", "required": false},
+      {"name": "/W:n", "description": "重试等待秒数（默认30秒）", "required": false}
+    ],
+    "examples": [
+      {"description": "镜像备份目录", "command": "robocopy C:\\Data D:\\Backup /mir"},
+      {"description": "多线程快速复制", "command": "robocopy src\\ dest\\ /e /mt:16"},
+      {"description": "同步目录（删除多余文件）", "command": "robocopy src\\ dest\\ /mir /r:2 /w:5"}
+    ],
+    "tags": ["文件", "复制", "robocopy", "备份", "同步", "镜像", "多线程", "robust copy", "断点续传"]
+  },
+  {
+    "name": "move",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "将文件或目录移动到新位置，也可用于重命名",
+    "syntax": "move [/Y | /-Y] [drive:][path]filename1 destination",
+    "parameters": [
+      {"name": "/Y", "description": "覆盖不提示", "required": false},
+      {"name": "/-Y", "description": "覆盖时提示确认", "required": false}
+    ],
+    "examples": [
+      {"description": "移动文件", "command": "move file.txt D:\\Archive\\"},
+      {"description": "重命名文件", "command": "move oldname.txt newname.txt"},
+      {"description": "移动并覆盖", "command": "move /y data.csv C:\\Processed\\"}
+    ],
+    "tags": ["文件", "移动", "move", "重命名", "mv", "转移", "剪贴"]
+  },
+  {
+    "name": "del / erase",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "删除一个或多个文件",
+    "syntax": "del [/P] [/F] [/S] [/Q] [/A[[:]attributes]] names 或 erase [/P] [/F] [/S] [/Q] [/A[[:]attributes]] names",
+    "parameters": [
+      {"name": "/P", "description": "删除每个文件前提示确认", "required": false},
+      {"name": "/F", "description": "强制删除只读文件", "required": false},
+      {"name": "/S", "description": "递归删除所有子目录中的匹配文件", "required": false},
+      {"name": "/Q", "description": "安静模式，不提示确认（全局通配符时）", "required": false}
+    ],
+    "examples": [
+      {"description": "删除单个文件", "command": "del temp.txt"},
+      {"description": "删除所有 .tmp 文件", "command": "del *.tmp /s"},
+      {"description": "强制删除只读文件", "command": "del /f locked.txt"},
+      {"description": "删除前确认", "command": "del /p *.bak"}
+    ],
+    "tags": ["文件", "删除", "del", "erase", "remove", "delete", "清理", "rm"]
+  },
+  {
+    "name": "ren / rename",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "重命名文件或目录",
+    "syntax": "ren [drive:][path] filename1 filename2 或 rename [drive:][path] filename1 filename2",
+    "parameters": [],
+    "examples": [
+      {"description": "重命名文件", "command": "ren report.txt report_2024.txt"},
+      {"description": "批量修改扩展名", "command": "ren *.txt *.md"},
+      {"description": "重命名目录", "command": "ren OldFolder NewFolder"}
+    ],
+    "tags": ["文件", "重命名", "ren", "rename", "改名", "名称"]
+  },
+  {
+    "name": "type",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "显示文本文件的内容",
+    "syntax": "type [drive:][path]filename",
+    "parameters": [],
+    "examples": [
+      {"description": "查看文件内容", "command": "type config.ini"},
+      {"description": "查看多个文件", "command": "type file1.txt file2.txt"},
+      {"description": "分页查看大文件", "command": "type large.log | more"}
+    ],
+    "tags": ["文件", "查看", "type", "内容", "cat", "文本", "读取", "显示"]
+  },
+  {
+    "name": "more",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "分页显示输出或文件内容，每次显示一屏",
+    "syntax": "more [/E [/C] [/P] [/S] [/Tn] [+n]] < [drive:][path]filename 或 command | more [options]",
+    "parameters": [
+      {"name": "/E", "description": "启用扩展功能", "required": false},
+      {"name": "/P", "description": "清除屏幕后显示", "required": false},
+      {"name": "+n", "description": "从第 n 行开始显示", "required": false}
+    ],
+    "examples": [
+      {"description": "分页查看文件", "command": "more longfile.txt"},
+      {"description": "管道分页输出", "command": "dir /s | more"},
+      {"description": "从第100行开始分页", "command": "more +100 data.csv"}
+    ],
+    "tags": ["文件", "分页", "more", "查看", "浏览", "less", "翻页"]
+  },
+  {
+    "name": "attrib",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "显示或更改文件属性（只读、隐藏、系统、存档）",
+    "syntax": "attrib [+R | -R] [+A | -A] [+S | -S] [+H | -H] [drive:][path]filename [/S [/D]]",
+    "parameters": [
+      {"name": "+R/-R", "description": "设置/清除只读属性", "required": false},
+      {"name": "+H/-H", "description": "设置/清除隐藏属性", "required": false},
+      {"name": "+S/-S", "description": "设置/清除系统属性", "required": false},
+      {"name": "+A/-A", "description": "设置/清除存档属性", "required": false},
+      {"name": "/S", "description": "递归处理子目录中的文件", "required": false},
+      {"name": "/D", "description": "同时处理目录", "required": false}
+    ],
+    "examples": [
+      {"description": "查看文件属性", "command": "attrib myfile.txt"},
+      {"description": "设置隐藏属性", "command": "attrib +h secret.txt"},
+      {"description": "取消只读和隐藏属性", "command": "attrib -r -h *.* /s"}
+    ],
+    "tags": ["文件", "属性", "attrib", "隐藏", "只读", "系统", "attribute", "权限"]
+  },
+  {
+    "name": "icacls",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "显示或修改文件和目录的访问控制列表（ACL）",
+    "syntax": "icacls name [/save aclfile] [/restore aclfile] [/grant[:r] user:permission] [/deny user:permission] [/remove[:g|:d]] user] [/inheritance:e|d|r] [/setintegritylevel level] [/t] [/c] [/l] [/q]",
+    "parameters": [
+      {"name": "/grant", "description": "授予用户权限", "required": false},
+      {"name": "/deny", "description": "拒绝用户权限", "required": false},
+      {"name": "/remove", "description": "移除用户权限", "required": false},
+      {"name": "/inheritance", "description": "设置继承 (e启用 d禁用 r移除)", "required": false},
+      {"name": "/t", "description": "递归应用到子目录和文件", "required": false}
+    ],
+    "examples": [
+      {"description": "查看文件权限", "command": "icacls document.docx"},
+      {"description": "授予完全控制权", "command": "icacls folder\\ /grant username:F /t"},
+      {"description": "移除用户权限", "command": "icacls file.txt /remove username"}
+    ],
+    "tags": ["文件", "权限", "icacls", "ACL", "安全", "访问控制", "授权", "cacls"]
+  },
+  {
+    "name": "tree",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "以图形方式显示驱动器或路径的目录结构",
+    "syntax": "tree [drive:][path] [/F] [/A]",
+    "parameters": [
+      {"name": "/F", "description": "同时显示每个目录中的文件名", "required": false},
+      {"name": "/A", "description": "使用 ASCII 字符（而非扩展字符）绘制树形图", "required": false}
+    ],
+    "examples": [
+      {"description": "显示目录树", "command": "tree C:\\Projects"},
+      {"description": "显示包含文件的目录树", "command": "tree /f"},
+      {"description": "用ASCII字符显示", "command": "tree /a"}
+    ],
+    "tags": ["目录", "树形", "tree", "结构", "浏览", "层次", "可视化"]
+  },
+  {
+    "name": "where",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "在 PATH 环境变量指定的路径中查找文件的位置",
+    "syntax": "where [/R dir] [/Q] [/F] [/T] pattern ...",
+    "parameters": [
+      {"name": "/R", "description": "递归搜索指定目录", "required": false},
+      {"name": "/Q", "description": "安静模式，仅返回错误码", "required": false},
+      {"name": "/F", "description": "用引号括起结果", "required": false},
+      {"name": "/T", "description": "显示文件大小和修改时间", "required": false}
+    ],
+    "examples": [
+      {"description": "查找程序位置", "command": "where python.exe"},
+      {"description": "递归查找文件", "command": "where /r C:\\Projects *.dll"},
+      {"description": "查找所有匹配位置", "command": "where notepad.exe"}
+    ],
+    "tags": ["文件", "搜索", "where", "查找", "定位", "路径", "which", "PATH"]
+  },
+  {
+    "name": "assoc",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "显示或修改文件扩展名关联",
+    "syntax": "assoc [.ext[=[fileType]]]",
+    "parameters": [],
+    "examples": [
+      {"description": "查看所有关联", "command": "assoc"},
+      {"description": "查看 .txt 关联", "command": "assoc .txt"},
+      {"description": "设置扩展名关联", "command": "assoc .mydata=MyApp.DataFile"}
+    ],
+    "tags": ["文件", "关联", "assoc", "扩展名", "文件类型", "注册表", "默认程序"]
+  },
+  {
+    "name": "ftype",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "显示或修改文件类型关联中使用的打开命令",
+    "syntax": "ftype [fileType[=[openCommandString]]]",
+    "parameters": [],
+    "examples": [
+      {"description": "查看所有文件类型", "command": "ftype"},
+      {"description": "查看 txtfile 打开方式", "command": "ftype txtfile"},
+      {"description": "设置打开命令", "command": "ftype txtfile=C:\\Editor\\myedit.exe \"%1\""}
+    ],
+    "tags": ["文件", "关联", "ftype", "打开方式", "文件类型", "默认程序"]
+  },
+  {
+    "name": "comp",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "逐字节比较两个文件或文件集的内容",
+    "syntax": "comp [data1] [data2] [/D] [/A] [/L] [/N=number] [/C] [/OFF[LINE]]",
+    "parameters": [
+      {"name": "/D", "description": "以十进制显示差异", "required": false},
+      {"name": "/A", "description": "以 ASCII 字符显示差异", "required": false},
+      {"name": "/L", "description": "显示差异所在的行号", "required": false},
+      {"name": "/C", "description": "忽略 ASCII 字符的大小写差异", "required": false}
+    ],
+    "examples": [
+      {"description": "比较两个文件", "command": "comp file1.txt file2.txt"},
+      {"description": "以十进制显示差异", "command": "comp a.bin b.bin /d"},
+      {"description": "比较通配符文件", "command": "comp *.bak *.txt"}
+    ],
+    "tags": ["文件", "比较", "comp", "diff", "对比", "差异", "compare"]
+  },
+  {
+    "name": "compact",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "显示或更改 NTFS 分区上文件的压缩状态",
+    "syntax": "compact [/C | /U] [/S[:dir]] [/A] [/I] [/F] [/Q] [/EXE[:algorithm]] [filename [...]]",
+    "parameters": [
+      {"name": "/C", "description": "压缩指定的文件或目录", "required": false},
+      {"name": "/U", "description": "解压缩指定的文件或目录", "required": false},
+      {"name": "/S", "description": "递归处理子目录", "required": false},
+      {"name": "/A", "description": "显示隐藏和系统文件", "required": false}
+    ],
+    "examples": [
+      {"description": "查看压缩状态", "command": "compact"},
+      {"description": "压缩目录", "command": "compact /c /s:Folder"},
+      {"description": "解压缩", "command": "compact /u /s:Folder"}
+    ],
+    "tags": ["文件", "压缩", "compact", "NTFS", "磁盘", "节省空间", "compress"]
+  },
+  {
+    "name": "expand",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "解压缩一个或多个 CAB 压缩文件",
+    "syntax": "expand [-R] source [destination] [-F:files] [-I] [-D] [source.cab]",
+    "parameters": [
+      {"name": "-R", "description": "递归处理输入文件", "required": false},
+      {"name": "-F:files", "description": "指定要解压的文件", "required": false},
+      {"name": "-D", "description": "显示 CAB 文件中的文件列表（不解压）", "required": false}
+    ],
+    "examples": [
+      {"description": "解压单个文件", "command": "expand file.cab newfile.dll"},
+      {"description": "查看 CAB 内容", "command": "expand -d driver.cab"},
+      {"description": "解压到指定目录", "command": "expand updates.cab -F:* C:\\Extracted\\"}
+    ],
+    "tags": ["文件", "解压", "expand", "CAB", "提取", "extract"]
+  },
+  {
+    "name": "fc",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "比较两个文件并显示它们之间的差异",
+    "syntax": "fc [/A] [/B] [/C] [/L] [/LBn] [/N] [/OFF[LINE]] [/T] [/U] [/W] [/nnnn] [drive:][path]filename1 [drive:][path]filename2",
+    "parameters": [
+      {"name": "/A", "description": "仅显示每组差异的第一行和最后一行", "required": false},
+      {"name": "/B", "description": "进行二进制比较", "required": false},
+      {"name": "/C", "description": "忽略大小写", "required": false},
+      {"name": "/L", "description": "以 ASCII 文本模式比较", "required": false},
+      {"name": "/N", "description": "显示行号", "required": false},
+      {"name": "/W", "description": "将连续的空白压缩为单个空格", "required": false}
+    ],
+    "examples": [
+      {"description": "文本比较", "command": "fc file1.txt file2.txt"},
+      {"description": "二进制比较", "command": "fc /b a.exe b.exe"},
+      {"description": "忽略大小写比较", "command": "fc /c config.ini config.bak"}
+    ],
+    "tags": ["文件", "比较", "fc", "diff", "对比", "差异", "file compare"]
+  },
+  {
+    "name": "systeminfo",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "显示计算机的详细系统信息，包括操作系统版本、处理器、内存、网卡等",
+    "syntax": "systeminfo [/S system [/U username [/P password]]] [/FO format] [/NH]",
+    "parameters": [
+      {"name": "/S", "description": "指定远程系统", "required": false},
+      {"name": "/U", "description": "指定用户名", "required": false},
+      {"name": "/P", "description": "指定密码", "required": false},
+      {"name": "/FO", "description": "输出格式 (TABLE/LIST/CSV)", "required": false}
+    ],
+    "examples": [
+      {"description": "查看本机系统信息", "command": "systeminfo"},
+      {"description": "以列表格式输出", "command": "systeminfo /fo list"},
+      {"description": "查看远程系统信息", "command": "systeminfo /s 192.168.1.100 /u admin /p pass"}
+    ],
+    "tags": ["系统", "信息", "systeminfo", "版本", "硬件", "OS", "配置", "specs"]
+  },
+  {
+    "name": "ver",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "显示 Windows 操作系统版本号",
+    "syntax": "ver",
+    "parameters": [],
+    "examples": [
+      {"description": "查看版本", "command": "ver"}
+    ],
+    "tags": ["系统", "版本", "ver", "Windows", "version", "操作系统"]
+  },
+  {
+    "name": "hostname",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "显示计算机的主机名",
+    "syntax": "hostname",
+    "parameters": [],
+    "examples": [
+      {"description": "查看主机名", "command": "hostname"}
+    ],
+    "tags": ["系统", "主机名", "hostname", "计算机名", "名称", "网络标识"]
+  },
+  {
+    "name": "whoami",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "显示当前登录的用户名、安全标识符（SID）、组成员身份等信息",
+    "syntax": "whoami [/upn | /fqdn | /logonid] [/user] [/groups] [/priv] [/all]",
+    "parameters": [
+      {"name": "/user", "description": "显示当前用户 SID", "required": false},
+      {"name": "/groups", "description": "显示组成员身份", "required": false},
+      {"name": "/priv", "description": "显示安全权限", "required": false},
+      {"name": "/all", "description": "显示所有信息", "required": false}
+    ],
+    "examples": [
+      {"description": "查看当前用户名", "command": "whoami"},
+      {"description": "查看所有信息", "command": "whoami /all"},
+      {"description": "查看组信息", "command": "whoami /groups"}
+    ],
+    "tags": ["系统", "用户", "whoami", "身份", "SID", "权限", "组"]
+  },
+  {
+    "name": "date",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "显示或设置系统日期",
+    "syntax": "date [/T | date]",
+    "parameters": [
+      {"name": "/T", "description": "仅显示当前日期，不提示设置", "required": false}
+    ],
+    "examples": [
+      {"description": "查看并修改日期", "command": "date"},
+      {"description": "仅查看日期", "command": "date /t"}
+    ],
+    "tags": ["系统", "日期", "date", "时间", "设置"]
+  },
+  {
+    "name": "time",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "显示或设置系统时间",
+    "syntax": "time [/T | time]",
+    "parameters": [
+      {"name": "/T", "description": "仅显示当前时间，不提示设置", "required": false}
+    ],
+    "examples": [
+      {"description": "查看并修改时间", "command": "time"},
+      {"description": "仅查看时间", "command": "time /t"}
+    ],
+    "tags": ["系统", "时间", "time", "时钟", "设置"]
+  },
+  {
+    "name": "set",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "显示、设置或删除 CMD 环境变量",
+    "syntax": "set [variable=[string]]",
+    "parameters": [
+      {"name": "/A", "description": "将等号右边的字符串作为算术表达式求值", "required": false},
+      {"name": "/P", "description": "提示用户输入值", "required": false}
+    ],
+    "examples": [
+      {"description": "查看所有环境变量", "command": "set"},
+      {"description": "设置变量", "command": "set MY_VAR=hello"},
+      {"description": "提示用户输入", "command": "set /p NAME=Enter your name: "}
+    ],
+    "tags": ["系统", "环境变量", "set", "配置", "变量", "env", "PATH"]
+  },
+  {
+    "name": "path",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "显示或设置可执行文件的搜索路径",
+    "syntax": "path [[drive:]path[;...]] 或 path ;",
+    "parameters": [],
+    "examples": [
+      {"description": "查看当前 PATH", "command": "path"},
+      {"description": "追加路径", "command": "path %PATH%;C:\\MyTools"},
+      {"description": "清除 PATH", "command": "path ;"}
+    ],
+    "tags": ["系统", "PATH", "路径", "环境变量", "搜索路径"]
+  },
+  {
+    "name": "cls",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "清除命令提示符窗口的屏幕内容",
+    "syntax": "cls",
+    "parameters": [],
+    "examples": [
+      {"description": "清屏", "command": "cls"}
+    ],
+    "tags": ["系统", "清屏", "cls", "清除", "屏幕", "clear"]
+  },
+  {
+    "name": "title",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "设置命令提示符窗口的标题",
+    "syntax": "title [string]",
+    "parameters": [],
+    "examples": [
+      {"description": "设置窗口标题", "command": "title My Build Script"},
+      {"description": "恢复默认标题", "command": "title"}
+    ],
+    "tags": ["系统", "标题", "title", "窗口", "CMD", "终端"]
+  },
+  {
+    "name": "color",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "更改命令提示符窗口的前景色和背景色",
+    "syntax": "color [attr] 或 color [[background][foreground]]",
+    "parameters": [
+      {"name": "attr", "description": "颜色属性（两位十六进制：第一位背景，第二位前景）0=黑 1=蓝 2=绿 3=浅绿 4=红 5=紫 6=黄 7=白 8=灰 9=淡蓝 A=淡绿 B=淡浅绿 C=淡红 D=淡紫 E=淡黄 F=亮白", "required": false}
+    ],
+    "examples": [
+      {"description": "恢复默认颜色", "command": "color"},
+      {"description": "白色背景蓝色文字", "command": "color f1"},
+      {"description": "黑底绿字", "command": "color 0a"}
+    ],
+    "tags": ["系统", "颜色", "color", "终端", "外观", "美化"]
+  },
+  {
+    "name": "prompt",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "更改命令提示符的显示格式",
+    "syntax": "prompt [text]",
+    "parameters": [
+      {"name": "$P", "description": "当前驱动器和路径", "required": false},
+      {"name": "$G", "description": "> 符号", "required": false},
+      {"name": "$T", "description": "当前时间", "required": false},
+      {"name": "$D", "description": "当前日期", "required": false},
+      {"name": "$V", "description": "Windows 版本号", "required": false}
+    ],
+    "examples": [
+      {"description": "默认提示符", "command": "prompt $P$G"},
+      {"description": "显示时间", "command": "prompt $T $P$G"},
+      {"description": "自定义提示符", "command": "prompt [Admin] $P$G"}
+    ],
+    "tags": ["系统", "提示符", "prompt", "终端", "外观", "CMD"]
+  },
+  {
+    "name": "doskey",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "创建命令行宏、编辑命令行、调用命令历史",
+    "syntax": "doskey [/reinstall] [/listsize=size] [/macros:[all | exename]] [/history] [/insert | /overstrike] [/exename=exename] [macroname=[text]]",
+    "parameters": [
+      {"name": "/history", "description": "显示命令历史记录", "required": false},
+      {"name": "/macros", "description": "显示所有宏", "required": false},
+      {"name": "/listsize", "description": "设置命令历史缓冲区大小", "required": false}
+    ],
+    "examples": [
+      {"description": "查看命令历史", "command": "doskey /history"},
+      {"description": "创建宏", "command": "doskey ls=dir /w $*"}
+    ],
+    "tags": ["系统", "doskey", "宏", "快捷键", "历史", "别名"]
+  },
+  {
+    "name": "ipconfig",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络相关",
+    "description": "显示所有当前 TCP/IP 网络配置值，并刷新 DHCP 和 DNS 设置",
+    "syntax": "ipconfig [/allcompartments] [/? | /all | /renew [adapter] | /release [adapter] | /renew6 [adapter] | /release6 [adapter] | /flushdns | /displaydns | /registerdns | /showclassid adapter | /setclassid adapter [classid]]",
+    "parameters": [
+      {"name": "/all", "description": "显示所有适配器的完整 TCP/IP 配置", "required": false},
+      {"name": "/release", "description": "释放指定适配器的 IPv4 地址", "required": false},
+      {"name": "/renew", "description": "续订指定适配器的 IPv4 地址", "required": false},
+      {"name": "/flushdns", "description": "清除 DNS 解析器缓存", "required": false},
+      {"name": "/displaydns", "description": "显示 DNS 解析器缓存的内容", "required": false},
+      {"name": "/registerdns", "description": "刷新所有 DHCP 租约并重新注册 DNS 名称", "required": false}
+    ],
+    "examples": [
+      {"description": "查看基本 IP 配置", "command": "ipconfig"},
+      {"description": "查看详细网络配置", "command": "ipconfig /all"},
+      {"description": "刷新 DNS 缓存", "command": "ipconfig /flushdns"},
+      {"description": "释放并续订 IP 地址", "command": "ipconfig /release && ipconfig /renew"}
+    ],
+    "tags": ["网络", "IP", "ipconfig", "DNS", "DHCP", "TCP/IP", "配置", "地址", "adapter"]
+  },
+  {
+    "name": "ping",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络相关",
+    "description": "通过发送 ICMP 回显请求数据包来测试网络连接和目标主机的可达性",
+    "syntax": "ping [-t] [-a] [-n count] [-l size] [-f] [-i TTL] [-v TOS] [-r count] [-s count] [-w timeout] [-4] [-6] target_name",
+    "parameters": [
+      {"name": "-t", "description": "持续 ping 直到手动停止 (Ctrl+C)", "required": false},
+      {"name": "-a", "description": "将 IP 地址解析为主机名", "required": false},
+      {"name": "-n", "description": "发送指定数量的回显请求（默认4）", "required": false},
+      {"name": "-l", "description": "设置发送缓冲区大小（字节）", "required": false},
+      {"name": "-w", "description": "等待每次回复的超时时间（毫秒）", "required": false}
+    ],
+    "examples": [
+      {"description": "测试连接", "command": "ping google.com"},
+      {"description": "持续 ping", "command": "ping -t 192.168.1.1"},
+      {"description": "发送10个请求", "command": "ping -n 10 8.8.8.8"},
+      {"description": "大数据包测试", "command": "ping -l 1024 -t example.com"}
+    ],
+    "tags": ["网络", "ping", "ICMP", "连接", "延迟", "测试", "连通性", "latency"]
+  },
+  {
+    "name": "tracert",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络相关",
+    "description": "跟踪数据包到达目标主机所经过的路由路径",
+    "syntax": "tracert [-d] [-h maximum_hops] [-j host-list] [-w timeout] [-4] [-6] target_name",
+    "parameters": [
+      {"name": "-d", "description": "不将 IP 地址解析为主机名（加速追踪）", "required": false},
+      {"name": "-h", "description": "最大跃点数（默认30）", "required": false},
+      {"name": "-w", "description": "每跳超时时间（毫秒）", "required": false}
+    ],
+    "examples": [
+      {"description": "追踪路由", "command": "tracert google.com"},
+      {"description": "不解析主机名", "command": "tracert -d 8.8.8.8"},
+      {"description": "限制跃点数", "command": "tracert -h 10 example.com"}
+    ],
+    "tags": ["网络", "路由", "tracert", "trace", "traceroute", "路径", "追踪", "跃点"]
+  },
+  {
+    "name": "netstat",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络相关",
+    "description": "显示活动的网络连接、路由表、接口统计等信息",
+    "syntax": "netstat [-a] [-b] [-e] [-f] [-n] [-o] [-p proto] [-r] [-s] [-t] [-x] [-y] [interval]",
+    "parameters": [
+      {"name": "-a", "description": "显示所有连接和侦听端口", "required": false},
+      {"name": "-b", "description": "显示每个连接关联的可执行程序", "required": false},
+      {"name": "-n", "description": "以数字形式显示地址和端口号", "required": false},
+      {"name": "-o", "description": "显示关联的进程 ID (PID)", "required": false},
+      {"name": "-p", "description": "仅显示指定协议的连接 (TCP/UDP)", "required": false},
+      {"name": "-r", "description": "显示路由表", "required": false}
+    ],
+    "examples": [
+      {"description": "查看所有连接", "command": "netstat -a"},
+      {"description": "查看连接及对应程序", "command": "netstat -b"},
+      {"description": "查看连接及PID", "command": "netstat -ano"},
+      {"description": "仅查看TCP连接", "command": "netstat -p tcp -n"}
+    ],
+    "tags": ["网络", "netstat", "连接", "端口", "端口", "TCP", "UDP", "监听", "路由", "统计"]
+  },
+  {
+    "name": "nslookup",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络相关",
+    "description": "查询 DNS 服务器以获取域名对应的 IP 地址或其他 DNS 记录",
+    "syntax": "nslookup [-option ...] [host-to-find | - [server]]",
+    "parameters": [
+      {"name": "-type=A", "description": "查询 A 记录（IPv4地址）", "required": false},
+      {"name": "-type=MX", "description": "查询邮件交换记录", "required": false},
+      {"name": "-type=NS", "description": "查询名称服务器记录", "required": false},
+      {"name": "-type=CNAME", "description": "查询别名记录", "required": false},
+      {"name": "-type=TXT", "description": "查询文本记录", "required": false}
+    ],
+    "examples": [
+      {"description": "查询域名IP", "command": "nslookup google.com"},
+      {"description": "查询MX记录", "command": "nslookup -type=mx gmail.com"},
+      {"description": "使用指定DNS服务器", "command": "nslookup example.com 8.8.8.8"}
+    ],
+    "tags": ["网络", "DNS", "nslookup", "域名", "解析", "查询", "IP", "dig"]
+  },
+  {
+    "name": "arp",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络相关",
+    "description": "显示和修改 IP 地址与物理地址（MAC）之间的地址解析协议（ARP）缓存表",
+    "syntax": "arp -a [inet_addr] [-N if_addr] 或 arp -d inet_addr [if_addr] 或 arp -s inet_addr eth_addr [if_addr]",
+    "parameters": [
+      {"name": "-a", "description": "显示所有当前 ARP 缓存条目", "required": false},
+      {"name": "-d", "description": "删除指定 IP 地址的 ARP 条目", "required": false},
+      {"name": "-s", "description": "添加静态 ARP 条目", "required": false}
+    ],
+    "examples": [
+      {"description": "查看 ARP 缓存", "command": "arp -a"},
+      {"description": "删除 ARP 条目", "command": "arp -d 192.168.1.1"},
+      {"description": "添加静态 ARP 条目", "command": "arp -s 192.168.1.100 00-AA-00-4F-2A-1C"}
+    ],
+    "tags": ["网络", "ARP", "MAC", "地址解析", "缓存", "IP", "物理地址"]
+  },
+  {
+    "name": "route",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络相关",
+    "description": "查看和修改本地 IP 路由表",
+    "syntax": "route [-f] [-p] [-4|-6] command [destination] [MASK netmask] [gateway] [METRIC metric] [IF interface]",
+    "parameters": [
+      {"name": "print", "description": "打印路由表", "required": false},
+      {"name": "add", "description": "添加路由", "required": false},
+      {"name": "delete", "description": "删除路由", "required": false},
+      {"name": "-p", "description": "创建持久路由（重启后保留）", "required": false},
+      {"name": "-f", "description": "清除所有网关条目的路由表", "required": false}
+    ],
+    "examples": [
+      {"description": "查看路由表", "command": "route print"},
+      {"description": "添加静态路由", "command": "route add 10.0.0.0 mask 255.0.0.0 192.168.1.1"},
+      {"description": "添加持久路由", "command": "route -p add 10.10.0.0 mask 255.255.0.0 192.168.1.1"}
+    ],
+    "tags": ["网络", "路由", "route", "路由表", "网关", "gateway", "静态路由"]
+  },
+  {
+    "name": "net",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络相关",
+    "description": "用于管理网络资源、用户账户、服务等的多功能命令集合",
+    "syntax": "net [accounts | computer | config | continue | file | group | help | helpmsg | localgroup | pause | session | share | start | statistics | stop | time | use | user | view]",
+    "parameters": [
+      {"name": "use", "description": "连接或断开共享资源", "required": false},
+      {"name": "user", "description": "管理用户账户", "required": false},
+      {"name": "share", "description": "管理共享资源", "required": false},
+      {"name": "view", "description": "查看网络上的共享资源", "required": false},
+      {"name": "statistics", "description": "显示服务统计信息", "required": false}
+    ],
+    "examples": [
+      {"description": "查看共享资源", "command": "net view \\\\server"},
+      {"description": "映射网络驱动器", "command": "net use Z: \\\\server\\share"},
+      {"description": "查看用户列表", "command": "net user"},
+      {"description": "查看本机共享", "command": "net share"}
+    ],
+    "tags": ["网络", "net", "共享", "用户", "资源", "服务", "驱动器"]
+  },
+  {
+    "name": "netsh",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络相关",
+    "description": "网络 Shell 命令行脚本工具，用于配置和显示网络组件的状态",
+    "syntax": "netsh [-a AliasFile] [-c Context] [-r RemoteMachine] [-u [DomainName\\]UserName] [-p Password | *] [command | -f ScriptFile]",
+    "parameters": [
+      {"name": "interface", "description": "进入网络接口上下文", "required": false},
+      {"name": "wlan", "description": "进入无线网络上下文", "required": false},
+      {"name": "firewall", "description": "进入防火墙上下文（旧版）", "required": false},
+      {"name": "advfirewall", "description": "进入高级防火墙上下文", "required": false}
+    ],
+    "examples": [
+      {"description": "查看网络接口", "command": "netsh interface show interface"},
+      {"description": "查看 WiFi 密码", "command": "netsh wlan show profile name=\"SSID\" key=clear"},
+      {"description": "重置 Winsock", "command": "netsh winsock reset"},
+      {"description": "设置静态 IP", "command": "netsh interface ip set address \"以太网\" static 192.168.1.100 255.255.255.0 192.168.1.1"}
+    ],
+    "tags": ["网络", "netsh", "配置", "接口", "防火墙", "WLAN", "Winsock", "network shell"]
+  },
+  {
+    "name": "curl",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络相关",
+    "description": "使用各种网络协议从服务器传输数据（Windows 10+ 内置）",
+    "syntax": "curl [options] <url>",
+    "parameters": [
+      {"name": "-O, --remote-name", "description": "将输出写入以远程文件名命名的文件", "required": false},
+      {"name": "-o, --output <file>", "description": "写入到指定文件", "required": false},
+      {"name": "-L, --location", "description": "跟随重定向", "required": false},
+      {"name": "-H, --header", "description": "添加自定义请求头", "required": false},
+      {"name": "-X, --request", "description": "指定请求方法 (GET/POST/PUT/DELETE)", "required": false},
+      {"name": "-d, --data", "description": "发送 POST 数据", "required": false}
+    ],
+    "examples": [
+      {"description": "下载文件", "command": "curl -O https://example.com/file.zip"},
+      {"description": "GET 请求", "command": "curl https://api.example.com/data"},
+      {"description": "POST 请求", "command": "curl -X POST -d \"name=test\" https://api.example.com/submit"},
+      {"description": "下载并显示进度", "command": "curl -# -O https://example.com/large.zip"}
+    ],
+    "tags": ["网络", "curl", "HTTP", "下载", "API", "请求", "上传"]
+  },
+  {
+    "name": "telnet",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络相关",
+    "description": "使用 Telnet 协议远程登录到另一台计算机或测试 TCP 端口连通性",
+    "syntax": "telnet [host [port]]",
+    "parameters": [],
+    "examples": [
+      {"description": "连接到远程主机", "command": "telnet 192.168.1.1"},
+      {"description": "测试端口是否开放", "command": "telnet example.com 80"},
+      {"description": "测试邮件服务器", "command": "telnet smtp.example.com 25"}
+    ],
+    "tags": ["网络", "telnet", "远程", "端口", "测试", "连通性", "TCP"]
+  },
+  {
+    "name": "chkdsk",
+    "source": "cmd",
+    "category": "disk",
+    "categoryLabel": "磁盘管理",
+    "description": "检查磁盘卷的文件系统和文件系统元数据，并修复逻辑和物理错误",
+    "syntax": "chkdsk [volume[[path]filename]] [/F] [/V] [/R] [/X] [/I] [/C] [/L[:size]] [/B] [/scan] [/spotfix]",
+    "parameters": [
+      {"name": "/F", "description": "修复磁盘上的错误", "required": false},
+      {"name": "/R", "description": "定位坏扇区并恢复可读信息（隐含 /F）", "required": false},
+      {"name": "/X", "description": "必要时先强制卸除卷（隐含 /F）", "required": false},
+      {"name": "/B", "description": "重新评估磁盘上的坏簇", "required": false},
+      {"name": "/scan", "description": "运行联机扫描（NTFS）", "required": false}
+    ],
+    "examples": [
+      {"description": "检查C盘错误", "command": "chkdsk C:"},
+      {"description": "检查并修复错误", "command": "chkdsk C: /f"},
+      {"description": "检查并恢复坏扇区", "command": "chkdsk D: /r"}
+    ],
+    "tags": ["磁盘", "chkdsk", "检查", "修复", "chkdsk", "错误", "文件系统", "坏道"]
+  },
+  {
+    "name": "diskpart",
+    "source": "cmd",
+    "category": "disk",
+    "categoryLabel": "磁盘管理",
+    "description": "磁盘分区管理工具，用于创建、删除和格式化分区",
+    "syntax": "diskpart",
+    "parameters": [],
+    "examples": [
+      {"description": "启动 diskpart", "command": "diskpart"},
+      {"description": "列出所有磁盘（在diskpart中）", "command": "list disk"},
+      {"description": "选择磁盘（在diskpart中）", "command": "select disk 0"},
+      {"description": "列出分区（在diskpart中）", "command": "list partition"}
+    ],
+    "tags": ["磁盘", "diskpart", "分区", "格式化", "管理", "GPT", "MBR"]
+  },
+  {
+    "name": "format",
+    "source": "cmd",
+    "category": "disk",
+    "categoryLabel": "磁盘管理",
+    "description": "格式化磁盘以存储文件（注意：会删除所有数据）",
+    "syntax": "format volume [/FS:file-system] [/V:label] [/Q] [/L] [/A:size] [/C] [/X] [/P:passes]",
+    "parameters": [
+      {"name": "/FS", "description": "指定文件系统 (NTFS/FAT32/exFAT)", "required": false},
+      {"name": "/Q", "description": "快速格式化", "required": false},
+      {"name": "/V", "description": "指定卷标", "required": false},
+      {"name": "/X", "description": "必要时强制卸除卷", "required": false}
+    ],
+    "examples": [
+      {"description": "快速格式化", "command": "format D: /q"},
+      {"description": "格式化为 FAT32", "command": "format E: /fs:fat32 /q"},
+      {"description": "格式化并设置卷标", "command": "format D: /fs:ntfs /v:DataDrive"}
+    ],
+    "tags": ["磁盘", "format", "格式化", "文件系统", "NTFS", "FAT32", "exFAT"]
+  },
+  {
+    "name": "label",
+    "source": "cmd",
+    "category": "disk",
+    "categoryLabel": "磁盘管理",
+    "description": "创建、更改或删除磁盘的卷标（名称）",
+    "syntax": "label [drive:][label]",
+    "parameters": [],
+    "examples": [
+      {"description": "查看并修改卷标", "command": "label C:"},
+      {"description": "直接设置卷标", "command": "label D: Data"},
+      {"description": "删除卷标", "command": "label E: (回车后不输入直接回车)"}
+    ],
+    "tags": ["磁盘", "label", "卷标", "名称", "重命名"]
+  },
+  {
+    "name": "vol",
+    "source": "cmd",
+    "category": "disk",
+    "categoryLabel": "磁盘管理",
+    "description": "显示磁盘的卷标和序列号",
+    "syntax": "vol [drive:]",
+    "parameters": [],
+    "examples": [
+      {"description": "查看当前驱动器信息", "command": "vol"},
+      {"description": "查看D盘信息", "command": "vol D:"}
+    ],
+    "tags": ["磁盘", "vol", "卷标", "序列号", "信息"]
+  },
+  {
+    "name": "subst",
+    "source": "cmd",
+    "category": "disk",
+    "categoryLabel": "磁盘管理",
+    "description": "将路径映射为驱动器号（创建虚拟驱动器）",
+    "syntax": "subst [drive1: [drive2:]path] 或 subst drive1: /D",
+    "parameters": [
+      {"name": "/D", "description": "删除虚拟驱动器映射", "required": false}
+    ],
+    "examples": [
+      {"description": "映射文件夹为驱动器", "command": "subst X: C:\\Projects\\MyApp"},
+      {"description": "查看所有映射", "command": "subst"},
+      {"description": "删除映射", "command": "subst X: /d"}
+    ],
+    "tags": ["磁盘", "subst", "虚拟驱动器", "映射", "路径", "驱动器号"]
+  },
+  {
+    "name": "tasklist",
+    "source": "cmd",
+    "category": "process",
+    "categoryLabel": "进程与服务",
+    "description": "显示本地或远程计算机上当前运行的所有进程列表",
+    "syntax": "tasklist [/S system] [/U username [/P password]] [/M [module] | /SVC | /V] [/FI filter] [/FO format] [/NH]",
+    "parameters": [
+      {"name": "/SVC", "description": "显示每个进程承载的服务", "required": false},
+      {"name": "/V", "description": "显示详细任务信息", "required": false},
+      {"name": "/FI", "description": "按条件筛选进程", "required": false},
+      {"name": "/M", "description": "列出使用指定模块的任务", "required": false},
+      {"name": "/FO", "description": "指定输出格式 (TABLE/LIST/CSV)", "required": false}
+    ],
+    "examples": [
+      {"description": "查看所有进程", "command": "tasklist"},
+      {"description": "查看进程对应服务", "command": "tasklist /svc"},
+      {"description": "筛选特定进程", "command": "tasklist /fi \"imagename eq chrome.exe\""},
+      {"description": "筛选高内存进程", "command": "tasklist /fi \"memusage gt 200000\""}
+    ],
+    "tags": ["进程", "tasklist", "任务", "进程列表", "运行", "ps", "process"]
+  },
+  {
+    "name": "taskkill",
+    "source": "cmd",
+    "category": "process",
+    "categoryLabel": "进程与服务",
+    "description": "结束一个或多个正在运行的进程",
+    "syntax": "taskkill [/S system] [/U username [/P password]] { [/FI filter] [/PID processid | /IM imagename] } [/T] [/F]",
+    "parameters": [
+      {"name": "/PID", "description": "要终止的进程 ID", "required": false},
+      {"name": "/IM", "description": "要终止的进程映像名称", "required": false},
+      {"name": "/T", "description": "终止指定进程及其所有子进程", "required": false},
+      {"name": "/F", "description": "强制终止进程", "required": false}
+    ],
+    "examples": [
+      {"description": "按名称终止进程", "command": "taskkill /im notepad.exe"},
+      {"description": "强制终止", "command": "taskkill /f /im chrome.exe"},
+      {"description": "按PID终止", "command": "taskkill /pid 1234 /t"},
+      {"description": "筛选后终止", "command": "taskkill /fi \"status eq not responding\" /f"}
+    ],
+    "tags": ["进程", "taskkill", "结束", "kill", "终止", "强制", "process"]
+  },
+  {
+    "name": "start",
+    "source": "cmd",
+    "category": "process",
+    "categoryLabel": "进程与服务",
+    "description": "启动新窗口或程序来运行指定的程序或命令",
+    "syntax": "start [\"title\"] [/D path] [/I] [/MIN | /MAX] [/SEPARATE | /SHARED] [/LOW | /NORMAL | /HIGH | /REALTIME | /ABOVENORMAL | /BELOWNORMAL] [/NODE <numa>] [/AFFINITY <hex>] [/WAIT] [/B] [command/program] [parameters]",
+    "parameters": [
+      {"name": "/MIN", "description": "最小化窗口启动", "required": false},
+      {"name": "/MAX", "description": "最大化窗口启动", "required": false},
+      {"name": "/WAIT", "description": "等待程序结束后再继续", "required": false},
+      {"name": "/B", "description": "不创建新窗口", "required": false}
+    ],
+    "examples": [
+      {"description": "打开网页", "command": "start https://github.com"},
+      {"description": "打开资源管理器", "command": "start ."},
+      {"description": "在新窗口运行命令", "command": "start cmd /k \"echo Hello\""},
+      {"description": "等待程序完成后继续", "command": "start /wait setup.exe"}
+    ],
+    "tags": ["进程", "start", "启动", "运行", "程序", "打开", "exec"]
+  },
+  {
+    "name": "wmic",
+    "source": "cmd",
+    "category": "process",
+    "categoryLabel": "进程与服务",
+    "description": "Windows 管理规范命令行工具，用于获取大量系统信息和管理操作系统（Windows 10 22H2+ 已弃用，建议使用 PowerShell）",
+    "syntax": "wmic [global switches] [alias] [verbs] [properties]",
+    "parameters": [
+      {"name": "cpu", "description": "获取 CPU 信息", "required": false},
+      {"name": "os", "description": "获取操作系统信息", "required": false},
+      {"name": "process", "description": "管理进程", "required": false},
+      {"name": "product", "description": "获取已安装软件信息", "required": false},
+      {"name": "diskdrive", "description": "获取磁盘信息", "required": false}
+    ],
+    "examples": [
+      {"description": "查看CPU信息", "command": "wmic cpu get name,numberofcores"},
+      {"description": "查看已安装软件", "command": "wmic product get name,version"},
+      {"description": "查看进程列表", "command": "wmic process list brief"},
+      {"description": "查看内存信息", "command": "wmic memorychip get capacity,speed"}
+    ],
+    "tags": ["系统", "wmic", "WMI", "管理", "查询", "信息", "硬件"]
+  },
+  {
+    "name": "schtasks",
+    "source": "cmd",
+    "category": "process",
+    "categoryLabel": "进程与服务",
+    "description": "创建、删除、查询、更改、运行和结束计划任务",
+    "syntax": "schtasks /create /tn TaskName /tr TaskRun /sc schedule [/mo modifier] [/d day] [/m month[,month...]] [/i IdleTime] [/st StartTime] [/sd StartDate] [/ed EndDate] [/s computer] [/u user] [/p password] [/ru RunAsUser] [/rp RunAsPassword]",
+    "parameters": [
+      {"name": "/create", "description": "创建新计划任务", "required": false},
+      {"name": "/query", "description": "显示计划任务", "required": false},
+      {"name": "/delete", "description": "删除计划任务", "required": false},
+      {"name": "/run", "description": "立即运行计划任务", "required": false},
+      {"name": "/end", "description": "停止正在运行的计划任务", "required": false}
+    ],
+    "examples": [
+      {"description": "查看所有计划任务", "command": "schtasks /query"},
+      {"description": "创建计划任务", "command": "schtasks /create /tn \"MyTask\" /tr \"C:\\script.bat\" /sc daily /st 09:00"},
+      {"description": "删除计划任务", "command": "schtasks /delete /tn \"MyTask\" /f"}
+    ],
+    "tags": ["进程", "schtasks", "计划任务", "定时", "调度", "cron", "scheduled task"]
+  },
+  {
+    "name": "echo",
+    "source": "cmd",
+    "category": "batch",
+    "categoryLabel": "批处理脚本",
+    "description": "在屏幕上显示消息，或打开/关闭命令回显",
+    "syntax": "echo [on | off] 或 echo [message]",
+    "parameters": [
+      {"name": "on", "description": "打开命令回显", "required": false},
+      {"name": "off", "description": "关闭命令回显", "required": false},
+      {"name": ".", "description": "输出一个空行", "required": false}
+    ],
+    "examples": [
+      {"description": "显示消息", "command": "echo Hello World"},
+      {"description": "写入文件", "command": "echo Some text > file.txt"},
+      {"description": "输出空行", "command": "echo."},
+      {"description": "关闭回显", "command": "echo off"}
+    ],
+    "tags": ["脚本", "echo", "输出", "显示", "批处理", "打印", "print"]
+  },
+  {
+    "name": "if",
+    "source": "cmd",
+    "category": "batch",
+    "categoryLabel": "批处理脚本",
+    "description": "在批处理程序中执行条件处理",
+    "syntax": "if [not] errorlevel number command [else expression] | if [not] string1==string2 command [else expression] | if [not] exist filename command [else expression]",
+    "parameters": [
+      {"name": "errorlevel", "description": "检查上一个命令的返回码", "required": false},
+      {"name": "exist", "description": "检查文件是否存在", "required": false},
+      {"name": "not", "description": "对条件取反", "required": false},
+      {"name": "else", "description": "条件不满足时执行", "required": false}
+    ],
+    "examples": [
+      {"description": "比较字符串", "command": "if \"%VAR%\"==\"value\" echo Matched"},
+      {"description": "检查文件存在", "command": "if exist config.txt echo Found"},
+      {"description": "检查错误码", "command": "if errorlevel 1 echo Failed"}
+    ],
+    "tags": ["脚本", "if", "条件", "判断", "分支", "批处理", "逻辑"]
+  },
+  {
+    "name": "for",
+    "source": "cmd",
+    "category": "batch",
+    "categoryLabel": "批处理脚本",
+    "description": "对一组文件或字符串中的每个元素重复执行命令",
+    "syntax": "for %variable IN (set) DO command [parameters]  （命令行中用一个%），批处理文件中用 for %%variable IN (set) DO command [parameters]",
+    "parameters": [
+      {"name": "/D", "description": "匹配目录而非文件", "required": false},
+      {"name": "/R", "description": "递归遍历子目录", "required": false},
+      {"name": "/L", "description": "按数字序列循环", "required": false},
+      {"name": "/F", "description": "解析文件内容、命令输出或字符串", "required": false}
+    ],
+    "examples": [
+      {"description": "遍历文件列表", "command": "for %f in (*.txt) do echo %f"},
+      {"description": "数字循环", "command": "for /l %i in (1,1,10) do echo %i"},
+      {"description": "递归处理文件", "command": "for /r %f in (*.log) do del %f"},
+      {"description": "解析命令输出", "command": "for /f \"tokens=*\" %a in ('dir /b') do echo %a"}
+    ],
+    "tags": ["脚本", "for", "循环", "遍历", "迭代", "批处理", "loop"]
+  },
+  {
+    "name": "goto",
+    "source": "cmd",
+    "category": "batch",
+    "categoryLabel": "批处理脚本",
+    "description": "将批处理程序的执行跳转到指定标签行",
+    "syntax": "goto label",
+    "parameters": [
+      {"name": ":EOF", "description": "跳转到文件末尾（退出批处理）", "required": false}
+    ],
+    "examples": [
+      {"description": "跳转到标签", "command": "goto :next"},
+      {"description": "条件跳转", "command": "if \"%1\"==\"\" goto :help"},
+      {"description": "退出批处理", "command": "goto :eof"}
+    ],
+    "tags": ["脚本", "goto", "跳转", "标签", "流程", "批处理"]
+  },
+  {
+    "name": "call",
+    "source": "cmd",
+    "category": "batch",
+    "categoryLabel": "批处理脚本",
+    "description": "从一个批处理程序中调用另一个批处理程序，而不终止父批处理程序",
+    "syntax": "call [drive:][path]filename [batch-parameters] 或 call :label [arguments]",
+    "parameters": [],
+    "examples": [
+      {"description": "调用另一个批处理", "command": "call helper.bat"},
+      {"description": "调用内部标签", "command": "call :subroutine param1"},
+      {"description": "调用带参数的脚本", "command": "call build.bat Release x64"}
+    ],
+    "tags": ["脚本", "call", "调用", "批处理", "子程序", "函数"]
+  },
+  {
+    "name": "choice",
+    "source": "cmd",
+    "category": "batch",
+    "categoryLabel": "批处理脚本",
+    "description": "提示用户在批处理程序中做出选择，并等待用户输入",
+    "syntax": "choice [/C choices] [/N] [/CS] [/T timeout /D choice] [/M text]",
+    "parameters": [
+      {"name": "/C", "description": "指定允许的按键列表（默认YN）", "required": false},
+      {"name": "/N", "description": "不显示提示文本", "required": false},
+      {"name": "/T", "description": "超时秒数", "required": false},
+      {"name": "/D", "description": "超时后的默认选择", "required": false},
+      {"name": "/M", "description": "显示自定义提示消息", "required": false}
+    ],
+    "examples": [
+      {"description": "是/否选择", "command": "choice /m \"确认继续?\""},
+      {"description": "多选项", "command": "choice /c ABC /m \"请选择A/B/C\""},
+      {"description": "带超时", "command": "choice /t 10 /d Y /m \"10秒后自动选Y\""}
+    ],
+    "tags": ["脚本", "choice", "选择", "交互", "批处理", "输入", "菜单"]
+  },
+  {
+    "name": "pause",
+    "source": "cmd",
+    "category": "batch",
+    "categoryLabel": "批处理脚本",
+    "description": "暂停批处理程序的执行，并显示「按任意键继续...」",
+    "syntax": "pause",
+    "parameters": [],
+    "examples": [
+      {"description": "暂停等待按键", "command": "pause"},
+      {"description": "条件暂停", "command": "if errorlevel 1 pause"}
+    ],
+    "tags": ["脚本", "pause", "暂停", "等待", "批处理"]
+  },
+  {
+    "name": "rem",
+    "source": "cmd",
+    "category": "batch",
+    "categoryLabel": "批处理脚本",
+    "description": "在批处理文件中添加注释（REM = remark）",
+    "syntax": "rem [comment]",
+    "parameters": [],
+    "examples": [
+      {"description": "添加注释", "command": "rem This is a comment"},
+      {"description": "注释掉的命令", "command": "rem del /q *.tmp"}
+    ],
+    "tags": ["脚本", "rem", "注释", "备注", "批处理", "comment"]
+  },
+  {
+    "name": "exit",
+    "source": "cmd",
+    "category": "batch",
+    "categoryLabel": "批处理脚本",
+    "description": "退出命令提示符或批处理程序，并可设置退出代码",
+    "syntax": "exit [/B] [exitCode]",
+    "parameters": [
+      {"name": "/B", "description": "仅退出当前批处理脚本（不关闭 CMD 窗口）", "required": false},
+      {"name": "exitCode", "description": "设置退出代码 (ERRORLEVEL)", "required": false}
+    ],
+    "examples": [
+      {"description": "退出CMD", "command": "exit"},
+      {"description": "退出批处理脚本", "command": "exit /b"},
+      {"description": "返回错误码", "command": "exit /b 1"}
+    ],
+    "tags": ["脚本", "exit", "退出", "返回", "ERRORLEVEL", "错误码"]
+  },
+  {
+    "name": "help",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "显示 CMD 内置命令的帮助信息",
+    "syntax": "help [command] 或 command /?",
+    "parameters": [],
+    "examples": [
+      {"description": "列出所有命令", "command": "help"},
+      {"description": "查看特定命令帮助", "command": "help dir"},
+      {"description": "使用 /? 查看帮助", "command": "xcopy /?"}
+    ],
+    "tags": ["系统", "help", "帮助", "文档", "命令", "usage"]
+  },
+  {
+    "name": "find",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "在文件中搜索文本字符串",
+    "syntax": "find [/V] [/C] [/N] [/I] [/OFF[LINE]] \"string\" [[drive:][path]filename[ ...]]",
+    "parameters": [
+      {"name": "/V", "description": "显示不包含搜索字符串的行", "required": false},
+      {"name": "/C", "description": "仅显示包含字符串的行数", "required": false},
+      {"name": "/N", "description": "在每行前显示行号", "required": false},
+      {"name": "/I", "description": "忽略大小写", "required": false}
+    ],
+    "examples": [
+      {"description": "搜索字符串", "command": "find \"error\" log.txt"},
+      {"description": "统计匹配行数", "command": "find /c \"TODO\" *.py"},
+      {"description": "显示行号", "command": "find /n \"function\" app.js"}
+    ],
+    "tags": ["文件", "搜索", "find", "文本", "grep", "查找", "字符串"]
+  },
+  {
+    "name": "findstr",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "使用正则表达式在文件中搜索文本模式（比 find 更强大）",
+    "syntax": "findstr [/B] [/E] [/L] [/R] [/S] [/I] [/X] [/V] [/N] [/M] [/O] [/P] [/F:file] [/C:string] [/G:file] [/D:dirlist] [/A:color] [/OFF[LINE]] strings [[drive:][path]filename[ ...]]",
+    "parameters": [
+      {"name": "/S", "description": "递归搜索子目录", "required": false},
+      {"name": "/I", "description": "忽略大小写", "required": false},
+      {"name": "/R", "description": "使用正则表达式（默认）", "required": false},
+      {"name": "/N", "description": "显示行号", "required": false},
+      {"name": "/V", "description": "显示不匹配的行", "required": false},
+      {"name": "/C", "description": "将搜索字符串视为精确文字", "required": false}
+    ],
+    "examples": [
+      {"description": "搜索文本", "command": "findstr \"import\" *.py"},
+      {"description": "递归搜索", "command": "findstr /s /i \"TODO\" *.java"},
+      {"description": "正则搜索", "command": "findstr /r \"^[0-9]\" data.txt"},
+      {"description": "显示行号", "command": "findstr /n \"class\" *.cpp"}
+    ],
+    "tags": ["文件", "搜索", "findstr", "grep", "正则", "regex", "文本", "查找"]
+  },
+  {
+    "name": "sort",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "对输入内容进行排序并输出到屏幕、文件或其他设备",
+    "syntax": "sort [/R] [/+n] [/M kilobytes] [/L locale] [/REC recordbytes] [[drive1:][path1]filename1] [/T [drive2:][path2]] [/O [drive3:][path3]filename3]",
+    "parameters": [
+      {"name": "/R", "description": "反向排序（降序）", "required": false},
+      {"name": "/+n", "description": "按第 n 个字符排序", "required": false},
+      {"name": "/O", "description": "输出到文件", "required": false}
+    ],
+    "examples": [
+      {"description": "排序文件内容", "command": "sort names.txt"},
+      {"description": "降序排序", "command": "sort /r data.csv"},
+      {"description": "管道排序", "command": "dir /b | sort"},
+      {"description": "排序并保存", "command": "sort input.txt /o sorted.txt"}
+    ],
+    "tags": ["文件", "排序", "sort", "文本", "整理", "order"]
+  },
+  {
+    "name": "shutdown",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "关闭、重启、注销计算机",
+    "syntax": "shutdown [/i | /l | /s | /sg | /r | /g | /a | /p | /h | /e | /o] [/hybrid] [/fw] [/f] [/m \\\\computer] [/t xxx] [/d [p|u:]xx:yy] [/c \"comment\"]",
+    "parameters": [
+      {"name": "/s", "description": "关闭计算机", "required": false},
+      {"name": "/r", "description": "重新启动计算机", "required": false},
+      {"name": "/l", "description": "注销当前用户", "required": false},
+      {"name": "/t", "description": "设置超时时间（秒）", "required": false},
+      {"name": "/a", "description": "中止系统关闭", "required": false},
+      {"name": "/f", "description": "强制关闭运行中的程序", "required": false}
+    ],
+    "examples": [
+      {"description": "立即关机", "command": "shutdown /s /t 0"},
+      {"description": "60秒后重启", "command": "shutdown /r /t 60"},
+      {"description": "取消关机", "command": "shutdown /a"},
+      {"description": "注销", "command": "shutdown /l"}
+    ],
+    "tags": ["系统", "shutdown", "关机", "重启", "注销", "电源", "restart"]
+  },
+  {
+    "name": "driverquery",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "显示已安装设备驱动程序的列表及其属性",
+    "syntax": "driverquery [/S system [/U username [/P [password]]]] [/FO format] [/NH] [/SI] [/V]",
+    "parameters": [
+      {"name": "/S", "description": "指定远程系统", "required": false},
+      {"name": "/V", "description": "显示详细信息", "required": false},
+      {"name": "/SI", "description": "显示数字签名的驱动程序", "required": false},
+      {"name": "/FO", "description": "输出格式 (TABLE/LIST/CSV)", "required": false}
+    ],
+    "examples": [
+      {"description": "查看所有驱动", "command": "driverquery"},
+      {"description": "详细列表", "command": "driverquery /v"},
+      {"description": "CSV格式输出", "command": "driverquery /fo csv"}
+    ],
+    "tags": ["系统", "driverquery", "驱动", "驱动程序", "设备", "硬件"]
+  },
+  {
+    "name": "gpupdate",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "更新组策略设置",
+    "syntax": "gpupdate [/target:{computer|user}] [/force] [/wait:value] [/logoff] [/boot] [/sync]",
+    "parameters": [
+      {"name": "/force", "description": "强制重新应用所有策略设置", "required": false},
+      {"name": "/target", "description": "指定更新计算机策略还是用户策略", "required": false},
+      {"name": "/boot", "description": "策略应用后重启", "required": false}
+    ],
+    "examples": [
+      {"description": "更新组策略", "command": "gpupdate /force"},
+      {"description": "仅更新用户策略", "command": "gpupdate /target:user"},
+      {"description": "强制更新并重启", "command": "gpupdate /force /boot"}
+    ],
+    "tags": ["系统", "gpupdate", "组策略", "策略", "GPO", "配置", "更新"]
+  },
+  {
+    "name": "sc",
+    "source": "cmd",
+    "category": "process",
+    "categoryLabel": "进程与服务",
+    "description": "与服务控制管理器和服务进行通信，用于创建、启动、停止和配置 Windows 服务",
+    "syntax": "sc [\\server] command [service name] [option ...]",
+    "parameters": [
+      {"name": "query", "description": "查询服务状态", "required": false},
+      {"name": "start", "description": "启动服务", "required": false},
+      {"name": "stop", "description": "停止服务", "required": false},
+      {"name": "config", "description": "修改服务配置", "required": false},
+      {"name": "create", "description": "创建服务", "required": false},
+      {"name": "delete", "description": "删除服务", "required": false}
+    ],
+    "examples": [
+      {"description": "查询服务状态", "command": "sc query"},
+      {"description": "启动服务", "command": "sc start spooler"},
+      {"description": "停止服务", "command": "sc stop wuauserv"},
+      {"description": "设置服务为自动启动", "command": "sc config spooler start= auto"}
+    ],
+    "tags": ["服务", "sc", "service", "启动", "停止", "配置", "Windows服务"]
+  },
+  {
+    "name": "sfc",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "系统文件检查器，扫描并修复受保护的系统文件",
+    "syntax": "sfc [/scannow] [/scanonce] [/scanboot] [/revert] [/purgecache] [/cachesize=x] [/verifyonly]",
+    "parameters": [
+      {"name": "/scannow", "description": "立即扫描所有受保护系统文件并修复", "required": false},
+      {"name": "/scanonce", "description": "下次重启时扫描一次", "required": false},
+      {"name": "/verifyonly", "description": "仅验证不修复", "required": false}
+    ],
+    "examples": [
+      {"description": "扫描并修复系统文件", "command": "sfc /scannow"},
+      {"description": "仅检查不修复", "command": "sfc /verifyonly"}
+    ],
+    "tags": ["系统", "sfc", "修复", "扫描", "系统文件", "检查", "repair"]
+  },
+  {
+    "name": "clip",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "将命令行输出重定向到 Windows 剪贴板",
+    "syntax": "command | clip",
+    "parameters": [],
+    "examples": [
+      {"description": "复制文件内容到剪贴板", "command": "type config.json | clip"},
+      {"description": "复制目录列表", "command": "dir /b | clip"},
+      {"description": "复制命令输出", "command": "ipconfig /all | clip"}
+    ],
+    "tags": ["文件", "clip", "剪贴板", "复制", "管道", "输出"]
+  },
+  {
+    "name": "mklink",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "创建符号链接、硬链接或目录链接",
+    "syntax": "mklink [/D | /H | /J] link target",
+    "parameters": [
+      {"name": "/D", "description": "创建目录符号链接（默认为文件符号链接）", "required": false},
+      {"name": "/H", "description": "创建硬链接而非符号链接", "required": false},
+      {"name": "/J", "description": "创建目录联接（Junction）", "required": false}
+    ],
+    "examples": [
+      {"description": "创建文件符号链接", "command": "mklink link.txt C:\\original.txt"},
+      {"description": "创建目录符号链接", "command": "mklink /D LinkFolder C:\\RealFolder"},
+      {"description": "创建硬链接", "command": "mklink /H backup.txt data.txt"},
+      {"description": "创建目录联接", "command": "mklink /J C:\\Projects D:\\Dev\\Projects"}
+    ],
+    "tags": ["链接", "mklink", "符号链接", "symlink", "硬链接", "hardlink", "junction", "联接"]
+  },
+  {
+    "name": "takeown",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "获取文件或文件夹的所有权，用于无法访问的文件",
+    "syntax": "takeown /S system /U username /P password /F filename /A /R /D prompt",
+    "parameters": [
+      {"name": "/F", "description": "指定文件或目录的路径", "required": true},
+      {"name": "/A", "description": "将所有权授予 Administrators 组", "required": false},
+      {"name": "/R", "description": "递归处理所有子目录", "required": false},
+      {"name": "/D", "description": "抑制确认提示 (Y/N)", "required": false}
+    ],
+    "examples": [
+      {"description": "获取文件所有权", "command": "takeown /F C:\\locked.txt"},
+      {"description": "管理员获取目录所有权", "command": "takeown /F C:\\OldData /A /R"},
+      {"description": "递归获取所有权不提示", "command": "takeown /F D:\\Backup /A /R /D Y"}
+    ],
+    "tags": ["所有权", "takeown", "权限", "文件", "访问", "ownership", "管理员"]
+  },
+  {
+    "name": "cipher",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "显示或更改 NTFS 分区上的文件加密状态，也可用于安全删除数据",
+    "syntax": "cipher [/E | /D | /C] [/S:directory] [/B] [/H] [pathname [...]]",
+    "parameters": [
+      {"name": "/E", "description": "加密指定的目录", "required": false},
+      {"name": "/D", "description": "解密指定的目录", "required": false},
+      {"name": "/C", "description": "显示加密文件的加密信息", "required": false},
+      {"name": "/W", "description": "安全删除已删除文件的数据（擦除残留）", "required": false},
+      {"name": "/S", "description": "在指定目录及其子目录上执行操作", "required": false}
+    ],
+    "examples": [
+      {"description": "加密目录中的文件", "command": "cipher /E C:\\SensitiveData"},
+      {"description": "解密目录", "command": "cipher /D C:\\SensitiveData"},
+      {"description": "安全擦除已删除文件残留", "command": "cipher /W:C:\\"},
+      {"description": "查看加密信息", "command": "cipher /C C:\\file.txt"}
+    ],
+    "tags": ["加密", "cipher", "安全", "NTFS", "解密", "encrypt", "decrypt", "擦除"]
+  },
+  {
+    "name": "fc",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "比较两个文件或文件集之间的差异",
+    "syntax": "fc [/A] [/C] [/L] [/LBn] [/N] [/OFF[LINE]] [/T] [/U] [/W] [/nnnn] [drive1:][path1]filename1 [drive2:][path2]filename2",
+    "parameters": [
+      {"name": "/A", "description": "仅显示每个差异块的第一行和最后一行", "required": false},
+      {"name": "/C", "description": "忽略字母大小写", "required": false},
+      {"name": "/L", "description": "按 ASCII 文本逐行比较", "required": false},
+      {"name": "/N", "description": "在 ASCII 比较中显示行号", "required": false},
+      {"name": "/W", "description": "压缩空白（制表符和空格）进行比较", "required": false}
+    ],
+    "examples": [
+      {"description": "比较两个文件", "command": "fc old.txt new.txt"},
+      {"description": "忽略大小写比较", "command": "fc /c file1.txt file2.txt"},
+      {"description": "显示行号的文本比较", "command": "fc /n config.ini config.bak"},
+      {"description": "二进制文件比较", "command": "fc /b bin1.dat bin2.dat"}
+    ],
+    "tags": ["比较", "fc", "文件比较", "差异", "diff", "compare", "对比"]
+  },
+  {
+    "name": "forfiles",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "按日期或其他条件批量选择文件并执行命令",
+    "syntax": "forfiles [/P pathname] [/S] [/M searchmask] [/D [{+|-}][{MM/DD/YYYY | dd}]] [/C command]",
+    "parameters": [
+      {"name": "/P", "description": "指定开始搜索的路径（默认为当前目录）", "required": false},
+      {"name": "/S", "description": "递归搜索子目录", "required": false},
+      {"name": "/M", "description": "搜索掩码（如 *.txt）", "required": false},
+      {"name": "/D", "description": "按日期筛选：+为之后 -为之前，或天数差", "required": false},
+      {"name": "/C", "description": "对每个匹配文件执行的命令", "required": false}
+    ],
+    "examples": [
+      {"description": "列出当前目录所有文件", "command": "forfiles"},
+      {"description": "删除7天前的文件", "command": "forfiles /p C:\\Logs /s /m *.log /d -7 /c \"cmd /c del @file\""},
+      {"description": "查找大于指定日期的文件", "command": "forfiles /d +01/01/2026 /c \"cmd /c echo @file\""},
+      {"description": "递归查找并列出 txt 文件", "command": "forfiles /s /m *.txt /c \"cmd /c echo @path\""}
+    ],
+    "tags": ["批量", "forfiles", "日期", "文件选择", "清理", "batch", "date", "删除旧文件"]
+  },
+  {
+    "name": "where",
+    "source": "cmd",
+    "category": "file-dir",
+    "categoryLabel": "文件与目录操作",
+    "description": "在 PATH 环境变量指定的目录中搜索文件，显示匹配文件的路径",
+    "syntax": "where [/R dirname] [/Q] [/F] [/T] pattern [...]",
+    "parameters": [
+      {"name": "/R", "description": "从指定目录开始递归搜索", "required": false},
+      {"name": "/Q", "description": "仅返回退出代码，不显示文件名", "required": false},
+      {"name": "/F", "description": "显示引号中的文件名（输出格式化）", "required": false},
+      {"name": "/T", "description": "显示文件的大小、日期和时间", "required": false}
+    ],
+    "examples": [
+      {"description": "查找系统中的 python.exe", "command": "where python.exe"},
+      {"description": "递归搜索指定目录", "command": "where /r C:\\Windows *.dll"},
+      {"description": "查找多个文件", "command": "where notepad.exe cmd.exe"},
+      {"description": "显示文件详细信息", "command": "where /t *.exe"}
+    ],
+    "tags": ["搜索", "where", "路径", "查找文件", "path", "search", "locate", "定位"]
+  },
+  {
+    "name": "reg",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "命令行注册表操作，用于添加、更改、删除、查询和备份注册表项和值",
+    "syntax": "reg <operation> [参数]",
+    "parameters": [
+      {"name": "query", "description": "查询注册表项或值", "required": false},
+      {"name": "add", "description": "添加新的注册表项或值", "required": false},
+      {"name": "delete", "description": "删除注册表项或值", "required": false},
+      {"name": "save", "description": "将注册表项保存到文件", "required": false},
+      {"name": "restore", "description": "恢复注册表项", "required": false},
+      {"name": "export", "description": "导出注册表到文件", "required": false},
+      {"name": "import", "description": "从文件导入注册表", "required": false}
+    ],
+    "examples": [
+      {"description": "查询注册表项", "command": "reg query HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion"},
+      {"description": "添加字符串值", "command": "reg add HKCU\\Software\\MyApp /v Version /t REG_SZ /d 1.0"},
+      {"description": "删除注册表值", "command": "reg delete HKCU\\Software\\MyApp /v OldValue /f"},
+      {"description": "导出注册表分支", "command": "reg export HKLM\\SOFTWARE backup.reg"}
+    ],
+    "tags": ["注册表", "reg", "registry", "系统配置", "注册", "修改注册表", "导出"]
+  },
+  {
+    "name": "gpresult",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "显示计算机和用户的组策略结果集（RSoP），用于排查组策略应用问题",
+    "syntax": "gpresult [/S system [/U username [/P [password]]]] [/SCOPE scope] [/USER targetusername] [/R | /V | /Z] [(/X | /H) <filename> [/F]]",
+    "parameters": [
+      {"name": "/R", "description": "显示 RSoP 摘要数据", "required": false},
+      {"name": "/V", "description": "显示详细策略信息", "required": false},
+      {"name": "/Z", "description": "显示所有可用的详细信息", "required": false},
+      {"name": "/H", "description": "将报告保存为 HTML 文件", "required": false},
+      {"name": "/USER", "description": "指定要显示策略的用户名", "required": false}
+    ],
+    "examples": [
+      {"description": "显示组策略摘要", "command": "gpresult /r"},
+      {"description": "显示详细策略信息", "command": "gpresult /v"},
+      {"description": "导出 HTML 报告", "command": "gpresult /h report.html"},
+      {"description": "查看指定用户的策略", "command": "gpresult /user domain\\username /r"}
+    ],
+    "tags": ["组策略", "gpresult", "策略", "RSoP", "group policy", "域策略", "排查"]
+  },
+  {
+    "name": "bcdedit",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "启动配置数据（BCD）存储编辑器，用于管理系统启动项和启动配置",
+    "syntax": "bcdedit [/store filename] [/create] [/delete] [/set] [/enum] [/default] [/timeout]",
+    "parameters": [
+      {"name": "/enum", "description": "列出启动项", "required": false},
+      {"name": "/set", "description": "设置启动项属性值", "required": false},
+      {"name": "/create", "description": "创建新的启动项", "required": false},
+      {"name": "/delete", "description": "删除启动项", "required": false},
+      {"name": "/default", "description": "设置默认启动项", "required": false},
+      {"name": "/timeout", "description": "设置启动等待超时时间", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有启动项", "command": "bcdedit /enum"},
+      {"description": "设置启动超时为10秒", "command": "bcdedit /timeout 10"},
+      {"description": "查看当前启动配置", "command": "bcdedit /enum active"},
+      {"description": "删除指定启动项", "command": "bcdedit /delete {identifier}"}
+    ],
+    "tags": ["启动", "bcdedit", "BCD", "boot", "启动配置", "引导", "双系统", "启动管理"]
+  },
+  {
+    "name": "powercfg",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "电源配置管理工具，用于管理电源计划、诊断电池和能耗问题",
+    "syntax": "powercfg [/list | /query | /create | /delete | /setactive | /change | /hibernate | /sleepstudy | /batteryreport]",
+    "parameters": [
+      {"name": "/list", "description": "列出所有电源计划", "required": false},
+      {"name": "/query", "description": "显示电源计划设置", "required": false},
+      {"name": "/setactive", "description": "激活指定电源计划", "required": false},
+      {"name": "/hibernate", "description": "启用或禁用休眠", "required": false},
+      {"name": "/sleepstudy", "description": "生成睡眠研究报告", "required": false},
+      {"name": "/batteryreport", "description": "生成电池使用报告", "required": false},
+      {"name": "/energy", "description": "生成能耗诊断报告", "required": false}
+    ],
+    "examples": [
+      {"description": "列出电源计划", "command": "powercfg /list"},
+      {"description": "生成电池报告", "command": "powercfg /batteryreport /output battery.html"},
+      {"description": "启用休眠", "command": "powercfg /hibernate on"},
+      {"description": "生成能耗分析报告", "command": "powercfg /energy /output report.html"}
+    ],
+    "tags": ["电源", "powercfg", "电池", "省电", "休眠", "power", "battery", "睡眠", "能耗"]
+  },
+  {
+    "name": "manage-bde",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "BitLocker 驱动器加密管理工具，用于加密和管理磁盘驱动器",
+    "syntax": "manage-bde [-status] [-on] [-off] [-lock] [-unlock] [-pause] [-resume] [-protectors] drive:",
+    "parameters": [
+      {"name": "-status", "description": "显示所有驱动器的 BitLocker 状态", "required": false},
+      {"name": "-on", "description": "启用 BitLocker 加密", "required": false},
+      {"name": "-off", "description": "解密并关闭 BitLocker", "required": false},
+      {"name": "-lock", "description": "锁定驱动器", "required": false},
+      {"name": "-unlock", "description": "解锁驱动器", "required": false},
+      {"name": "-protectors", "description": "管理密钥保护程序（密码、恢复密钥等）", "required": false}
+    ],
+    "examples": [
+      {"description": "查看加密状态", "command": "manage-bde -status"},
+      {"description": "启用 C 盘加密", "command": "manage-bde -on C:"},
+      {"description": "查看指定驱动器状态", "command": "manage-bde -status D:"},
+      {"description": "解锁驱动器", "command": "manage-bde -unlock D: -RecoveryPassword 123456-789012"}
+    ],
+    "tags": ["BitLocker", "manage-bde", "加密", "磁盘加密", "安全", "bitlocker", "解密", "驱动器加密"]
+  },
+  {
+    "name": "wevtutil",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "Windows 事件日志查询和导出工具，用于管理事件日志和订阅",
+    "syntax": "wevtutil {el | gl | sl | qe | epl | al | cl | ep | gp | sp | um | gli} [参数]",
+    "parameters": [
+      {"name": "el", "description": "列出所有事件日志名称", "required": false},
+      {"name": "qe", "description": "查询事件日志", "required": false},
+      {"name": "epl", "description": "导出事件日志到文件", "required": false},
+      {"name": "cl", "description": "清除事件日志", "required": false},
+      {"name": "gl", "description": "获取日志配置信息", "required": false},
+      {"name": "sl", "description": "设置日志配置", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有事件日志", "command": "wevtutil el"},
+      {"description": "查询系统日志最近10条", "command": "wevtutil qe System /c:10 /f:text"},
+      {"description": "导出应用日志", "command": "wevtutil epl Application C:\\backup\\app.evtx"},
+      {"description": "清除安全日志", "command": "wevtutil cl Security"}
+    ],
+    "tags": ["事件日志", "wevtutil", "日志", "查询", "导出", "event log", "evtx", "系统日志", "排查"]
+  },
+  {
+    "name": "openfiles",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "查看或断开系统上打开的文件，需要先启用维护对象列表",
+    "syntax": "openfiles /query [/s computer [/u domain\\user [/p password]]] [/fo format] [/nh] [/v]",
+    "parameters": [
+      {"name": "/query", "description": "查询打开的文件列表", "required": false},
+      {"name": "/disconnect", "description": "断开打开的文件", "required": false},
+      {"name": "/enable", "description": "启用系统全局标志维护对象列表", "required": false},
+      {"name": "/fo", "description": "输出格式 (TABLE, LIST, CSV)", "required": false},
+      {"name": "/v", "description": "显示详细信息", "required": false}
+    ],
+    "examples": [
+      {"description": "查询所有打开的文件", "command": "openfiles /query /fo table"},
+      {"description": "显示详细信息", "command": "openfiles /query /fo list /v"},
+      {"description": "启用打开文件跟踪", "command": "openfiles /enable"},
+      {"description": "断开指定文件连接", "command": "openfiles /disconnect /id 12345"}
+    ],
+    "tags": ["打开文件", "openfiles", "文件句柄", "共享", "断开", "file handle", "共享文件"]
+  },
+  {
+    "name": "fltmc",
+    "source": "cmd",
+    "category": "system-info",
+    "categoryLabel": "系统信息与管理",
+    "description": "筛选器驱动器管理工具，用于加载、卸载和查看文件系统筛选器驱动程序",
+    "syntax": "fltmc [filters | instances | volumes] [driver_name]",
+    "parameters": [
+      {"name": "filters", "description": "列出所有已加载的筛选器驱动程序", "required": false},
+      {"name": "instances", "description": "列出所有筛选器实例", "required": false},
+      {"name": "volumes", "description": "列出所有筛选器卷", "required": false},
+      {"name": "load", "description": "加载指定的筛选器驱动程序", "required": false},
+      {"name": "unload", "description": "卸载指定的筛选器驱动程序", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有筛选器驱动", "command": "fltmc filters"},
+      {"description": "列出所有筛选器实例", "command": "fltmc instances"},
+      {"description": "加载筛选器驱动", "command": "fltmc load MyFilter"},
+      {"description": "卸载筛选器驱动", "command": "fltmc unload MyFilter"}
+    ],
+    "tags": ["筛选器", "fltmc", "驱动", "minifilter", "filter driver", "文件系统", "驱动管理"]
+  },
+  {
+    "name": "netsh wlan",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络命令",
+    "description": "WiFi 无线网络配置管理，用于查看、连接和管理无线网络配置文件",
+    "syntax": "netsh wlan [show | connect | disconnect | add | delete | set] [参数]",
+    "parameters": [
+      {"name": "show networks", "description": "显示可用的无线网络列表", "required": false},
+      {"name": "show profiles", "description": "显示已保存的无线网络配置文件", "required": false},
+      {"name": "connect", "description": "连接到指定的无线网络", "required": false},
+      {"name": "disconnect", "description": "断开当前无线连接", "required": false},
+      {"name": "delete profile", "description": "删除已保存的网络配置文件", "required": false},
+      {"name": "export profile", "description": "导出网络配置文件为 XML", "required": false}
+    ],
+    "examples": [
+      {"description": "显示可用 WiFi 网络", "command": "netsh wlan show networks"},
+      {"description": "显示已保存的配置文件", "command": "netsh wlan show profiles"},
+      {"description": "连接到指定网络", "command": "netsh wlan connect name=MyWiFi"},
+      {"description": "导出 WiFi 配置文件", "command": "netsh wlan export profile folder=C:\\Backup"},
+      {"description": "显示 WiFi 密码", "command": "netsh wlan show profile name=MyWiFi key=clear"}
+    ],
+    "tags": ["WiFi", "netsh", "wlan", "无线网络", "网络配置", "wireless", "WiFi密码", "连接"]
+  },
+  {
+    "name": "certutil",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络命令",
+    "description": "证书服务管理工具，也常用于 Base64 编解码、文件哈希计算和 URL 下载",
+    "syntax": "certutil [选项] [参数]",
+    "parameters": [
+      {"name": "-encode", "description": "将文件编码为 Base64", "required": false},
+      {"name": "-decode", "description": "将 Base64 解码为文件", "required": false},
+      {"name": "-hashfile", "description": "计算文件的哈希值", "required": false},
+      {"name": "-urlcache", "description": "管理 URL 缓存（可用于下载文件）", "required": false},
+      {"name": "-store", "description": "显示证书存储内容", "required": false}
+    ],
+    "examples": [
+      {"description": "Base64 编码文件", "command": "certutil -encode file.bin file.b64"},
+      {"description": "Base64 解码文件", "command": "certutil -decode file.b64 file.bin"},
+      {"description": "计算文件 MD5 哈希", "command": "certutil -hashfile setup.exe MD5"},
+      {"description": "计算文件 SHA256", "command": "certutil -hashfile data.zip SHA256"},
+      {"description": "下载文件", "command": "certutil -urlcache -split -f http://example.com/file.exe download.exe"}
+    ],
+    "tags": ["证书", "certutil", "Base64", "编码", "解码", "哈希", "hash", "下载", "MD5", "SHA256"]
+  },
+  {
+    "name": "bitsadmin",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络命令",
+    "description": "后台智能传输服务（BITS）管理工具，用于创建和管理文件下载/上传作业",
+    "syntax": "bitsadmin /list | /create | /cancel | /complete | /addfile | /resume | /info job",
+    "parameters": [
+      {"name": "/list", "description": "列出所有 BITS 作业", "required": false},
+      {"name": "/create", "description": "创建新的传输作业", "required": false},
+      {"name": "/addfile", "description": "向作业添加文件", "required": false},
+      {"name": "/resume", "description": "恢复暂停的作业", "required": false},
+      {"name": "/cancel", "description": "取消作业", "required": false},
+      {"name": "/complete", "description": "完成作业", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有作业", "command": "bitsadmin /list"},
+      {"description": "创建下载作业", "command": "bitsadmin /create MyDownload"},
+      {"description": "添加下载文件", "command": "bitsadmin /addfile MyDownload http://example.com/file.zip C:\\Downloads\\file.zip"},
+      {"description": "恢复并完成作业", "command": "bitsadmin /resume MyDownload"},
+      {"description": "一步完成下载", "command": "bitsadmin /transfer myJob /download /priority normal http://example.com/file.zip C:\\file.zip"}
+    ],
+    "tags": ["下载", "bitsadmin", "BITS", "后台传输", "download", "传输", "断点续传"]
+  },
+  {
+    "name": "ftp",
+    "source": "cmd",
+    "category": "network",
+    "categoryLabel": "网络命令",
+    "description": "FTP 文件传输协议客户端，用于连接 FTP 服务器进行文件上传和下载",
+    "syntax": "ftp [-v] [-d] [-i] [-n] [-g] [-s:filename] [-A] host",
+    "parameters": [
+      {"name": "-A", "description": "以匿名模式登录", "required": false},
+      {"name": "-i", "description": "关闭多文件传输时的交互提示", "required": false},
+      {"name": "-n", "description": "禁止自动登录", "required": false},
+      {"name": "-s", "description": "指定包含 FTP 命令的脚本文件", "required": false},
+      {"name": "-v", "description": "禁止显示远程服务器响应", "required": false}
+    ],
+    "examples": [
+      {"description": "连接 FTP 服务器", "command": "ftp ftp.example.com"},
+      {"description": "匿名连接", "command": "ftp -A ftp.example.com"},
+      {"description": "使用脚本自动执行", "command": "ftp -s:commands.txt ftp.example.com"},
+      {"description": "非交互模式连接", "command": "ftp -n ftp.example.com"}
+    ],
+    "tags": ["FTP", "ftp", "文件传输", "上传", "下载", "server", "远程", "传输协议"]
+  },
+  {
+    "name": "timeout",
+    "source": "cmd",
+    "category": "process",
+    "categoryLabel": "进程与服务",
+    "description": "命令行延时等待工具，在批处理脚本中用于暂停执行指定时间",
+    "syntax": "timeout /T seconds [/NOBREAK]",
+    "parameters": [
+      {"name": "/T", "description": "指定等待的秒数（-1 为永久等待）", "required": true},
+      {"name": "/NOBREAK", "description": "忽略按键，必须等待指定时间", "required": false}
+    ],
+    "examples": [
+      {"description": "等待10秒", "command": "timeout /t 10"},
+      {"description": "等待5秒且不可跳过", "command": "timeout /t 5 /nobreak"},
+      {"description": "等待任意键继续", "command": "timeout /t -1"},
+      {"description": "在批处理中延迟", "command": "timeout /t 3 >nul"}
+    ],
+    "tags": ["延时", "timeout", "等待", "暂停", "sleep", "delay", "暂停执行"]
+  },
+  {
+    "name": "title",
+    "source": "cmd",
+    "category": "process",
+    "categoryLabel": "进程与服务",
+    "description": "设置命令提示符窗口的标题栏文本",
+    "syntax": "title [string]",
+    "parameters": [],
+    "examples": [
+      {"description": "设置窗口标题", "command": "title My Console"},
+      {"description": "在脚本中标记窗口", "command": "title Build Process - Step 1"},
+      {"description": "显示任务名称", "command": "title 正在编译项目..."}
+    ],
+    "tags": ["标题", "title", "窗口", "控制台", "命令行", "console", "rename"]
+  },
+  {
+    "name": "fsutil",
+    "source": "cmd",
+    "category": "disk",
+    "categoryLabel": "磁盘与存储",
+    "description": "高级文件系统操作工具，用于管理卷、文件、稀疏文件、USN 日志等",
+    "syntax": "fsutil <subcommand> [参数]",
+    "parameters": [
+      {"name": "fsinfo", "description": "显示文件系统类型和卷信息", "required": false},
+      {"name": "volume", "description": "管理卷操作", "required": false},
+      {"name": "file", "description": "按文件 ID 查找文件", "required": false},
+      {"name": "dirty", "description": "查询或设置卷的脏位", "required": false},
+      {"name": "behavior", "description": "查询或设置文件系统行为参数", "required": false},
+      {"name": "sparse", "description": "管理稀疏文件", "required": false}
+    ],
+    "examples": [
+      {"description": "显示所有驱动器信息", "command": "fsutil fsinfo drives"},
+      {"description": "查看卷信息", "command": "fsutil fsinfo volumeinfo C:"},
+      {"description": "查询文件系统类型", "command": "fsutil fsinfo filesysteminfo C:"},
+      {"description": "查看可用空间", "command": "fsutil volume diskfree C:"}
+    ],
+    "tags": ["文件系统", "fsutil", "卷", "磁盘信息", "NTFS", "volume", "高级操作", "稀疏文件"]
+  },
+  {
+    "name": "mountvol",
+    "source": "cmd",
+    "category": "disk",
+    "categoryLabel": "磁盘与存储",
+    "description": "创建、删除或列出卷的挂载点（驱动器号或文件夹路径）",
+    "syntax": "mountvol [drive:]path volumename | /D | /L",
+    "parameters": [
+      {"name": "/D", "description": "删除指定的卷挂载点", "required": false},
+      {"name": "/L", "description": "列出已装入卷的路径", "required": false},
+      {"name": "/P", "description": "删除卷的挂载点并使卷脱机", "required": false},
+      {"name": "/R", "description": "删除卷的挂载点并删除卷的唯一标识", "required": false}
+    ],
+    "examples": [
+      {"description": "列出所有卷挂载点", "command": "mountvol"},
+      {"description": "列出当前卷路径", "command": "mountvol C:\\ /L"},
+      {"description": "删除挂载点", "command": "mountvol C:\\Mount /D"},
+      {"description": "创建挂载点", "command": "mountvol C:\\Data \\\\?\\Volume{guid}\\"}
+    ],
+    "tags": ["挂载", "mountvol", "卷", "驱动器", "mount", "挂载点", "磁盘挂载", "文件夹挂载"]
+  },
+  {
+    "name": "setlocal",
+    "source": "cmd",
+    "category": "batch",
+    "categoryLabel": "批处理脚本",
+    "description": "在批处理文件中启动局部环境变量的隔离，使变量更改在 endlocal 后自动还原",
+    "syntax": "setlocal [ENABLEEXTENSIONS | DISABLEEXTENSIONS] [ENABLEDELAYEDEXPANSION | DISABLEDELAYEDEXPANSION]",
+    "parameters": [
+      {"name": "ENABLEEXTENSIONS", "description": "启用命令扩展", "required": false},
+      {"name": "DISABLEEXTENSIONS", "description": "禁用命令扩展", "required": false},
+      {"name": "ENABLEDELAYEDEXPANSION", "description": "启用延迟变量展开（用 !var! 代替 %var%）", "required": false},
+      {"name": "DISABLEDELAYEDEXPANSION", "description": "禁用延迟变量展开", "required": false}
+    ],
+    "examples": [
+      {"description": "隔离环境变量修改", "command": "setlocal\nset PATH=C:\\MyApp;%PATH%\nmyapp.exe\nendlocal"},
+      {"description": "启用延迟展开", "command": "setlocal enabledelayedexpansion"},
+      {"description": "临时修改目录并还原", "command": "setlocal\ncd /d D:\\Temp\nprocess.exe\nendlocal"}
+    ],
+    "tags": ["局部变量", "setlocal", "环境变量", "批处理", "local", "隔离", "延迟展开"]
+  },
+  {
+    "name": "shift",
+    "source": "cmd",
+    "category": "batch",
+    "categoryLabel": "批处理脚本",
+    "description": "在批处理文件中移位可替换参数的位置，使 %1 获取 %2 的值，%2 获取 %3 的值，以此类推",
+    "syntax": "shift [/n]",
+    "parameters": [
+      {"name": "/n", "description": "从第 n 个参数开始移位（n 为 0-8）", "required": false}
+    ],
+    "examples": [
+      {"description": "遍历所有参数", "command": ":loop\nif \"%~1\"==\"\" goto end\necho %~1\nshift\ngoto loop\n:end"},
+      {"description": "从第二个参数开始移位", "command": "shift /1"},
+      {"description": "处理不定数量参数", "command": "@echo off\n:args\nif \"%~1\"==\"\" goto done\necho 参数: %~1\nshift\ngoto args\n:done"}
+    ],
+    "tags": ["参数", "shift", "移位", "批处理", "命令行参数", "arguments", "循环"]
+  },
+  {
+    "name": "pushd / popd",
+    "source": "cmd",
+    "category": "batch",
+    "categoryLabel": "批处理脚本",
+    "description": "目录栈管理命令：pushd 保存当前目录并切换到新目录，popd 恢复之前保存的目录",
+    "syntax": "pushd [path] / popd",
+    "parameters": [],
+    "examples": [
+      {"description": "保存当前目录并切换", "command": "pushd D:\\Projects"},
+      {"description": "返回之前保存的目录", "command": "popd"},
+      {"description": "嵌套使用目录栈", "command": "pushd C:\\A\npushd D:\\B\npopd\npopd"},
+      {"description": "临时进入子目录工作", "command": "pushd %TEMP%\nmake build\npopd"}
+    ],
+    "tags": ["目录栈", "pushd", "popd", "目录切换", "批处理", "stack", "保存目录", "返回目录"]
+  }
+]

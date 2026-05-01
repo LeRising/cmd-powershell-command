@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows 命令参考 — CMD &amp; PowerShell</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header class="top-bar">
+        <div class="top-bar-inner">
+            <a href="/" class="logo">
+                <svg class="logo-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="4 17 10 11 4 5"></polyline>
+                    <line x1="12" y1="19" x2="20" y2="19"></line>
+                </svg>
+                <span class="logo-text">Windows 命令参考</span>
+            </a>
+            <div class="search-wrapper">
+                <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="searchInput" class="search-input"
+                       placeholder="搜索命令名称或功能描述..."
+                       autocomplete="off" autofocus>
+                <kbd class="search-shortcut">/</kbd>
+                <button class="search-clear" id="searchClear" title="清空搜索">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            <div class="source-toggle" id="sourceToggle">
+                <input type="radio" name="source" id="src-all" value="all" checked>
+                <label for="src-all">全部</label>
+                <input type="radio" name="source" id="src-cmd" value="cmd">
+                <label for="src-cmd">CMD</label>
+                <input type="radio" name="source" id="src-ps" value="powershell">
+                <label for="src-ps">PowerShell</label>
+                <input type="radio" name="source" id="src-run" value="run">
+                <label for="src-run">运行</label>
+            </div>
+        </div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>分类过滤</h3>
+                <div class="sidebar-actions">
+                    <button id="selectAll" class="link-btn">全选</button>
+                    <span class="sep">|</span>
+                    <button id="clearAll" class="link-btn">取消</button>
+                </div>
+                <div class="selected-count" id="selectedCount">已选 {{ categories|length }}/{{ categories|length }} 个分类</div>
+            </div>
+            <ul class="category-list" id="categoryList">
+                {% for cat in categories %}
+                <li class="category-item">
+                    <label>
+                        <input type="checkbox" class="category-check" value="{{ cat.key }}" checked>
+                        <span class="cat-label">{{ cat.label }}</span>
+                        <span class="cat-count">{{ cat.count }}</span>
+                    </label>
+                </li>
+                {% endfor %}
+            </ul>
+            <div class="sidebar-stats">
+                <div class="stat-row">
+                    <span class="stat-label">CMD 命令</span>
+                    <span class="stat-value" id="statCmd">—</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">PowerShell</span>
+                    <span class="stat-value" id="statPs">—</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">运行命令</span>
+                    <span class="stat-value" id="statRun">—</span>
+                </div>
+            </div>
+            <div class="sidebar-footer">
+                <span>共 {{ total_count }} 条命令</span>
+            </div>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="results-header" id="resultsHeader">
+                <span class="results-count" id="resultsCount">显示全部 {{ total_count }} 条命令</span>
+            </div>
+            <div class="results-grid" id="resultsGrid"></div>
+            <div class="empty-state" id="emptyState" style="display:none;">
+                <div class="empty-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        <line x1="8" y1="11" x2="14" y2="11" class="empty-cross"></line>
+                    </svg>
+                </div>
+                <h3>未找到匹配的命令</h3>
+                <p id="emptyHint">尝试使用其他关键词，或调整分类过滤条件</p>
+                <div class="empty-suggestions" id="emptySuggestions"></div>
+            </div>
+        </main>
+    </div>
+
+    <button class="back-to-top" id="backToTop" title="回到顶部">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script>window.COMMAND_DATA = {{ commands_json|safe }};</script>
+    <script>window.CATEGORIES = {{ categories|tojson }};</script>
+    <script>
+        // Populate stats
+        (function() {
+            var cmds = window.COMMAND_DATA || [];
+            var counts = { cmd: 0, powershell: 0, run: 0 };
+            cmds.forEach(function(c) { if (counts[c.source] !== undefined) counts[c.source]++; });
+            var el;
+            el = document.getElementById('statCmd'); if (el) el.textContent = counts.cmd;
+            el = document.getElementById('statPs'); if (el) el.textContent = counts.powershell;
+            el = document.getElementById('statRun'); if (el) el.textContent = counts.run;
+        })();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
